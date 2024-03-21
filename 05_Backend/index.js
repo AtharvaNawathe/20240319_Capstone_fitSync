@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
-
+const workoutRoutes = require("./routes/workoutRoutes")
+const mealRoutes = require("./routes/mealRoutes")
 // Create an Express application
 const app = express();
 dotenv.config();
@@ -23,6 +24,8 @@ const connectToMongoDB = async () => {
 
 // Define routes
 app.use("/user",userRoutes);
+app.use("/workouts",workoutRoutes);
+app.use("/meals",mealRoutes);
 
 // Start the server
 const startServer = async () => {

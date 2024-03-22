@@ -1,7 +1,15 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user_schema');
-
-// Middleware to verify the JWT token
+/**
+ * Middleware function to verify the JWT token in an incoming request.
+ *
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} next - The Express next function to call if the token is valid.
+ *
+ * @throws {import('jsonwebtoken').VerifyErrors} - If the token is invalid or there's an error verifying it.
+ * @returns {void}
+ */
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
 
@@ -27,7 +35,16 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-// Middleware to check if the user is an admin
+/**
+ * Middleware function to check if the user extracted from the JWT token is an admin.
+ *
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} next - The Express next function to call if the user is an admin.
+ *
+ * @throws {Error} - If there's an error fetching the user from the database.
+ * @returns {void}
+ */
 const isAdmin = async (req, res, next) => {
   try {
     const username = req.decoded.username;

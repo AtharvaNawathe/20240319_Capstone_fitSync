@@ -1,3 +1,15 @@
+
+/**
+ * Validates the provided user data according to specific criteria.
+ *
+ * @param {Object} userData - The user data to be validated.
+ * @param {string} userData.username - The username.
+ * @param {string} [userData.email] - The user's email address (optional).
+ * @param {string} [userData.phone_number] - The user's phone number (optional).
+ * @param {string} userData.password - The user's password.
+ *
+ * @returns {string|null} - A string describing the validation error if any, or null if validation passes.
+ */
 const validateInputs = (userData) => {
     const { username, email, phone_number, password } = userData;
   

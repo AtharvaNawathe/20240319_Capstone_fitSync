@@ -3,6 +3,12 @@ const User = require('../models/user_schema');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.SECRET_KEY;
 
+
+/**
+ * Adds a meal plan to the database.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const addMealPlan = async (req, res) => {
     try {
         const { goal, meal_name, meal_plan } = req.body;
@@ -26,14 +32,6 @@ const addMealPlan = async (req, res) => {
             }
         }
 
-        // Fetch user from the database based on username
-        if (username) {
-            const user = await User.findOne({ username });
-            if (!user) {
-                return res.status(404).send('User not found');
-            }
-        }
-
         // Create a new meal plan
         const newMealPlanData = {
             meal_name,
@@ -45,15 +43,30 @@ const addMealPlan = async (req, res) => {
         const newMealPlan = new MealPlan(newMealPlanData);
 
         // Save the meal plan to the database
-        await newMealPlan.save();
-
-        res.status(201).json({ message: "Meal plan added successfully", mealPlan: newMealPlan });
+        try {
+            await newMealPlan.save();
+            res.status(201).json({ message: "Meal plan added successfully", mealPlan: newMealPlan });
+        } catch (error) {
+            // Check if the error is due to a duplicate key (meal_name)
+            if (error.name === 'MongoError' && error.code === 11000) {
+                return res.status(400).json({ message: "Meal name must be unique" });
+            } else {
+                console.error(error);
+                res.status(500).json({ message: "Server error" });
+            }
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error" });
     }
 };
 
+
+/**
+ * Retrieves all meals assigned to the logged-in user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getMyMeals = async (req, res) => {
     try {
         // Extract the token from the request headers
@@ -73,6 +86,13 @@ const getMyMeals = async (req, res) => {
     }
 };
 
+/**
+ * Updates the status of a meal to "completed".
+ * while tracking the progress if user has consumed a meal status will be updated
+ * to completed
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const updateMealStatus = async (req, res) => {
     try {
         const { name } = req.body;
@@ -100,7 +120,11 @@ const updateMealStatus = async (req, res) => {
     }
 };
 
-
+/**
+ * Retrieves all meals not assigned to any user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getAllMeals = async (req, res) => {
     try {
         // Fetch all meal plans from the database
@@ -119,7 +143,11 @@ const getAllMeals = async (req, res) => {
     }
 };
 
-
+/**
+ * Removes a meal from a user's meal plan.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const removeMeal = async (req, res) => {
     try {
         const { meal_name } = req.body;

@@ -9,7 +9,12 @@ const config = require("../config/config");
 const { validateInputs } = require('../validators/user_validators');
 
 const SECRET_KEY = process.env.SECRET_KEY;
-// Defined the signup function
+/**
+ * Sign up a new user.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} The response object.
+ */
 const signup = async (req, res) => {
   try {
     const userData = req.body;
@@ -59,7 +64,12 @@ const signup = async (req, res) => {
   }
 };
 
-// Define the login function
+/**
+ * Login a user.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} The response object.
+ */
 const login = async (req, res) => {
   try {
     const userData = req.body;
@@ -120,7 +130,12 @@ const login = async (req, res) => {
   }
 };
 
-
+/**
+ * Send a reset password email.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} The response object.
+ */
 const forget_password = async (req, res) => {
   try {
     // Extracting the email from the request body
@@ -157,7 +172,12 @@ const forget_password = async (req, res) => {
   }
 };
 
-// Function for sending a reset password email
+/**
+ * Send a reset password email.
+ * @param {string} name - The user's name.
+ * @param {string} email - The user's email.
+ * @param {string} token - The reset password token.
+ */
 const sendResetPasswordMail = async (name, email, token) => {
   try {
     // Creating a transporter for sending emails using Gmail SMTP
@@ -204,7 +224,12 @@ const sendResetPasswordMail = async (name, email, token) => {
   }
 };   
 
-
+/**
+ * Resets the user password 
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ * @returns {object} The response object.
+ */
 const reset_password = async (req, res) => {
   try {
     // Extracting the token from the query parameters
@@ -247,6 +272,12 @@ const reset_password = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves profile details of the logged-in user.
+ * @param {Function} verifyToken Function to verify user token.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getProfileDetails =
   (verifyToken,
   async (req, res) => {
@@ -285,7 +316,11 @@ const getProfileDetails =
     }
   });
 
-
+/**
+ * Updates the goal of the logged-in user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const updateGoal = async (req, res) => {
     try {
         const userId = req.decoded.userId; // Get user ID from decoded token
@@ -307,7 +342,11 @@ const updateGoal = async (req, res) => {
     }
 };
 
-
+/**
+ * Edits profile details of the logged-in user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const editProfile = async (req, res) => {
     try {
         const userId = req.decoded.userId; // Get user ID from decoded token
@@ -329,6 +368,11 @@ const editProfile = async (req, res) => {
     }
 };
 
+/**
+ * Updates personal details of the logged-in user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const personalDetails = async (req,res) => {
   try {
     const { email } = req.body; // Assuming you'll use email to identify the user

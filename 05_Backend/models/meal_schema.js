@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mealPlanSchema = new Schema({
-    meal_name: { type: String, required: true },
+    meal_name: { type: String, required: true, unique: true },
     username: { type: String },
     goal: { type: String, required: true },
     meal_plan: [{

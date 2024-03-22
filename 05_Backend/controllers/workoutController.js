@@ -9,6 +9,11 @@ dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
+/**
+ * Adds a new workout plan.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const addWorkoutPlan = async (req, res) => {
     try {
         const { goal, workout_loc, workout_name, schedule } = req.body;
@@ -61,7 +66,11 @@ const addWorkoutPlan = async (req, res) => {
     }
 };
 
-
+/**
+ * Retrieves all workouts of the logged-in user.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const myWorkouts = async (req, res) => {
     try {
         // Extract the authorization token from the request headers
@@ -87,7 +96,11 @@ const myWorkouts = async (req, res) => {
     }
 };
 
-
+/**
+ * Updates the status of a workout exercise to "completed".
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const updateWorkoutStatus = async (req, res) => {
     try {
         const { exercise_name } = req.body;
@@ -123,8 +136,11 @@ const updateWorkoutStatus = async (req, res) => {
     }
 };
 
-
-
+/**
+ * Retrieves all workouts.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getAllWorkouts = async (req, res) => {
     try {
         // Fetch all workout plans from the database
@@ -143,6 +159,11 @@ const getAllWorkouts = async (req, res) => {
     }
 };
 
+/**
+ * Removes a workout from the database.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const removeWorkout = async (req, res) => {
     try {
         const { workout_name } = req.body;

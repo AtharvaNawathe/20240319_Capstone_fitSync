@@ -113,7 +113,7 @@ img
 	cursor: pointer;
 }
 
-.btn a
+.btn 
 {
 	color: var(--secondry-color);
 	text-decoration: none;
@@ -316,7 +316,7 @@ img
 
 	.logo
 	{
-		font-size: 1.5rem;
+		font-size: 19px;
 		font-weight: 700;
 	}
 

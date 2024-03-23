@@ -35,37 +35,4 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-/**
- * Middleware function to check if the user extracted from the JWT token is an admin.
- *
- * @param {import('express').Request} req - The Express request object.
- * @param {import('express').Response} res - The Express response object.
- * @param {import('express').NextFunction} next - The Express next function to call if the user is an admin.
- *
- * @throws {Error} - If there's an error fetching the user from the database.
- * @returns {void}
- */
-const isAdmin = async (req, res, next) => {
-  try {
-    const username = req.decoded.username;
-    
-    const user = await User.findOne({ username });
-
-    if (!user || user.user_type !== 'admin') {
-      return res.status(403).json({
-        success: false,
-        message: 'Permission denied. Only admins can perform this action.',
-      });
-    }
-
-    next();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal Server Error',
-    });
-  }
-};
-
-module.exports = { verifyToken, isAdmin };
+module.exports = { verifyToken };

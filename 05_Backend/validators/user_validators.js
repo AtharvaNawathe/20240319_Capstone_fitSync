@@ -11,7 +11,7 @@
  * @returns {string|null} - A string describing the validation error if any, or null if validation passes.
  */
 const validateInputs = (userData) => {
-    const { username, email, phone_number, password } = userData;
+    const { username, email, password } = userData;
   
     // Validate username
     if (!username || typeof username !== 'string' || username.length < 3) {
@@ -26,13 +26,13 @@ const validateInputs = (userData) => {
       }
     }
   
-    // Validate phone number
-    if (phone_number) {
-      const phoneRegex = /^[0-9]{10}$/;
-      if (!phoneRegex.test(phone_number)) {
-        return 'Please provide a valid 10-digit phone number.';
-      }
-    }
+    //  Validate phone number
+    // if (phone_number) {
+    //   const phoneRegex = /^[0-9]{10}$/;
+    //   if (!phoneRegex.test(phone_number)) {
+    //     return 'Please provide a valid 10-digit phone number.';
+    //   }
+    // }
   
     // Validate password
     if (!password || typeof password !== 'string' || password.length < 6) {

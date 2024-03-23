@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const mealController = require("../controllers/mealController")
-const { verifyToken} = require("../middlewares/auth");
+const mealController = require("../controllers/mealController");
+const { verifyToken } = require("../middlewares/auth");
 /**
  * @typedef {Object} ErrorObject
  * @property {string} message - The error message.
@@ -23,10 +23,18 @@ const { verifyToken} = require("../middlewares/auth");
  *
  * @throws {ErrorObject} - If an error occurs during route handling (specific implementation details may vary).
  */
-router.post('/addmealplans',mealController.addMealPlan);
-router.get('/mymeals',verifyToken,mealController.getMyMeals);
-router.put('/updatemeals',verifyToken,mealController.updateMealStatus);
-router.get('/getmeals',verifyToken,mealController.getAllMeals);
-router.delete('/removemeal',verifyToken,mealController.removeMeal);
+router.post("/addmealplans", mealController.addMealPlan);
+router.get("/mymeals", verifyToken, mealController.getMyMeals);
+router.put("/updatemeals", verifyToken, mealController.updateMealStatus);
+router.get("/getmeals", verifyToken, mealController.getAllMeals);
+router.delete("/removemeal", verifyToken, mealController.removeMeal);
+
+/*
+router.post("/", mealController.addMealPlan);
+router.get("/", verifyToken, mealController.getMyMeals);
+router.put("/:id", verifyToken, mealController.updateMealStatus);
+router.get("/", verifyToken, mealController.getAllMeals);
+router.delete("/:id", verifyToken, mealController.removeMeal);
+*/
 
 module.exports = router;

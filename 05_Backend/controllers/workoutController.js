@@ -2,7 +2,6 @@ const User = require('../models/user_schema');
 const bcrypt = require('bcrypt');
 const dotenv = require("dotenv");
 const jwt = require('jsonwebtoken');
-const { validateInputs } = require('../validators/user_validators');
 const WorkoutPlan = require('../models/workout_schema')
 dotenv.config();
 

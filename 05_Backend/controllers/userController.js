@@ -2,13 +2,13 @@
 const User = require('../models/user_schema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
 const { verifyToken} = require("../middlewares/auth");
 const config = require("../config/config");
 const { validateInputs } = require('../validators/user_validators');
-
-const SECRET_KEY = process.env.SECRET_KEY;
+dotenv.config();
 /**
  * Sign up a new user.
  * @param {object} req - The request object.
@@ -373,15 +373,19 @@ const editProfile = async (req, res) => {
  * @param {Object} req HTTP request object.
  * @param {Object} res HTTP response object.
  */
-const personalDetails = async (req,res) => {
+
+const personalDetails = async (req, res) => {
   try {
-    const { email } = req.body; // Assuming you'll use email to identify the user
+    const token = req.headers.authorization; // Extract JWT token from headers
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify and decode the token
+    const userId = decodedToken.userId; // Assuming the userId is stored in the token
+
     const { height, weight, gender, goal, veg, workout_loc } = req.body;
 
-    // Find the user by email
-    const user = await User.findOne({ email });
+    // Find the user by userId
+    const user = await User.findById(userId);
     if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     // Update user details
@@ -396,12 +400,12 @@ const personalDetails = async (req,res) => {
     await user.save();
 
     res.status(200).json({ message: 'User details updated successfully', user });
-} catch (error) {
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
-}
+  }
+};
 
-}
 // Export the controller functions
 module.exports = {
   signup,

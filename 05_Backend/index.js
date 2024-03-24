@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const workoutRoutes = require("./routes/workoutRoutes")
 const mealRoutes = require("./routes/mealRoutes")
@@ -11,6 +12,8 @@ const app = express();
 dotenv.config();
 app.use(bodyParser.json());
 //connecting to the datbase:
+
+app.use(cors());
 
 const connectToMongoDB = async () => {
   try {

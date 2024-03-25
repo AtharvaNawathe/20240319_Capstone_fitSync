@@ -2,10 +2,9 @@
 
 :root {
   --primary-font: "Poppins", sans-serif;
-
-  --primary-color: #f9ef23; /*--- Yellow color ----*/
-  --secondry-color: #141414; /*--- Black color ----*/
-  --third-color: #ffffff; /*--- White color ----*/
+  --primary-color: #f9ef23; /* Yellow color */
+  --secondry-color: #141414; /* Black color */
+  --third-color: #ffffff; /* White color */
 }
 
 * {
@@ -19,6 +18,17 @@
   font-weight: 400;
 }
 
+.form-heading {
+  text-align: center; /* Center align text */
+  margin-bottom: -130px;
+  margin-top: 40px;
+  color: yellow;
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
 .body-container {
   background-color: var(--secondry-color);
   font-family: var(--primary-font);
@@ -28,7 +38,6 @@
   background-repeat: no-repeat;  /* Remove repetition */
   width: 100%;  /* Maintain full width for responsiveness */
   height: 100vh;
-
 }
 
 .container {
@@ -108,6 +117,7 @@ img {
   font-size: 0.9rem;
   text-transform: uppercase;
 }
+
 .form-style-7 {
   max-width: 600px;
   margin: 50px auto;
@@ -115,7 +125,9 @@ img {
   padding: 20px;
   font-family: Georgia, "Times New Roman", Times, serif;
   background-color: rgba(31, 30, 30, 0.8);
+  margin-top: 150px;
 }
+
 .form-style-7 h1 {
   display: block;
   text-align: center;
@@ -124,11 +136,13 @@ img {
   color: #5c5c5c;
   font-size: x-large;
 }
+
 .form-style-7 ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 .form-style-7 li {
   display: block;
   padding: 9px;
@@ -136,24 +150,27 @@ img {
   margin-bottom: 30px;
   border-radius: 3px;
 }
+
 .form-style-7 li:last-child {
   border: none;
   margin-bottom: 0px;
   text-align: center;
 }
+
 .form-style-7 li > label {
   display: block;
   float: left;
   margin-top: -19px;
   background: rgb(40, 39, 39);
-  /* background-color: transparent; */
   height: 19px;
   padding: 2px 5px 2px 5px;
   color: #b9b9b9;
   font-size: 14px;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
+  transition: black 0.3s ease; 
 }
+
 .form-style-7 input[type="text"],
 .form-style-7 input[type="date"],
 .form-style-7 input[type="datetime"],
@@ -184,16 +201,15 @@ img {
 
 .form-style-7 select option {
   background-color: rgb(50, 49, 49);
-
   color: white;
 }
 
 .form-style-7 select option:hover {
-  background-color: #333; /* Darker shade for hover state */
+  background-color: black;
 }
 
 .form-style-7 select option:focus {
-  background-color: #222; /* Even darker shade for focused state */
+  background-color: #222;
 }
 
 .form-style-7 li > span {
@@ -207,22 +223,35 @@ img {
   font-size: 11px;
   background-color: transparent;
 }
+
 .form-style-7 textarea {
   resize: none;
   background-color: #141414;
   background-color: transparent;
 }
+
 .form-style-7 input[type="submit"],
 .form-style-7 input[type="button"] {
   background: #2471ff;
   border: none;
   padding: 10px 20px 10px 20px;
   border-bottom: 3px solid #5994ff;
-  border-radius: 3px;
+  border-radius: 9px;
   color: #d2e2ff;
 }
-.form-style-7 input[type="submit"]:hover,
-.form-style-7 input[type="button"]:hover {
-  background: #6b9fff;
-  color: #fff;
+
+.form-style-7 .btn-next button {
+  border-radius: 5px; /* Add border radius */
+  cursor: pointer; /* Add cursor pointer */
+  margin-left: 250px;
+  margin-top: -40px;
+	background-color:#f9ef23;
+	border: none;
+	outline: none;
+	padding: 0.8rem 2rem;
+	transition: .5s;
+}
+
+.form-style-7 .btn-next button:hover {
+  background-color: #0056b3; /* Change background color on hover */
 }

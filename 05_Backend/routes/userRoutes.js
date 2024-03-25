@@ -32,6 +32,6 @@ router.post('/reset_password',UserController.reset_password)
 router.get('/profiledetails',verifyToken, UserController.getProfileDetails)
 router.put('/goal', verifyToken, UserController.updateGoal);
 router.put('/editprofile', verifyToken, UserController.editProfile);
-router.put('/personaldetails', UserController.personalDetails);
+router.put('/personaldetails', verifyToken, UserController.personalDetails);
 
 module.exports = router;

@@ -11,10 +11,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import FormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -37,11 +41,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatMenuModule,
     FormsModule, 
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+   ReactiveFormsModule
 
   ],
   providers: [
     provideClientHydration()
+    
   ],
   bootstrap: [AppComponent]
 })

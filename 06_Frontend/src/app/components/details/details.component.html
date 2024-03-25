@@ -1,64 +1,60 @@
 <div class="html-container">
-<div class="body-container">
-    <app-navbar>
+  <div class="body-container">
+    <app-navbar></app-navbar>
+    <h2 class="form-heading">TELL US MORE ABOUT YOURSELF!</h2>
+    <form class="form-style-7" [formGroup]="userForm" (submit)="onSubmit()">
 
-    </app-navbar>
-    <form class="form-style-7">
-        <ul>
-            <li>
-                <label for="weight">Weight</label>
-                <input type="text" name="weight" maxlength="100">
-                <span></span>
-            </li>
-            <li>
-                <label for="height">Height</label>
-                <input type="text" name="height" maxlength="100" >
-                <span></span>
-            </li>
-            <li>
-                <label for="age">Age</label>
-                <textarea name="text" onkeyup="adjust_textarea(this)"></textarea>
-                <span></span>
-            </li>
-            <li>
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender">
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-            </li>
-            <li>
-                <label for="goal">Goal</label>
-                <select id="goal" name="goal">
-                  <option value="">Select Goal</option>
-                  <option value="bodybuilding">Bodybuilding</option>
-                  <option value="weightgain">Weight Gain</option>
-                  <option value="weightloss">Weight Loss</option>
-                  <option value="crossfit">Crossfit</option>
-                </select>
-            </li>
-            <li>
-                <label for="veg">Veg</label>
-                <select id="veg" name="veg">
-                  <option value="">Select Option</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-            </li>
-            <li>
-                <label for="loc">Workout Location</label>
-                <select id="loc" name="location">
-                  <option value="">Select Option</option>
-                  <option value="yes">Home</option>
-                  <option value="no">Gym</option>
-                </select>
-            </li>
-            <li>
-                <input type="submit" value="Next">
-            </li>
-        </ul>
+      <ul>
+        <li>
+          <label for="weight">Weight</label>
+          <input type="text" id="weight" formControlName="weight" maxlength="100">
+        </li>
+        <li>
+          <label for="height">Height</label>
+          <input type="text" id="height" formControlName="height" maxlength="100">
+        </li>
+        <li>
+          <label for="age">Age</label>
+          <input type="text" id="age" formControlName="age">
+        </li>
+        <li>
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </li>
+        <li>
+          <label for="goal">Goal</label>
+          <select id="goal" formControlName="goal">
+            <option value="">Select Goal</option>
+            <option value="bodybuilding">Bodybuilding</option>
+            <option value="weightgain">Weight Gain</option>
+            <option value="weightloss">Weight Loss</option>
+            <option value="crossfit">Crossfit</option>
+          </select>
+        </li>
+        <li>
+          <label for="veg">Veg</label>
+          <select id="veg" formControlName="veg">
+            <option value="">Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </li>
+        <li>
+          <label for="loc">Workout Location</label>
+          <select id="loc" formControlName="workout_loc">
+            <option value="">Select Option</option>
+            <option value="home">Home</option>
+            <option value="gym">Gym</option>
+          </select>
+        </li>
+        <div class="btn-next">
+          <button type="submit">Next</button>
+        </div>
+      </ul>
     </form>
-
-</div>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 
 
 @Component({
@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  menuToggle() {
-    const toggleMenu = document.querySelector(".menu");
-    if (toggleMenu) {
-      toggleMenu.classList.toggle("active");
-    }
-  }
 }

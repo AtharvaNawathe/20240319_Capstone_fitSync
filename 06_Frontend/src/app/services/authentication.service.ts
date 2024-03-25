@@ -19,4 +19,8 @@ export class AuthenticationService {
   login(userData: any): Observable<any> {
     return this.http.post<any>(`${this.backendUrl}/login`, userData);
   }
+
+  getJwtToken(): string | null {
+    return localStorage.getItem('token'); 
+  }
 }

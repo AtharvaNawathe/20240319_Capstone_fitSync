@@ -6,10 +6,10 @@ import { DetailsComponent } from './components/details/details.component';
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: 'details', component: LandingPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'auth', component: AuthenticationComponent },
-  { path: 'details', component: DetailsComponent }
+  { path: '', component: DetailsComponent }
 
 ];
 

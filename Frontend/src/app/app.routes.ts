@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { DetailsComponent } from './components/details/details.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';

@@ -11,12 +11,14 @@ html {
     height: 100%;
     background: #6441A5; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+        
 }
 
 body {
     font-family: montserrat, arial, verdana;
     background: transparent;
-    /* background-image: url("../../../assets/img/home-bg.jpg"); */
+    
+
 }
 
 
@@ -38,6 +40,7 @@ body {
     width: 50%;
     margin: 0 10%;
     background: transparent;
+    margin-top: -700px;
 
     /*stacking fieldsets above each other*/
     position: relative;

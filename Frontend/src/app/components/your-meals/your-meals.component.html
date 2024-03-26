@@ -1,14 +1,15 @@
-<app-navbar [showMealsButton]="false" [showWorkoutsButton]="false"></app-navbar>
+
 
 
 <body>
+    <app-navbar [showMealsButton]="false" [showWorkoutsButton]="false"></app-navbar>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form id="msform">
                 <fieldset>
-                    <h2 class="fs-title">Your Workouts</h2>
+                    <h2 class="fs-title">Your Meals</h2>
                     <h3 class="fs-subtitle"></h3>
-                    <input type="text" name="fname" placeholder="Workout_Name" [readonly]="true" class="custom-input" />
+                    <input type="text" name="fname" placeholder="Meal_Name" [readonly]="true" class="custom-input" />
                     <select name="day" id="day-select" class="custom-select">
                         <option value="">--Please choose a day--</option>
                         <option value="">sunday</option>

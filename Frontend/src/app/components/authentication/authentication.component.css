@@ -13,7 +13,8 @@
   justify-content: center;
   background: black;
   padding: 30px;
-  background-image: url("../../../assets/img/training.png")
+  background-image: url("../../../assets/img/training.png");
+  margin-top: -690px;
 }
 .container{
   position: relative;

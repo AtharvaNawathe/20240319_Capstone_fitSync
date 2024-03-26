@@ -27,6 +27,7 @@
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;
+  margin-top: -680px;
 }
 
 .body-container {
@@ -125,7 +126,7 @@ img {
   padding: 20px;
   font-family: Georgia, "Times New Roman", Times, serif;
   background-color: rgba(31, 30, 30, 0.8);
-  margin-top: 150px;
+  margin-top: -600px;
 }
 
 .form-style-7 h1 {

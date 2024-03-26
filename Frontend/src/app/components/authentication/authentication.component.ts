@@ -50,7 +50,7 @@ export class AuthenticationComponent {
         // Store token in local storage
         localStorage.setItem('token', response.token);
         console.log("Login Success");
-        this.router.navigate(['/home']);
+        this.router.navigate(['/details']);
       },
       (error) => {
         // Handle error

@@ -20,56 +20,62 @@
         </div>
       </div>
     </div>
-    <div class="forms">
-      <div class="form-content">
-        <div class="login-form">
-          <div class="title">Login</div>
-          <form>
-            <div class="input-boxes">
-              <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Enter username">
-              </div>
-              <div class="input-box">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Enter your password">
-              </div>
-              <div class="text"><a href="#">Forgot password?</a></div>
-              <div class="button input-box">
-                <input type="submit" value="Sumbit">
-              </div>
-              <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
-            </div>
-          </form>
+<!-- authentication.component.html -->
+
+<div class="forms">
+  <div class="form-content">
+    <div [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="title">Login</div>
+      <form [formGroup]="loginForm">
+        <div class="input-boxes">
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Enter username" formControlName="username">
+            <!-- Use formControlName for username -->
+          </div>
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Enter your password" formControlName="password">
+            <!-- Use formControlName for password -->
+          </div>
+          <div class="text"><a href="#">Forgot password?</a></div>
+          <div class="button input-box">
+            <input type="submit" value="Submit" [disabled]="loginForm.invalid">
+            <!-- Disable the submit button if the form is invalid -->
+          </div>
+          <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
         </div>
-        <div class="signup-form">
-          <div class="title">Signup</div>
-          <form>
-            <div class="input-boxes">
-              <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Enter your name">
-              </div>
-              <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Enter username">
-              </div>
-              <div class="input-box">
-                <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Enter your email">
-              </div>
-              <div class="input-box">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Enter your password">
-              </div>
-              <div class="button input-box">
-                <input type="submit" value="Sumbit">
-              </div>
-              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
-            </div>
-          </form>
-        </div>
-      </div>
+      </form>
     </div>
+    <div class="signup-form">
+      <div class="title">Signup</div>
+      <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+        <div class="input-boxes">
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Enter your name" formControlName="name">
+          </div>
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Enter username" formControlName="username">
+          </div>
+          <div class="input-box">
+            <i class="fas fa-envelope"></i>
+            <input type="text" placeholder="Enter your email"formControlName="email">
+          </div>
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Enter your password"formControlName="password">
+          </div>
+          <div class="button input-box">
+            <input type="submit" value="Sumbit" [disabled]="signupForm.invalid">
+          </div>
+          <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
   </div>
 </div>

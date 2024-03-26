@@ -76,14 +76,14 @@ const login = async (req, res) => {
     const username = userData.username;
     const password = userData.password;
 
-    // Validate inputs
-    // const validationError = validateInputs(userData);
-    // if (validationError) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: validationError,
-    //   });
-    // }
+   
+    const validationError = validateInputs(userData);
+    if (validationError) {
+      return res.status(400).json({
+        success: false,
+        message: validationError,
+      });
+    }
 
     // Find the user by username
     const user = await User.findOne({ username });

@@ -141,4 +141,28 @@ body {
     margin-bottom: 20px;
 }
 
+/* your-workouts.component.css */
+
+.exercises-container {
+    color: white; /* Set text color to white */
+  }
+  
+  .exercises-container h4 {
+    /* Style h4 headers within the exercises container */
+    color: white; /* Set text color to white */
+    font-weight: bold; /* Make the text bold */
+  }
+  
+  .exercises-container ul {
+    /* Style ul lists within the exercises container */
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .exercises-container li {
+    /* Style li items within the exercises container */
+    margin-bottom: 10px; /* Add some bottom margin between items */
+  }
+  
+
 

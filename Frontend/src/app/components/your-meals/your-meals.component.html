@@ -1,4 +1,3 @@
-
 <body>
     <app-navbar [showMealsButton]="false" [showWorkoutsButton]="false"></app-navbar>
     <div class="row">
@@ -7,15 +6,27 @@
                 <fieldset>
                     <h2 class="fs-title">Your Meals</h2>
                     <h3 class="fs-subtitle"></h3>
-                    <input type="text" name="fname" placeholder="Meal_Name" [readonly]="true" class="custom-input" />
-                    <select name="day" id="day-select" class="custom-select">
-                        <option value="">--Please choose a day--</option>
-                        <option value="">sunday</option>
-                        <option value="">monday</option>
+                    <!-- Dropdown for meal types -->
+                    <select name="mealType" id="mealType-select" class="custom-select" (change)="onSelectMealType($event)">
+                        <option value="" disabled selected>--Please choose a meal type--</option>
+                        <ng-container *ngFor="let mealPlan of mealPlans">
+                            <ng-container *ngFor="let mealType of mealPlan.meal_plan">
+                                <option [value]="mealType.meal_type">{{ mealType.meal_type }}</option>
+                            </ng-container>
+                        </ng-container>
                     </select>
-                    <textarea type="text" [readonly]="true"></textarea>
+                    <div *ngIf="selectedMeals.length > 0" style="color: white;">
+                        <h3>{{ selectedMealType }}</h3>
+                        <div *ngFor="let meal of selectedMeals">
+                            <p style="color: white;">Name: {{ meal.name }}</p>
+                            <p style="color: white;">Description: {{ meal.description }}</p>
+                            <hr style="background-color: white;">
+                            <br>
+                        </div>
+                    </div>
                 </fieldset>
             </form>
+  
         </div>
     </div>
 </body>

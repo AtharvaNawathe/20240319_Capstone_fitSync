@@ -1,21 +1,35 @@
-
 <body>
-  <app-navbar [showMealsButton]="false" [showWorkoutsButton]="false"></app-navbar>
-  <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-          <form id="msform">
-              <fieldset>
-                  <h2 class="fs-title">Your Workouts</h2>
-                  <h3 class="fs-subtitle"></h3>
-                  <input type="text" name="fname" placeholder="Workout_Name" [readonly]="true" class="custom-input" />
-                  <select name="day" id="day-select" class="custom-select">
-                      <option value="">--Please choose a day--</option>
-                      <option value="">sunday</option>
-                      <option value="">monday</option>
-                  </select>
-                  <textarea type="text" [readonly]="true"></textarea>
-              </fieldset>
-          </form>
-      </div>
-  </div>
+    <app-navbar [showMealsButton]="false" [showWorkoutsButton]="false"></app-navbar>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form id="msform">
+                <fieldset>
+                    <h2 class="fs-title">Your Workouts</h2>
+                    <h3 class="fs-subtitle"></h3>
+                    <!-- Display selected day -->
+                    <input type="text" name="fname" placeholder="Workout Name" class="custom-input" [(ngModel)]="workoutName" />
+                    <!-- Dropdown for days -->
+                    <select name="day" id="day-select" class="custom-select" (change)="selectDay($event)">
+                        <option value="">--Please choose a day--</option>
+                        <ng-container *ngFor="let workout of workouts">
+                            <ng-container *ngFor="let daySchedule of workout.schedule">
+                                <option [ngValue]="daySchedule.day">{{ daySchedule.day }}</option>
+                            </ng-container>
+                        </ng-container>
+                    </select>
+                    
+
+                    <div *ngIf="exercises.length > 0" class="exercises-container">
+                        <h4>Exercises:</h4>
+                        <ul>
+                          <li *ngFor="let exercise of exercises">
+                            <!-- Display exercise name and description -->
+                            <strong>{{ exercise.exercise_name }}</strong>: {{ exercise.description }}
+                          </li>
+                        </ul>
+                      </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </body>

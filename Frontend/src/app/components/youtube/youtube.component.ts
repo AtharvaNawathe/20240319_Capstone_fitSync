@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { YouTubePlayerModule } from '@angular/youtube-player';
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 @Component({
   selector: 'app-youtube',

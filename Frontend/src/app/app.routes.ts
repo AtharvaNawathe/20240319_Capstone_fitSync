@@ -5,6 +5,8 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { YourMealsComponent } from './components/your-meals/your-meals.component';
 import { YourWorkoutsComponent } from './components/your-workouts/your-workouts.component';
 import { HomeComponent } from './components/home/home.component';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
@@ -12,5 +14,7 @@ export const routes: Routes = [
     { path: 'details', component: DetailsComponent},
     { path: 'auth', component: AuthenticationComponent},
     { path: 'yourmeals', component: YourMealsComponent},
-    { path: 'yourworkouts', component:YourWorkoutsComponent}
+    { path: 'yourworkouts', component:YourWorkoutsComponent},
+    { path: 'forgotpassword', component:ForgotpasswordComponent},
+    { path: 'resetpassword', component:ResetpasswordComponent}
 ];

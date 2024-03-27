@@ -38,7 +38,7 @@
             <input type="password" placeholder="Enter your password" formControlName="password">
             <!-- Use formControlName for password -->
           </div>
-          <div class="text"><a href="#">Forgot password?</a></div>
+          <div class="text"><a (click)="navigateToForgotPassword()">Forgot password?</a></div>
           <div class="button input-box">
             <input type="submit" value="Submit" [disabled]="loginForm.invalid">
             <!-- Disable the submit button if the form is invalid -->

@@ -33,7 +33,9 @@ export class AuthenticationComponent {
       password: ['', Validators.required]
     });
   }
-
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgotpassword']);
+  }
   onSubmit(): void {
     if (this.loginForm.invalid) {
       return;
@@ -49,8 +51,8 @@ export class AuthenticationComponent {
       (response) => {
         // Store token in local storage
         localStorage.setItem('token', response.token);
-        console.log("Login Success");
-        this.router.navigate(['/details']);
+       window.alert("You have successfullt logged in");
+        this.router.navigate(['/home']);
       },
       (error) => {
         // Handle error
@@ -74,9 +76,9 @@ export class AuthenticationComponent {
     // Make HTTP POST request for signup
     this.http.post<any>('http://localhost:3000/user/signup', userData).subscribe(
       (response) => {
-        console.log("Signup Success");
+        window.alert("You have successfullt signed up");
         // Optionally, you can automatically login the user after successful signup
-        window.location.reload();
+        this.router.navigate(['/details']);
       },
       (error) => {
         // Handle error

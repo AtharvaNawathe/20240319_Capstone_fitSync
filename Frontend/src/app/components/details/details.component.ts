@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -14,7 +15,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class DetailsComponent implements OnInit{  form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,  private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -49,6 +50,7 @@ export class DetailsComponent implements OnInit{  form!: FormGroup;
           (response) => {
             console.log('Data sent successfully:', response);
             // Handle success, e.g., show a success message
+            this.router.navigate(['/home']);
           },
           (error) => {
             console.error('Error sending data:', error);

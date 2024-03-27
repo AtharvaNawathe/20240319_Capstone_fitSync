@@ -272,6 +272,12 @@ const reset_password = async (req, res) => {
   }
 };
 
+const isTokenExpired = (timestamp) => {
+  const expirationTime = 86400000; 
+  const currentTime = new Date().getTime();
+  return (currentTime - timestamp) > expirationTime;
+};
+
 /**
  * Retrieves profile details of the logged-in user.
  * @param {Function} verifyToken Function to verify user token.

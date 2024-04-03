@@ -37,7 +37,7 @@
   transform-style: preserve-3d;
 }
 .container #flip:checked ~ .cover{
-  transform: rotateY(-180deg);
+  transform: rotateY(-179deg);
 }
  .container .cover .front,
  .container .cover .back{
@@ -63,7 +63,7 @@
 }
 .container .cover::after{
   opacity: 0.3;
-  transform: rotateY(180deg);
+  transform: rotateY(179deg);
   backface-visibility: hidden;
 }
 .container .cover img{

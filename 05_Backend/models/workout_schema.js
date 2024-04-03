@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const workoutPlanSchema = new Schema({
-    workout_name: { type: String, required: true, unique: true },
+    workout_name: { type: String, required: true},
     username: { type: String },
     goal: { type: String, required:true },
     workout_loc: { type: String, required: true},

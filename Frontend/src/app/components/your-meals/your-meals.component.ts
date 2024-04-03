@@ -29,12 +29,15 @@ interface Meal {
 export class YourMealsComponent implements OnInit {
   mealPlans: MealPlan[] = [];
   selectedMealType: string = '';
+  selectedMealName: string = '';
   selectedMeals: any[] = [];
+  formattedMealHistories: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchMeals();
+    this.fetchMealHistories();
   }
 
   fetchMeals(): void {
@@ -55,6 +58,7 @@ export class YourMealsComponent implements OnInit {
           if (this.mealPlans.length > 0 && this.mealPlans[0].meal_plan.length > 0) {
             this.selectedMealType = this.mealPlans[0].meal_plan[0].meal_type;
             this.selectedMeals = this.mealPlans[0].meal_plan[0].meals;
+            this.selectedMealName = this.mealPlans[0].meal_name; // Fetch the meal name
           }
         },
         (error: any) => {
@@ -63,15 +67,73 @@ export class YourMealsComponent implements OnInit {
       );
   }
 
-  onSelectMealType(event: any): void {
-    const selectedType = event.target.value;
-    const mealPlan = this.mealPlans.find(plan =>
-        plan.meal_plan.some(mealType => mealType.meal_type === selectedType)
-    );
-    if (mealPlan) {
-        this.selectedMealType = selectedType;
-        this.selectedMeals = mealPlan.meal_plan
-            .find(mealType => mealType.meal_type === selectedType)?.meals ?? [];
+  fetchMealHistories(): void {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token not found in local storage');
+      return;
     }
-}
+
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    this.http.get<any>('http://localhost:3000/meals/getmealshistory', { headers })
+      .subscribe(
+        (response: any[]) => {
+          this.formatMealHistories(response);
+        },
+        (error: any) => {
+          console.error('Error fetching meal histories:', error);
+        }
+      );
+  }
+
+  formatMealHistories(mealHistories: any[]): void {
+    this.formattedMealHistories = mealHistories.map(history => {
+      let formattedHistory = `${history.meal_name}:\n\n`;
+      history.meal_plan.forEach((mealType: any) => {
+        formattedHistory += `${mealType.meal_type}:\n`;
+        mealType.meals.forEach((meal: any) => {
+          formattedHistory += `${meal.name}: ${meal.description}\n`;
+        });
+      });
+      return formattedHistory;
+    }).join('');
+  }
+
+  onSubmit() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token not found in local storage');
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    const requestBody = {
+      meal_name: this.selectedMealName,
+      meal_type: this.selectedMealType
+    };
+
+    // Call the moveWorkoutToHistory API
+    this.http.post<any>('http://localhost:3000/meals/mealhistory', requestBody, { headers })
+      .subscribe(
+        (response: any) => {
+          console.log('Meals data moved to history successfully');
+          // Optionally, you can update the UI or perform other actions upon successful completion
+
+          // Fetch workouts again after moving data to history
+          this.fetchMeals();
+          window.alert('Successfully Completed the task!');
+          window.location.reload();
+        
+        },
+        (error: any) => {
+          console.error('Error moving workout data to history:', error);
+        }
+      );
+  }
 }

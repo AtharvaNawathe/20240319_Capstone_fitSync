@@ -23,5 +23,7 @@ router.get('/myworkouts',verifyToken, workoutController.myWorkouts);
 router.put('/updateworkout',verifyToken, workoutController.updateWorkoutStatus);
 router.get('/getworkouts',verifyToken, workoutController.getAllWorkouts);
 router.delete('/removeworkout',verifyToken, workoutController.removeWorkout);
+router.post('/workouthistory', verifyToken,workoutController.moveWorkoutToHistory);
+router.get('/getworkouthistory', verifyToken,workoutController.getWorkoutHistory);
 
 module.exports = router;

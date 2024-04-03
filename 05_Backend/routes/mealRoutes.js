@@ -28,6 +28,8 @@ router.get("/mymeals", verifyToken, mealController.getMyMeals);
 router.put("/updatemeals", verifyToken, mealController.updateMealStatus);
 router.get("/getmeals", verifyToken, mealController.getAllMeals);
 router.delete("/removemeal", verifyToken, mealController.removeMeal);
+router.post('/mealhistory', verifyToken, mealController.moveMealToHistory);
+router.get('/getmealshistory', verifyToken, mealController.getMealsHistory);
 
 /*
 router.post("/", mealController.addMealPlan);

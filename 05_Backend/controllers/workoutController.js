@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const dotenv = require("dotenv");
 const jwt = require('jsonwebtoken');
 const WorkoutPlan = require('../models/workout_schema')
+const WorkoutHistory = require('../models/WorkoutHistory_schema');
 dotenv.config();
 
 
@@ -186,10 +187,85 @@ const removeWorkout = async (req, res) => {
     }
 };
 
+
+const moveWorkoutToHistory = async (req, res) => {
+    try {
+        const { workout_name, day } = req.body;
+
+        // Find the workout entry in WorkoutPlan based on workout_name
+        const workoutPlan = await WorkoutPlan.findOne({ workout_name });
+
+        if (!workoutPlan) {
+            return res.status(404).json({ message: 'Workout plan not found' });
+        }
+
+        // Find the schedule entry index for the provided day
+        const scheduleEntryIndex = workoutPlan.schedule.findIndex(entry => entry.day === day);
+
+        if (scheduleEntryIndex === -1) {
+            return res.status(404).json({ message: 'No workout found for the provided day' });
+        }
+
+        // Get the exercises for the provided day
+        const exercisesToRemove = workoutPlan.schedule[scheduleEntryIndex].exercises;
+
+        // Create a new document to insert in WorkoutHistory collection
+        const newWorkoutHistoryEntry = {
+            workout_name: workoutPlan.workout_name,
+            day: day,
+            exercises: exercisesToRemove
+        };
+
+        // Find and replace the existing document if it exists, otherwise insert a new one
+        await WorkoutHistory.findOneAndReplace(
+            { workout_name: newWorkoutHistoryEntry.workout_name, day: newWorkoutHistoryEntry.day },
+            newWorkoutHistoryEntry,
+            { upsert: true }
+        );
+
+        // Remove the entire day's data structure from the workout plan
+        workoutPlan.schedule.pull({ day: day });
+
+        await workoutPlan.save();
+
+        res.status(200).json({ message: 'Workout data moved to history and entire day\'s data removed from workout plan successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const getWorkoutHistory = async (req, res) => {
+    try {
+        // Fetch all workout plans from the database
+        const workouts = await WorkoutHistory.find();
+
+        // Check if any workout plans exist
+        if (!workouts || workouts.length === 0) {
+            return res.status(404).json({ message: "No workouts found" });
+        }
+
+        // Send the list of workouts in the response
+        res.json(workouts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+
+
+
+
+
+
+
   module.exports = {
     addWorkoutPlan,
     myWorkouts,
     updateWorkoutStatus,
     getAllWorkouts,
-    removeWorkout
+    removeWorkout,
+    moveWorkoutToHistory,
+    getWorkoutHistory
   }

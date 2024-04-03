@@ -25,6 +25,14 @@ interface Workout {
   schedule: ScheduleEntry[];
 }
 
+interface WorkoutHistory {
+  _id: string;
+  workout_name: string;
+  day: string;
+  exercises: Exercise[];
+}
+
+
 @Component({
   selector: 'app-your-workouts',
   standalone: true,
@@ -36,12 +44,16 @@ export class YourWorkoutsComponent implements OnInit {
   workouts: Workout[] = [];
   selectedDay: string = '';
   exercises: Exercise[] = [];
-  workoutName: string = ''; // Variable to store the workout name
+  workoutName: string = '';
+  workoutHistories: WorkoutHistory[] = [];
+  formattedWorkoutHistories: string = '';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    console.log('Component initialized');
     this.fetchWorkouts();
+    this.fetchWorkoutHistories();
   }
 
   fetchWorkouts() {
@@ -70,6 +82,45 @@ export class YourWorkoutsComponent implements OnInit {
       );
   }
 
+  fetchWorkoutHistories(): void {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token not found in local storage');
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    this.http.get<any>('http://localhost:3000/workouts/getworkouthistory', { headers })
+    .subscribe(
+      (response: WorkoutHistory[]) => {
+        this.workoutHistories = response;
+        this.formatWorkoutHistories();
+      },
+      (error: any) => {
+        console.error('Error fetching workout histories:', error);
+      }
+    );
+
+  }
+
+  formatWorkoutHistories(): void {
+    this.formattedWorkoutHistories = '';
+    this.workoutHistories.forEach(history => {
+      this.formattedWorkoutHistories += `${history.day}: ${history.workout_name}\n`;
+      history.exercises.forEach(exercise => {
+        this.formattedWorkoutHistories += `Exercise: ${exercise.exercise_name}\n`;
+        this.formattedWorkoutHistories += `Description: ${exercise.description}\n`;
+        this.formattedWorkoutHistories += `Status: ${exercise.workout_status}\n\n`;
+      });
+    });
+  }
+
+
+
+
   selectDay(event: any) {
     const selectedValue = event.target.value;
     this.selectedDay = selectedValue;
@@ -80,5 +131,40 @@ export class YourWorkoutsComponent implements OnInit {
     } else {
       this.exercises = [];
     }
+  }
+
+  onSubmit() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token not found in local storage');
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `${token}`
+    });
+
+    const requestBody = {
+      workout_name: this.workoutName,
+      day: this.selectedDay
+    };
+
+    // Call the moveWorkoutToHistory API
+    this.http.post<any>('http://localhost:3000/workouts/workouthistory', requestBody, { headers })
+      .subscribe(
+        (response: any) => {
+          console.log('Workout data moved to history successfully');
+          // Optionally, you can update the UI or perform other actions upon successful completion
+
+          // Fetch workouts again after moving data to history
+          this.fetchWorkouts();
+          window.alert('Successfully Completed the task!');
+          window.location.reload();
+        
+        },
+        (error: any) => {
+          console.error('Error moving workout data to history:', error);
+        }
+      );
   }
 }

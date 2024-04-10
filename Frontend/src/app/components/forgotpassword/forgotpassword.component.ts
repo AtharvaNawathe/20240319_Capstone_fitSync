@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -16,7 +17,7 @@ export class ForgotpasswordComponent {
   
   // String variable to store the user's email
   email: string = '';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //when button it clicked 
   forgetPassword(): void {
@@ -28,6 +29,7 @@ export class ForgotpasswordComponent {
         console.log(this.email);
         window.alert("Password reset link sent to Email Successfully!!");
         console.log('Response:', response);
+        this.router.navigate(['/auth']);
       },
       (error) => {
         // Handle any errors that occur during the request

@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class NavbarComponent implements OnInit {
   @Input() showMealsButton: boolean = true;
   @Input() showWorkoutsButton: boolean = true;
+  isSignedUp: boolean = false;
 
   constructor(private router: Router,    private workoutService: WorkoutService) { }
   navigateToWorkouts() { 
@@ -29,6 +30,21 @@ export class NavbarComponent implements OnInit {
 
   navigateToHome() {
     this.router.navigate(['/home']);
+  }
+
+  Logout(): void {
+    const confirmation = confirm('Are you sure you want to log out?');
+
+    // Check if the user confirmed the action
+    if (confirmation) {
+      this.isSignedUp = false;
+      // clearing the token from the local Storage
+      localStorage.removeItem('token');
+      // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
+
+      this.router.navigate(['/auth']);
+      // this.clearSessionTimer();
+    }
   }
 
   ngOnInit(): void {

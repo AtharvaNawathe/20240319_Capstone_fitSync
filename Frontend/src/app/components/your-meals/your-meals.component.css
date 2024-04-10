@@ -39,6 +39,7 @@ body {
     margin: 0 10%;
     background: transparent;
     margin-top: -700px;
+    margin-left: 400px;
     /*stacking fieldsets above each other*/
     position: relative;
 }

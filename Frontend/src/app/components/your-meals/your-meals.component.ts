@@ -90,17 +90,36 @@ export class YourMealsComponent implements OnInit {
   }
 
   formatMealHistories(mealHistories: any[]): void {
-    this.formattedMealHistories = mealHistories.map(history => {
-      let formattedHistory = `${history.meal_name}:\n\n`;
-      history.meal_plan.forEach((mealType: any) => {
-        formattedHistory += `${mealType.meal_type}:\n`;
-        mealType.meals.forEach((meal: any) => {
-          formattedHistory += `${meal.name}: ${meal.description}\n`;
+    let formattedHistories = ''; // Initialize an empty string to hold the concatenated histories
+    mealHistories.forEach(history => {
+        let formattedHistory = `${history.meal_name}:\n\n`;
+        history.meal_plan.forEach((mealType: any) => {
+            formattedHistory += `${mealType.meal_type}:\n`;
+            mealType.meals.forEach((meal: any) => {
+                formattedHistory += `${meal.name}: ${meal.description}\n`;
+            });
         });
-      });
-      return formattedHistory;
-    }).join('');
-  }
+        formattedHistories += formattedHistory; // Concatenate the new formatted history to the existing ones
+    });
+    this.formattedMealHistories += formattedHistories; // Finally, update the formattedMealHistories variable
+}
+
+
+  onMealTypeChange(): void {
+    // Find the selected meal plan based on selected meal type
+    const selectedMealPlan = this.mealPlans.find(plan => plan.meal_plan.some(mealType => mealType.meal_type === this.selectedMealType));
+    if (selectedMealPlan) {
+        // Update selectedMeals with meals of the selected meal type
+        const selectedMealTypeData = selectedMealPlan.meal_plan.find(mealType => mealType.meal_type === this.selectedMealType);
+        if (selectedMealTypeData) {
+            this.selectedMeals = selectedMealTypeData.meals;
+        } else {
+            this.selectedMeals = [];
+        }
+    } else {
+        this.selectedMeals = [];
+    }
+}
 
   onSubmit() {
     const token = localStorage.getItem('token');

@@ -16,19 +16,4 @@ const userSchema = new Schema({
     token:{type:String, default:''}
 });
 
-userSchema.methods.getProfileDetails = function () {
-    return {
-        username: this.username,
-        email: this.email,
-        name: this.name,
-        height: this.height,
-        weight: this.weight,
-        gender: this.gender,
-        goal: this.goal,
-        veg: this.veg,
-        workout_plan: this.workout_plan,
-        meal_plan: this.meal_plan
-    };
-};
-
 module.exports = mongoose.model('User', userSchema);

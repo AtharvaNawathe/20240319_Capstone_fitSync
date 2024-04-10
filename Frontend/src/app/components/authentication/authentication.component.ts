@@ -6,11 +6,13 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-authentication',
   standalone: true,
-  imports: [NavbarComponent,FormsModule,HttpClientModule,ReactiveFormsModule],
+  imports: [NavbarComponent,FormsModule,HttpClientModule,ReactiveFormsModule,CommonModule],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.css'
 })
@@ -23,15 +25,23 @@ export class AuthenticationComponent {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator()]]
     });
 
     this.signupForm = this.formBuilder.group({
       name: ['', Validators.required],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6), this.passwordValidator()]],
     });
+  }
+
+passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const passwordRegex = /^(?=.*\d).{6,}$/; // At least 6 characters long and contain at least one number
+      const isValid = passwordRegex.test(control.value);
+      return isValid ? null : { invalidPassword: true };
+    };
   }
   navigateToForgotPassword() {
     this.router.navigate(['/forgotpassword']);
@@ -77,8 +87,8 @@ export class AuthenticationComponent {
     this.http.post<any>('http://localhost:3000/user/signup', userData).subscribe(
       (response) => {
         window.alert("You have successfullt signed up");
-        // Optionally, you can automatically login the user after successful signup
-        this.router.navigate(['/details']);
+        window.location.reload();
+
       },
       (error) => {
         // Handle error

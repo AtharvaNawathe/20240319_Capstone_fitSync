@@ -195,6 +195,14 @@
   color: #5b13b9;
   cursor: pointer;
 }
+
+.validation-message {
+  margin-top: 5px;
+}
+
+.text-danger {
+  color: red;
+}
 .forms .form-content label:hover{
   text-decoration: underline;
 }

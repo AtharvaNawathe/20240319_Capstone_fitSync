@@ -6,6 +6,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute for accessing URL parameters
 
+
 @Component({
   selector: 'app-resetpassword',
   standalone: true,

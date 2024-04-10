@@ -2,16 +2,12 @@
 <!-- Fontawesome CDN Link -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<app-navbar [showWorkoutsButton]="false" [showMealsButton]="false" ></app-navbar>
+<app-navbar [showWorkoutsButton]="false" [showMealsButton]="false"></app-navbar>
 <div class="body-container">
   <div class="container">
     <input type="checkbox" id="flip">
     <div class="cover">
       <div class="front">
-
-
-
-        
         <img src="../../../assets/img/Dumbell.jpg" alt="">
         <div class="text">
         </div>
@@ -24,62 +20,112 @@
         </div>
       </div>
     </div>
-<!-- authentication.component.html -->
+    <!-- authentication.component.html -->
 
-<div class="forms">
-  <div class="form-content">
-    <div [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="title">Login</div>
-      <form [formGroup]="loginForm">
-        <div class="input-boxes">
-          <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Enter username" formControlName="username">
-            <!-- Use formControlName for username -->
-          </div>
-          <div class="input-box">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Enter your password" formControlName="password">
-            <!-- Use formControlName for password -->
-          </div>
-          <div class="text"><a (click)="navigateToForgotPassword()">Forgot password?</a></div>
-          <div class="button input-box">
-            <input type="submit" value="Submit" [disabled]="loginForm.invalid">
-            <!-- Disable the submit button if the form is invalid -->
-          </div>
-          <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+    <div class="forms">
+      <div class="form-content">
+        <div [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="title">Login</div>
+          <form [formGroup]="loginForm">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter username" formControlName="username">
+              </div>
+              <!-- Validation message for username -->
+              <div
+                *ngIf="loginForm.get('username')!.invalid && (loginForm.get('username')!.dirty || loginForm.get('username')!.touched)"
+                class="text-danger">
+                <div *ngIf="loginForm.get('username')!.errors?.['required']">Username is required.</div>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Enter your password" formControlName="password">
+              </div>
+              <!-- Validation message for password -->
+              <div
+                *ngIf="loginForm.get('password')!.invalid && (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)"
+                class="text-danger">
+                <div *ngIf="loginForm.get('password')!.errors?.['required']">Password is required.</div>
+                <div *ngIf="loginForm.get('password')!.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                <div *ngIf="loginForm.get('password')!.errors?.['invalidPassword']">Password must contain at least one number.</div>
+              </div>
+              <div class="text"><a (click)="navigateToForgotPassword()">Forgot password?</a></div>
+              <div class="button input-box">
+                <input type="submit" value="Submit" [disabled]="loginForm.invalid">
+                <!-- Disable the submit button if the form is invalid -->
+              </div>
+              <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-    <div class="signup-form">
-      <div class="title">Signup</div>
-      <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
-        <div class="input-boxes">
-          <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Enter your name" formControlName="name">
-          </div>
-          <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Enter username" formControlName="username">
-          </div>
-          <div class="input-box">
-            <i class="fas fa-envelope"></i>
-            <input type="text" placeholder="Enter your email"formControlName="email">
-          </div>
-          <div class="input-box">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Enter your password"formControlName="password">
-          </div>
-          <div class="button input-box">
-            <input type="submit" value="Sumbit" [disabled]="signupForm.invalid">
-          </div>
-          <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+        <div class="signup-form">
+          <div class="title">Signup</div>
+          <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+            <div class="input-boxes">
+              <!-- Full Name -->
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter your name" formControlName="name">
+              </div>
+              <!-- Validation message for full name -->
+              <div *ngIf="signupForm.get('name')!.invalid && (signupForm.get('name')!.dirty || signupForm.get('name')!.touched)"
+                class="text-danger">
+                <div *ngIf="signupForm.get('name')!.errors?.['required']">Name is required.</div>
+              </div>
+        
+              <!-- Username -->
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Enter username" formControlName="username">
+              </div>
+              <!-- Validation message for username -->
+              <div
+                *ngIf="signupForm.get('username')!.invalid && (signupForm.get('username')!.dirty || signupForm.get('username')!.touched)"
+                class="text-danger">
+                <div *ngIf="signupForm.get('username')!.errors?.['required']">Username is required.</div>
+              </div>
+        
+              <!-- Email -->
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" formControlName="email">
+              </div>
+              <!-- Validation message for email -->
+              <div
+                *ngIf="signupForm.get('email')!.invalid && (signupForm.get('email')!.dirty || signupForm.get('email')!.touched)"
+                class="text-danger">
+                <div *ngIf="signupForm.get('email')!.errors?.['required']">Email is required.</div>
+                <div *ngIf="signupForm.get('email')!.errors?.['email']">Invalid email format.</div>
+              </div>
+        
+              <!-- Password -->
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Enter your password" formControlName="password">
+              </div>
+              <!-- Validation message for password -->
+              <div
+                *ngIf="signupForm.get('password')!.invalid && (signupForm.get('password')!.dirty || signupForm.get('password')!.touched)"
+                class="text-danger">
+                <div *ngIf="signupForm.get('password')!.errors?.['required']">Password is required.</div>
+                <div *ngIf="signupForm.get('password')!.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                <div *ngIf="signupForm.get('password')!.errors?.['invalidPassword']">Password must contain at least one number.</div>
+              </div>
+        
+              <!-- Submit button -->
+              <div class="button input-box">
+                <input type="submit" value="Submit" [disabled]="signupForm.invalid">
+              </div>
+        
+              <!-- Login link -->
+              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+            </div>
+          </form>
         </div>
-      </form>
+        
+      </div>
     </div>
-  </div>
-</div>
 
   </div>
 </div>

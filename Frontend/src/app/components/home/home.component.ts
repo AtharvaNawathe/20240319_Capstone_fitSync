@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
+import { YouTubePlayerModule } from "@angular/youtube-player";
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { YoutubeComponent } from '../youtube/youtube.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,HttpClientModule,YoutubeComponent],
+  imports: [NavbarComponent,HttpClientModule,YouTubePlayerModule,CarouselModule,YoutubeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
   username: string = '';
+
+  
 
   constructor(private http: HttpClient) { }
 

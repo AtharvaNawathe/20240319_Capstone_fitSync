@@ -34,21 +34,16 @@
               </div>
               <!-- Validation message for username -->
               <div
-                *ngIf="loginForm.get('username')!.invalid && (loginForm.get('username')!.dirty || loginForm.get('username')!.touched)"
+                
                 class="text-danger">
-                <div *ngIf="loginForm.get('username')!.errors?.['required']">Username is required.</div>
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
                 <input type="password" placeholder="Enter your password" formControlName="password">
               </div>
               <!-- Validation message for password -->
-              <div
-                *ngIf="loginForm.get('password')!.invalid && (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)"
-                class="text-danger">
-                <div *ngIf="loginForm.get('password')!.errors?.['required']">Password is required.</div>
-                <div *ngIf="loginForm.get('password')!.errors?.['minlength']">Password must be at least 6 characters long.</div>
-                <div *ngIf="loginForm.get('password')!.errors?.['invalidPassword']">Password must contain at least one number.</div>
+              <div class="text-danger">
+      
               </div>
               <div class="text"><a (click)="navigateToForgotPassword()">Forgot password?</a></div>
               <div class="button input-box">

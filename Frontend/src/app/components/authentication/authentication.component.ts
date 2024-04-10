@@ -87,7 +87,7 @@ passwordValidator(): ValidatorFn {
     this.http.post<any>('http://localhost:3000/user/signup', userData).subscribe(
       (response) => {
         window.alert("You have successfullt signed up");
-        window.location.reload();
+        this.router.navigate(['/profile']);
 
       },
       (error) => {

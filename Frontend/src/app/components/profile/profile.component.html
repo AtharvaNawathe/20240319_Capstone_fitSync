@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+<body>
+    <section>
+        <div id="body-container">
+            <div class="upper-body">
+                <div class="upper-body-data focus" id="general" tabindex="1">General</div>
+            </div>
+            <div id="general-container">
+                <div id="general-name">
+                    <h2>General</h2>
+                </div>
+                <form (ngSubmit)="saveData()">
+                    <label class="email">Email: </label>
+                    <input [(ngModel)]="formData.email" name="email" class="input-box" type="text"><br>
+                    <label for="name1">Your name:</label>
+                    <input [(ngModel)]="formData.name" name="name" class="input-box" type="text"><br>
+                    <!-- <div class="form-group">
+                        <label id="gender" for="gender-option" class="control-label">Gender:</label>
+                        <label id="gender-option-male" class="radio">
+                            <input id="gender_male" type="radio" name="gender" value="male">
+                            Male
+                        </label><br>
+                        <label id="gender-option-male" class="radio">
+                            <input id="gender_male" type="radio" name="gender" value="female">
+                            Female
+                        </label>
+                    </div><br> -->
+                    <label class="b-day" for="b-day b-month">Birth date:</label>
+                    <input [(ngModel)]="formData.birthDate" name="birthDate" class="input-box" type="text"><br>
+                    <!-- <select class="input-box" name="birth-data" id="b-month">
+                        <option>-Month-</option>
+                    </select>
+                    <select class="input-box" name="birth-data" id="b-day">
+                        <option>-Day-</option>
+                    </select>
+                    <select class="input-box" name="birth-data" id="b-year">
+                        <option>-Year-</option>
+                    </select><br> -->
+
+                    <div class="height-input">
+                        <label for="height1 height2">Height:</label>
+                        <input [(ngModel)]="formData.height" name="height" class="input-box BM-input BM-height" type="number"><span
+                            class="input-box units">cm</span>
+                    </div><br>
+
+                    <div class="height-input">
+                        <label for="height1 height2">Weight:</label>
+                        <input [(ngModel)]="formData.weight" name="weight" class="input-box BM-input BM-height" type="number"><span
+                            class="input-box units">kg</span>
+                    </div><br>
+                    <label for="Waist">Waist:</label>
+                    <input [(ngModel)]="formData.waist" name="waist" class="input-box BM-input" type="number"><span
+                    class="input-box units">cm</span>
+                    <br>
+                    <label for="Hips">Hips:</label>
+                    <input [(ngModel)]="formData.hips" name="hips" class="input-box BM-input" type="number"><span
+                    class="input-box units">cm</span>
+                    <br>
+                    <label for="Neck">Neck:</label>
+                    <input [(ngModel)]="formData.neck" name="neck" class="input-box BM-input" type="number"><span
+                    class="input-box units">cm</span>
+                    <br>
+                    <div class="form-group">
+                        <label for="user-description" class="col-sm-3 control-label">Your description for profile
+                            page:</label>
+                        <textarea [(ngModel)]="formData.description" name="description" class="input-box" rows="2"
+                        style="resize: vertical;"></textarea>
+                    </div><br>
+                </form>
+            </div>
+            <div class="save-button">
+                <button type="submit" class="save" (click)="saveData()">Save</button>
+            </div>
+        </div>
+        <div id="profile">
+            <div class="profile-image">
+                <img src="https://www.gymwolf.com/user_images/342053a2e3e85a2e3ae15dd0b7d01d60_.jpg" alt="Profile Image">
+            </div>
+            <button class="profile-pic-button">Change profile picture</button>
+            <h4>0</h4>
+            <p>Workouts added</p>
+            <h4>0 kg</h4>
+            <p>Lifted</p>
+        </div>
+    </section>
+    </body>

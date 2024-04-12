@@ -4,13 +4,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-import { WorkoutService } from '../../services/workout.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router'; 
+// import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MatToolbarModule,CommonModule,MatIconModule,HttpClientModule],
+  imports: [MatToolbarModule,CommonModule,MatIconModule,HttpClientModule,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,7 +21,7 @@ export class NavbarComponent implements OnInit {
   @Input() customClass: string = '';
   isSignedUp: boolean = false;
 
-  constructor(private router: Router,    private workoutService: WorkoutService) { }
+  constructor(private router: Router) { }
   navigateToWorkouts() { 
     this.router.navigate(['/yourworkouts']);
   
@@ -33,6 +34,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  navigateToProfile() {
+    this.router.navigate(['/editprofile']);
+  }
   Logout(): void {
     const confirmation = confirm('Are you sure you want to log out?');
 

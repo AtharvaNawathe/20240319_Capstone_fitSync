@@ -1,14 +1,11 @@
 import { Component,OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { WorkoutService } from '../../services/workout.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient,HttpClientModule,HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { log } from 'console';
-
 interface Exercise {
   exercise_name: string;
   description: string;

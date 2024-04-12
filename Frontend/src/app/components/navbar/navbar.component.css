@@ -30,9 +30,7 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 920px;
-  
-
+  margin-left: 860px;
 }
 
 button {
@@ -193,5 +191,11 @@ a {text-decoration:none;}
 .home-navbar-bg {
   background-image: url("../../../assets/img/home-bg.jpg");
   /* Additional background styles if needed */
+}
+
+.profile-icon {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  border-radius: 50%; /* Optional: Make the image round (for circular icons) */
 }
 

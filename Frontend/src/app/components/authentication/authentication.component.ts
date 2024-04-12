@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { AuthService } from '../../services/auth.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-authentication',
   standalone: true,
-  imports: [NavbarComponent,FormsModule,HttpClientModule,ReactiveFormsModule,CommonModule],
+  imports: [NavbarComponent,FormsModule,ReactiveFormsModule,CommonModule,HttpClientModule],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.css'
 })

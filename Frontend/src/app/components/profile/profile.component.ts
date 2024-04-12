@@ -27,7 +27,7 @@ export class ProfileComponent {
           // Clear form after successful save if needed
           this.formData = {};
           window.alert("You have successfullt filled the data");
-          this.router.navigate(['/home']);
+          this.router.navigate(['/auth']);
         },
         (error) => {
           console.error('Error saving data:', error);

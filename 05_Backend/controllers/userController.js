@@ -305,6 +305,10 @@ const getProfileDetails =
         username: user.username,
         name: user.name,
         email: user.email,
+        height:user.height,
+        waist:user.waist,
+        hips:user.hips,
+        neck:user.neck
         // Add other user details as needed
       };
 

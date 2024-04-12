@@ -175,7 +175,7 @@ body {
 }
 
 .completed-button:hover {
-    background-color: black; /* Example hover background color */
+    background-color: gray; /* Example hover background color */
     border-color: grey;
     color:black;
 }

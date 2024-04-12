@@ -17,12 +17,12 @@
                             </ng-container>
                         </ng-container>
                     </select>
-                    <div *ngIf="selectedMeals.length > 0" style="color: white;">
-                        <h3>{{ selectedMealType }} <button type="submit" class="completed-button">Completed</button>
+                    <div *ngIf="selectedMeals.length > 0" style="color: black;">
+                        <h3>{{ selectedMealType }} <button type="submit" class="completed-button">Done?</button>
                         </h3>
                         <div *ngFor="let meal of selectedMeals">
-                            <p style="color: white;">Name: {{ meal.name }}</p>
-                            <p style="color: white;">Description: {{ meal.description }}</p>
+                            <p style="color: black;">Name: {{ meal.name }}</p>
+                            <p style="color: black;">Description: {{ meal.description }}</p>
                             <hr style="background-color: white;">
                             <br>
                         </div>

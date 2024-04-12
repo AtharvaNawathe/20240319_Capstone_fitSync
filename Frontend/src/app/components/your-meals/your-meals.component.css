@@ -77,12 +77,12 @@ body {
 }
 
 ::ng-deep .custom-select {
-    background-color: black;
+    background-color: white;
     color: black;
   }
   
   ::ng-deep .custom-select option {
-    background-color: black;
+    background-color: white;
     color: black;
   }
 
@@ -141,9 +141,7 @@ body {
 }
 
 .completed-button {
-    /* Add your desired styles here */
-    background: transparent; /* Example background color */
-    color: #fff; /* Example text color */
+    color: black; /* Example text color */
     border: 2px solid black; /* Example border color */
     border-radius: 5px; 
     padding: 5px 10px; 

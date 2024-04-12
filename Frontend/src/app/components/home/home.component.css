@@ -1,3 +1,10 @@
+body {
+	margin: 0;
+	padding: 0;
+	background:black;
+	
+}
+
 .main-heading
 {
 	color: yellow;
@@ -7,13 +14,19 @@
 	text-transform: uppercase;
     margin-top: -650px;
     margin-left: 50px;
+	overflow: hidden;
 }
 
 h2 {
 	font-size: 25px;
 	font-weight: bold;
 	font-style: italic;
-	margin-top: 50px; /* Adjust the margin-top to add space between the greeting and the line */
+	margin-top: -50px; /* Adjust the margin-top to add space between the greeting and the line */
 	color: yellow;
 	margin-left: 60px;
   }
+
+  .home-navbar-bg {
+    background-image: url("../../../assets/img/home-bg.jpg");
+    /* Additional background styles if needed */
+}

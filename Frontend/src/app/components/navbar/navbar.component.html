@@ -1,5 +1,5 @@
 <body>
-  <mat-toolbar>
+  <mat-toolbar [ngClass]="'navbar-bg'">
     <span (click)="navigateToHome()">One-Rep-Max</span>
     <div class="buttons-container">
       <button *ngIf="showWorkoutsButton" class="button-arounder" (click)="navigateToWorkouts()">Your Workouts</button>

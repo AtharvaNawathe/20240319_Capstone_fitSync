@@ -33,5 +33,6 @@ router.get('/profiledetails',verifyToken, UserController.getProfileDetails)
 router.put('/goal', verifyToken, UserController.updateGoal);
 router.put('/editprofile', verifyToken, UserController.editProfile);
 router.put('/personaldetails', verifyToken, UserController.personalDetails);
+router.post('/save',  UserController.createUser);
 
 module.exports = router;

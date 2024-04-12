@@ -15,7 +15,7 @@ html {
 
 body {
     font-family: montserrat, arial, verdana;
-    background: transparent;
+    
     /* background-image: url("../../../assets/img/home-bg.jpg"); */
 }
 
@@ -26,6 +26,7 @@ body {
     text-align: center;
     position: relative;
     margin-top: 30px;
+   
 }
 
 #msform fieldset {
@@ -35,11 +36,11 @@ body {
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
     padding: 20px 30px;
     box-sizing: border-box;
-    width: 50%;
+    width: 180%;
     margin: 0 10%;
     background: transparent;
     margin-top: -700px;
-    margin-left: 400px;
+    margin-left: 50px;
     /*stacking fieldsets above each other*/
     position: relative;
 }
@@ -58,7 +59,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     font-family: montserrat;
-    color: white;
+    color: black;
     font-size: 13px;
     background: transparent;
 }
@@ -77,16 +78,16 @@ body {
 
 ::ng-deep .custom-select {
     background-color: black;
-    color: white;
+    color: black;
   }
   
   ::ng-deep .custom-select option {
     background-color: black;
-    color: white;
+    color: black;
   }
 
   .custom-input::placeholder {
-    color: white;
+    color: black;
   }
 
 /*buttons*/
@@ -94,7 +95,7 @@ body {
     width: 100px;
     background: #ee0979;
     font-weight: bold;
-    color: white;
+    color: black;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
@@ -103,14 +104,14 @@ body {
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+    box-shadow: 0 0 0 2px black, 0 0 0 3px #ee0979;
 }
 
 #msform .action-button-previous {
     width: 100px;
     background: #C5C5F1;
     font-weight: bold;
-    color: white;
+    color: black;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
@@ -119,14 +120,14 @@ body {
 }
 
 #msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+    box-shadow: 0 0 0 2px black, 0 0 0 3px #C5C5F1;
 }
 
 /*headings*/
 .fs-title {
     font-size: 18px;
     text-transform: uppercase;
-    color: yellow;
+    color: black;
     margin-bottom: 10px;
     letter-spacing: 2px;
     font-weight: bold;
@@ -135,7 +136,7 @@ body {
 .fs-subtitle {
     font-weight: normal;
     font-size: 13px;
-    color: white;
+    color: black;
     margin-bottom: 20px;
 }
 
@@ -143,7 +144,7 @@ body {
     /* Add your desired styles here */
     background: transparent; /* Example background color */
     color: #fff; /* Example text color */
-    border: 2px solid white; /* Example border color */
+    border: 2px solid black; /* Example border color */
     border-radius: 5px; 
     padding: 5px 10px; 
     cursor: pointer; 
@@ -156,7 +157,7 @@ body {
 }
 
 .textarea-container {
-    width: 700px; /* Adjust width as needed */
+    width: 100%; /* Adjust width as needed */
     margin-top: 100px;
 }
 

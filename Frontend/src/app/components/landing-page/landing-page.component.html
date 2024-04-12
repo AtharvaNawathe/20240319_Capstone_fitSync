@@ -1,141 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="body-containor">
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <div class="hero">
-		<div class="container">
-			<div class="logo">One-Rep-Max</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One-Rep-Max</title>
 
-			<div class="content">
-				<h2 class="main-heading">Be your <span>best</span></h2>
+  <!--import-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-				<button class="btn" (click)="navigateToAuth()">Join today</button>
-			</div>
-		</div>
-	</div>
+</head>
+
+<body>
+  <div class="landing">
+    <!-- ******  Video section ***************-->
+    <div id="videosection">
+      <video autoplay loop muted plays-inline class="video">
+        <source src="../../../assets/img/videoplayback.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!--**************** NavBar Section      ******************** -->
+    <div>
+      <div id="navbar">
+        <nav>
+          <img src="../../../assets/img/logo.png" alt="" class="sitelogo">
+
+          <ul>
+            <li (click)="navigateToAuth()"><a>Register</a></li>
+            <li (click)="navigateToAuth()" ><a>Sign In</a></li>
+            <li><a href=""><img src="https://img.icons8.com/ios/344/search--v1.png" id='srch_lv'></a></li>
+            <li id="menubtn">&#8803; <div id="smallscr">
 
 
-	<section class="offer">
-		<div class="container">
-			<h2 class="heading">What we offer</h2>
-			<p class="sub-heading white">
-				We're committed to bringing you the best workout experience.
-			</p>
+              </div>
+            </li>
 
-			<div class="row">
-				<div class="col">
-					<div class="offer-card offer-tour">
-						<h2 class="offer-name">
-							Meals
-						</h2>
-					</div>
-				</div>
-				<div class="col">
-					<div class="offer-card offer-classes">
-						<h2 class="offer-name">
-							Home workouts <br>
+          </ul>
 
-						</h2>
-					</div>
-				</div>
-				<div class="col">
-					<div class="offer-card offer-training">
-						<h2 class="offer-name">
-							Gym Workouts
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+        </nav>
+        <div id="extra_nav" class="notdisplay">
+          <p id="register1"><a>Register</a></p>
+          <p id="login1"><a>Sign In</a></p>
+        </div>
+      </div>
+    </div>
 
-	<section class="testimonial">
-		<div class="container">
-			<h2 class="heading">
-				What they say
-			</h2>
+    <!-- ******* Heading-1 ******************** -->
+    <div class="content">
+      <h1>A better way to track your workouts</h1>
+      <div id="buttonhome" class="display">
+        <button id="startfree" (click)="navigateToAuth()"><a>Start Free</a></button>
+      </div>
+      <div class="play">
+        <p class="playp">Get the app</p>
+        <p>
+          <a href="https://play.google.com/store/apps/details?id=com.mooncascade.gymwolf" title="Android App">
+            <img src="https://www.gymwolf.com/img/footer/android-button.png" alt="Android App" width="134" />
+          </a>
+        </p>
+        <p>
+          <a href="https://www.gymwolf.com/img/footer/ios-button.png" title="iPhone App">
+            <img src="https://www.gymwolf.com/img/footer/ios-button.png" alt="iPhone App" width="134" />
+          </a>
+        </p>
+      </div>
+      <div id="divinput" class="notdisplay">
+        <div><input type="email" placeholder="Entre your Email">
+          <button id="regi_button">Register</button>
+        </div>
+        <button class="facebbok"><b style="font-size: 20px; font-family:verdana">f</b> | Sign In with
+          Facebook</button>
+      </div>
 
-			<div class="row">
-				<div class="col">
-					<div class="review-card">
-						<div class="author-pic author-pic-a"></div>
-						<div class="review-content">
-							<p class="review para-line">
-								Incredible results! User-friendly interface, personalized plans, and excellent progress insights make it top-notch
-							</p>
-							<p class="author-name">Donna Bleaker, 31</p>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="review-card">
-						<div class="author-pic author-pic-b"></div>
-						<div class="review-content">
-							<p class="review para-line">
-								Best fitness tool ever! Customized plans, easy tracking, and amazing community support
-							</p>
-							<p class="author-name">Lauren Cross, 28</p>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="review-card">
-						<div class="author-pic author-pic-c"></div>
-						<div class="review-content">
-							<p class="review para-line">
-								This workout & health tracker is a game-changer! Easy to use, personalized plans, and fantastic progress tracking.
-							</p>
-							<p class="author-name">Thomas Xue, 44</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+      <div>
 
-	<footer class="footer-widget">
-		<div class="container">
-			<h2 class="heading">
-				Get in touch <br>
-				today
-			</h2>
-		</div>
-	</footer>
+      </div>
 
-	<footer class="footer-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="address">
-						<h2 class="contact-heading">
-							Mailing address
-						</h2>
-						<p class="contact-para-line">
+    </div>
+    <div id="extender"></div>
+  </div>
+  <!-- **********************--MId-Section--**************************************** -->
+<!-- 
+  <div class="mid-section">
+    <h1>Online personal trainer</h1>
 
-						</p>
-					</div>
-				</div>
-				<div class="col">
-					<div class="mail">
-						<h2 class="contact-heading">
-							Email address
-						</h2>
-						<p class="contact-para-line">
+    <p>
+      Gymwolf has certified personal trainers that provide you with customised
+      workout plans depending on your goals. Our trainers track your progress,
+      coach and motivate you daily through our web and smartphone app.
+    </p>
+    <button><a href="./trainer.html">Learn more</a></button>
+  </div> -->
 
-						</p>
-					</div>
-				</div>
-				<div class="col">
-					<div class="number">
-						<h2 class="contact-heading">
-							Phone number
-						</h2>
-						<p class="contact-para-line">
-							9604364337
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-</div>
+  <!-- *************** -Mid-Section--2************ -->
+  <div class="mid-section-2">
+    <div class="mid-section-part-1">
+      <div>
+        <h1>Features</h1>
+
+        <p>
+          One-Rep-Max is a workout tracking tool. Add workouts, create your own
+          customized workout plans or find suitable plan from other users.
+          Accomplish your goals with motivation from personal trainer and
+          committed training.
+        </p>
+        <button><a href="./tour.html">Take tour</a></button>
+      </div>
+      <div>
+        <img src="https://www.gymwolf.com/img/landing/features-img.png" alt="" />
+      </div>
+    </div>
+
+    <div class="mid-section-part-2">
+      <div>
+        <img src="https://www.gymwolf.com/img/landing/progress-img.png" alt="" />
+      </div>
+      <div>
+        <h1>See your progress</h1>
+
+        <p>
+          One-Rep-Max provides different graphs that help you track your progress.
+          There are graphs for gym workouts, cardio workouts and bodyweight.
+          The graphs are highly customizable: you can select the date range,
+          exercise and group the results by month, week or single workout.
+        </p>
+        <button><a href="./tour.html">Take tour</a></button>
+      </div>
+    </div>
+
+    <div class="mid-section-part-1">
+      <div>
+        <h1>Database with 300+ exercises</h1>
+
+        <p>
+          One-Rep-Max has a database with over 300 exercises. The exercises come
+          with detailed descriptions, tips and step-by-step images. If you
+          don't find a exercise from our database, then you can also add your
+          own exercises.
+        </p>
+        <button><a href="">Take tour</a></button>
+      </div>
+      <div>
+        <img src="https://www.gymwolf.com/img/landing/database-img.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-container">
+    <div class="footer-lifted">
+      <p class="footer-counter">
+        <span class="label label-default">1</span><span class="label label-default">1</span><span
+          class="label label-default">4</span><span class="label label-default">3</span><span
+          class="label label-default">9</span><span class="label label-default">1</span><span
+          class="label label-default">7</span><span class="label label-default">8</span><span
+          class="label label-default">5</span><span class="label label-default">5</span> <span>kg</span>
+      </p>
+      <p class="lead">LIFTED USING One-Rep-Max</p>
+    </div>
+    <!-- ******************* ->Footer Section ->************************************** -->

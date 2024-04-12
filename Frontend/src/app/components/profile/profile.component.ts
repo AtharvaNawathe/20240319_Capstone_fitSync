@@ -20,13 +20,13 @@ export class ProfileComponent {
 
   saveData() {
     // Assuming you want to send formData to backend on save
-    this.http.post<any>('http://localhost:3000/save', this.formData)
+    this.http.post<any>('http://localhost:3000/user/save', this.formData)
       .subscribe(
         (response) => {
           console.log('Data saved successfully!', response);
           // Clear form after successful save if needed
           this.formData = {};
-          
+          window.alert("You have successfullt filled the data");
           this.router.navigate(['/home']);
         },
         (error) => {

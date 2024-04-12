@@ -19,6 +19,11 @@ export class ForgotpasswordComponent {
   email: string = '';
   constructor(private http: HttpClient, private router: Router) {}
 
+  navigateToAuth ()
+  {
+    this.router.navigate(['/auth']);
+  }
+
   //when button it clicked 
   forgetPassword(): void {
 

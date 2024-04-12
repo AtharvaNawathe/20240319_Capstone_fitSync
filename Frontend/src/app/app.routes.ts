@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditprofileComponent } from './components/editprofile/editprofile.component';
+
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
@@ -18,5 +20,6 @@ export const routes: Routes = [
     { path: 'yourworkouts', component:YourWorkoutsComponent},
     { path: 'forgotpassword', component:ForgotpasswordComponent},
     { path: 'resetpassword', component:ResetpasswordComponent},
-    { path: 'profile', component:ProfileComponent}
+    { path: 'profile', component:ProfileComponent},
+    { path: 'editprofile', component:EditprofileComponent},
 ];

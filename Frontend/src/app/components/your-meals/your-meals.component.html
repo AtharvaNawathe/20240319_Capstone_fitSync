@@ -7,7 +7,7 @@
                     <h2 class="fs-title">Your Meals</h2>
                     <h3 class="fs-subtitle"></h3>
                     <input type="text" name="fname" placeholder="Meal Name" class="custom-input"
-                        [(ngModel)]="selectedMealName" />
+                        [(ngModel)]="selectedMealName" readonly/>
                     <!-- Dropdown for meal types -->
                     <select name="mealType" id="mealType-select" class="custom-select" [(ngModel)]="selectedMealType" (change)="onMealTypeChange()">
                         <option value="" disabled selected>--Please choose a meal type--</option>
@@ -30,7 +30,7 @@
                     <div class="textarea-container">
                         <h2 class="fs-title">Your Meals History</h2>
                         <textarea name="mealHistories" placeholder="Meal Histories"
-                            class="custom-textarea">{{ formattedMealHistories }}</textarea>
+                            class="custom-textarea" readonly>{{ formattedMealHistories }}</textarea>
                     </div>
 
                 </fieldset>

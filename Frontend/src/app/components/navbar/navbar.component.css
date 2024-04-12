@@ -15,7 +15,7 @@ mat-toolbar {
   }
 
   body {
-    background-image: url("../../../assets/img/home-bg.jpg");
+    /* background-image: url("../../../assets/img/home-bg.jpg"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;  /* Remove repetition */
@@ -188,5 +188,10 @@ a {text-decoration:none;}
 }
 .action .menu ul li:hover a{
   color:#ff00ff;
+}
+
+.home-navbar-bg {
+  background-image: url("../../../assets/img/home-bg.jpg");
+  /* Additional background styles if needed */
 }
 

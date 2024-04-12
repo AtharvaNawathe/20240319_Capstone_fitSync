@@ -4,12 +4,13 @@ import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { YoutubeComponent } from '../youtube/youtube.component';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent,HttpClientModule,YouTubePlayerModule,CarouselModule,YoutubeComponent],
+  imports: [NavbarComponent,HttpClientModule,YouTubePlayerModule,CarouselModule,YoutubeComponent,CarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -7,7 +7,7 @@
                     <h2 class="fs-title">Your Workouts</h2>
                     <h3 class="fs-subtitle"></h3>
                     <!-- Display selected day -->
-                    <input type="text" name="fname" placeholder="Workout Name" class="custom-input" [(ngModel)]="workoutName" />
+                    <input type="text" name="fname" placeholder="Workout Name" class="custom-input" [(ngModel)]="workoutName" readonly/>
                     <!-- Dropdown for days -->
                     <select name="day" id="day-select" class="custom-select" (change)="selectDay($event)">
                         <option value="">--Please choose a day--</option>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="textarea-container">
                         <h2 class="fs-title">Your Workout History</h2>
-                        <textarea name="workoutHistories" placeholder="Workout Histories" class="custom-textarea">{{ formattedWorkoutHistories }}</textarea>
+                        <textarea name="workoutHistories" placeholder="Workout Histories" class="custom-textarea" readonly>{{ formattedWorkoutHistories }}</textarea>
                     </div>
                     
                 </fieldset>

@@ -412,6 +412,37 @@ const personalDetails = async (req, res) => {
   }
 };
 
+
+const createUser = async (req, res) => {
+  try {
+    const userData = req.body;
+    const { email } = userData;
+
+    // Check if a user with the provided email already exists
+    let existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      // Update the existing user's information
+      existingUser.gender = userData.gender;
+      existingUser.birthdate = userData.birthdate;
+      existingUser.preferredUnits = userData.preferredUnits;
+      existingUser.height = userData.height;
+      existingUser.waist = userData.waist;
+      existingUser.hips = userData.hips;
+      existingUser.neck = userData.neck;
+
+      await existingUser.save();
+      res.status(200).json({ message: 'User information updated successfully' });
+    } else {
+      // User not found, return an error
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error saving/updating user:', error);
+    res.status(500).json({ message: 'Failed to save/update user information' });
+  }
+};
+
 // Export the controller functions
 module.exports = {
   signup,
@@ -421,6 +452,7 @@ module.exports = {
   getProfileDetails,
   updateGoal,
   editProfile,
-  personalDetails
+  personalDetails,
+  createUser
 
 };

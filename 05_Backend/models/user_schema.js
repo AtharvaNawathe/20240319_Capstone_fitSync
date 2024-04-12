@@ -6,14 +6,14 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String,required:true},
     name: { type: String, required: true },
-    height: { type: Number },
-    weight: { type: Number },
-    gender: { type: String},
-    goal: { type: String},
-    veg: { type: String },
-    workout_loc: { type: String },
-    meal_plan: { type: String },
-    token:{type:String, default:''}
+    gender: { type: String, enum: ['Male', 'Female', 'Other'] },
+    birthdate: { type: Date },
+    preferredUnits: { type: String, enum: ['kg', 'lbs'] },
+    height: { type: Number  },
+    waist: { type: Number },
+    hips: { type: Number },
+    neck: { type: Number },
+    token: { type: String, default: '' }
 });
 
 module.exports = mongoose.model('User', userSchema);

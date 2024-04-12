@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [CarouselModule, SlickCarouselModule],
+  imports: [CarouselModule, SlickCarouselModule,CommonModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent {
   slides = [
-    { img: "" },
-    { img: "" },
-    { img: "" },
-    { img: "" },
+    { img: "https://www.shutterstock.com/image-photo/happy-new-year-20242024-symbolizes-start-2396942295" },
+    { img: "https://www.shutterstock.com/image-photo/happy-new-year-20242024-symbolizes-start-2396942295" },
+    { img: "https://www.shutterstock.com/image-photo/happy-new-year-20242024-symbolizes-start-2396942295" },
+    { img: "https://www.shutterstock.com/image-photo/happy-new-year-20242024-symbolizes-start-2396942295" },
   ];
 
   slideConfig = {

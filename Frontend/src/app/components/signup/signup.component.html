@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<body>
+<div class="container">
+    <div class="card">
+      <h2>Register</h2>
+      <form (submit)="signup()">
+        <input type="text" id="name" name="name" [(ngModel)]="user.name" placeholder="Name" required>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" placeholder="Username" required>
+        <input type="text" id="Email" name="Email" [(ngModel)]="user.email" placeholder="Email" required>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" placeholder="Password" required>
+        <a type="submit">Already a Member?</a>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+</body>

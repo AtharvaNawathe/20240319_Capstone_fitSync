@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpClientModule,HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-editprofile',
   standalone: true,
-  imports: [NavbarComponent,CommonModule,FormsModule],
+  imports: [NavbarComponent,CommonModule,FormsModule,HttpClientModule],
   templateUrl: './editprofile.component.html',
   styleUrl: './editprofile.component.css'
 })

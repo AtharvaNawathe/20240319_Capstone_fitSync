@@ -1,0 +1,43 @@
+
+<form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="workoutName">Activity Name</label>
+      <input type="text" id="workoutName" formControlName="workoutName" required>
+    </div>
+
+    <div>
+        <label for="activity">Activity</label>
+        <select id="activity" formControlName="activity" required>
+          <option value="">Select Activity</option>
+          <option *ngFor="let activity of activities" [value]="activity">{{ activity }}</option>
+        </select>
+      </div>
+
+      <div *ngIf="workoutForm.get('activity')?.value === 'Other'">
+        <label for="preferredActivity">Your preferred activity</label>
+        <input type="text" id="preferredActivity" formControlName="preferredActivity" required>
+      </div>
+
+      <div>
+        <label for="notes">Activity Description</label>
+        <textarea id="notes" formControlName="notes"></textarea>
+      </div>
+  
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="date" formControlName="date" required>
+    </div>
+  
+    <div>
+      <label for="duration">Duration</label>
+      <input type="number" id="minutes" formControlName="durationMinutes" placeholder="Minutes" required>
+    </div>
+  
+    <div>
+      <label for="notes">Notes</label>
+      <textarea id="notes" formControlName="notes"></textarea>
+    </div>
+  
+    <button type="submit">Add Workout</button>
+  </form>
+  

@@ -1,0 +1,53 @@
+<form [formGroup]="mealForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="mealName">Meal Name</label>
+      <input type="text" id="mealName" formControlName="mealName" required>
+    </div>
+  
+    <div>
+      <label for="mealType">Meal Type</label>
+      <select id="mealType" formControlName="mealType" required>
+        <option value="">Select Meal Type</option>
+        <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+  
+    <div class="time-container">
+      <div class="time-input">
+        <label for="hour">Hour</label>
+        <select id="hour" formControlName="hour" required>
+          <option value="">Hour</option>
+          <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+        </select>
+      </div>
+  
+      <div class="time-input">
+        <label for="minute">Minute</label>
+        <select id="minute" formControlName="minute" required>
+          <option value="">Minute</option>
+          <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+        </select>
+      </div>
+  
+      <div class="time-input">
+        <label for="period">AM/PM</label>
+        <select id="period" formControlName="period" required>
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+  
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="date" formControlName="date" required>
+    </div>
+  
+    <div>
+      <label for="foodDescription">Food Description</label>
+      <textarea id="foodDescription" formControlName="foodDescription" required></textarea>
+    </div>
+  
+    <button type="submit">Add Meal</button>
+  </form>
+  

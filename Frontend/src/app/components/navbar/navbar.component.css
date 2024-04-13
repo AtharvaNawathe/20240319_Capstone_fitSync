@@ -1,29 +1,17 @@
 mat-toolbar {
-    background-color: black; /* Example background color */
-    color: white;
-    font-weight: bold;
-    font-style: italic;
-    font-size: large;
-    height: 50px; /* Example text color */
-    cursor: pointer;
-  }
+  position: fixed; /* Make the toolbar fixed */
+  top: 0; /* Position the toolbar at the top of the viewport */
+  width: 100%; /* Make the toolbar span the entire width of the viewport */
+  z-index: 1000; /* Set a high z-index to ensure it's above other content */
+  background-color: #7e685a; /* Example background color */
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: large;
+  height: 50px; /* Example text color */
+  cursor: pointer;
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-  }
-
-  body {
-    /* background-image: url("../../../assets/img/home-bg.jpg"); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;  /* Remove repetition */
-    width: 100%;  /* Maintain full width for responsiveness */
-    height: 100vh;
-  }
-
-  
 .buttons-container {
   width: 100%;
   height: 10px;
@@ -36,7 +24,7 @@ mat-toolbar {
 button {
   background: white;
   border: solid 2px black;
-  padding: .375em 1.125em;
+  padding: 0.375em 1.125em;
   font-size: 1rem;
   height: 40px;
   width: 150px;
@@ -45,36 +33,34 @@ button {
   font-weight: bold;
   font-style: italic;
   font-size: large;
-
 }
 
 .button-arounder {
   font-size: 15px;
   background: hsl(190deg, 30%, 15%);
   color: hsl(190deg, 10%, 95%);
-  
-  box-shadow: 0 0px 0px hsla(190deg, 15%, 5%, .2);
+
+  box-shadow: 0 0px 0px hsla(190deg, 15%, 5%, 0.2);
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-radius: 10px;
-  --dur: .15s;
-  --delay: .15s;
+  --dur: 0.15s;
+  --delay: 0.15s;
   --radius: 16px;
-  
-  transition:
-    border-top-left-radius var(--dur) var(--delay) ease-out,
+
+  transition: border-top-left-radius var(--dur) var(--delay) ease-out,
     border-top-right-radius var(--dur) calc(var(--delay) * 2) ease-out,
     border-bottom-right-radius var(--dur) calc(var(--delay) * 3) ease-out,
     border-bottom-left-radius var(--dur) calc(var(--delay) * 4) ease-out,
     box-shadow calc(var(--dur) * 4) ease-out,
-    transform calc(var(--dur) * 4) ease-out,
+    transform calc(var(--dur) * 4) ease-out;
 }
 
 .button-arounder:hover,
 .button-arounder:focus {
-  box-shadow: 0 4px 8px hsla(190deg, 15%, 5%, .2);
+  box-shadow: 0 4px 8px hsla(190deg, 15%, 5%, 0.2);
   transform: translateY(-4px);
   background: purple;
   border-top-left-radius: var(--radius);
@@ -83,23 +69,26 @@ button {
   border-bottom-right-radius: var(--radius);
 }
 
-ul, li {
-	list-style:none;
-	padding:0;
-	margin:0;
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-a {text-decoration:none;}
+a {
+  text-decoration: none;
+}
 
-.icons-size{
+.icons-size {
   color: #333;
   font-size: 14px;
 }
-.action{
+.action {
   position: fixed;
   right: 30px;
-  top:20px
+  top: 20px;
 }
-.action .profile{
+.action .profile {
   border-radius: 50%;
   cursor: pointer;
   height: 60px;
@@ -107,17 +96,17 @@ a {text-decoration:none;}
   position: relative;
   width: 60px;
 }
-.action .profile img{
+.action .profile img {
   width: 100%;
-  top:0;
+  top: 0;
   position: absolute;
   object-fit: cover;
   left: 0;
   height: 100%;
 }
-.action .menu{
-  background-color:#FFF;
-  box-sizing:0 5px 25px rgba(0,0,0,0.1);
+.action .menu {
+  background-color: #fff;
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   padding: 10px 20px;
   position: absolute;
@@ -128,22 +117,22 @@ a {text-decoration:none;}
   visibility: hidden;
   opacity: 0;
 }
-.action .menu.active{
+.action .menu.active {
   opacity: 1;
   top: 80px;
   visibility: visible;
 }
-.action .menu::before{
-  background-color:#fff;
-  content: '';
+.action .menu::before {
+  background-color: #fff;
+  content: "";
   height: 20px;
   position: absolute;
   right: 30px;
-  transform:rotate(45deg);
-  top:-5px;
+  transform: rotate(45deg);
+  top: -5px;
   width: 20px;
 }
-.action .menu h3{
+.action .menu h3 {
   color: #555;
   font-size: 16px;
   font-weight: 600;
@@ -152,26 +141,26 @@ a {text-decoration:none;}
   text-align: left;
   width: 100%;
 }
-.action .menu h3 div{
+.action .menu h3 div {
   color: #818181;
   font-size: 14px;
   font-weight: 400;
 }
-.action .menu ul li{
+.action .menu ul li {
   align-items: center;
-  border-top:1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: left;
   list-style: none;
   padding: 10px 0px;
 }
-.action .menu ul li img{
+.action .menu ul li img {
   max-width: 20px;
   margin-right: 10px;
   opacity: 0.5;
-  transition:0.5s
+  transition: 0.5s;
 }
-.action .menu ul li a{
+.action .menu ul li a {
   display: inline-block;
   color: #555;
   font-size: 14px;
@@ -181,11 +170,11 @@ a {text-decoration:none;}
   text-transform: uppercase;
   transition: 0.5s;
 }
-.action .menu ul li:hover img{
+.action .menu ul li:hover img {
   opacity: 1;
 }
-.action .menu ul li:hover a{
-  color:#ff00ff;
+.action .menu ul li:hover a {
+  color: #ff00ff;
 }
 
 .home-navbar-bg {
@@ -196,6 +185,12 @@ a {text-decoration:none;}
 .profile-icon {
   width: 40px; /* Adjust the width as needed */
   height: 40px; /* Adjust the height as needed */
-  border-radius: 50%; /* Optional: Make the image round (for circular icons) */
+  border-radius: 50%;
+  margin-left: 485px; /* Optional: Make the image round (for circular icons) */
 }
 
+.site-logo {
+  width: 70px; /* Adjust the width as needed */
+  height: 40px;
+  margin-left: -900px; /* Adjust the height as needed */
+}

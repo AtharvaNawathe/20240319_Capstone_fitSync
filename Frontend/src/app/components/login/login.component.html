@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<body>
+<div class="container">
+    <div class="card">
+      <h2>Login</h2>
+      <form (submit)="login()">
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" placeholder="Username" required>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" placeholder="Password" required>
+        <a type="submit">Forgot password?</a>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>

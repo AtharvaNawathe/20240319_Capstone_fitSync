@@ -1,0 +1,36 @@
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+<div class="wrapper">
+  <div class="sidebar">
+    <h2>Hey, Atharva!</h2>
+    <ul>
+      <li><a (click)="loadAddWorkout()"><i class="fas fa-dumbbell"></i> Add Workout</a></li>
+      <li><a (click)="loadAddMeal()"><i class="fas fa-dumbbell"></i>Add Meal</a></li>
+      <li><a (click)="loadYourPlans()"><i></i>Your Plans</a></li>
+      <li><a (click)="loadTrackProgress()"><i></i>Track Progress</a></li>
+      <li><a (click)="loadBlogs()"><i></i>Blogs</a></li>
+    </ul>
+  </div>
+  <div class="main_content">
+    <ng-container *ngIf="showAddWorkout">
+      <app-add-workout></app-add-workout>
+    </ng-container>
+
+    <ng-container *ngIf="showAddMeal">
+      <app-add-meals></app-add-meals>
+    </ng-container>
+
+    <ng-container *ngIf="showYourPlans">
+      <app-user-data></app-user-data>
+    </ng-container>
+
+    <ng-container *ngIf="showTrackProgress">
+      <app-history></app-history>
+    </ng-container>
+
+    <ng-container *ngIf="showBlogs">
+      <app-blogs></app-blogs>
+    </ng-container>
+
+  </div>
+</div>

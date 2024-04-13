@@ -1,0 +1,45 @@
+<p>user-data works!</p>
+<div class="wrapper">
+
+  
+    <!-- Tabs for Meals and Workouts -->
+    <div class="tabs">
+      <button (click)="showWorkouts = true; showMeals = false" [class.active]="showWorkouts">Workouts</button>
+      <button (click)="showMeals = true; showWorkouts = false" [class.active]="showMeals">Meals</button>
+    </div>
+  
+    <!-- Display Workouts or Meals based on selected tab -->
+    <div class="content">
+      <!-- Workouts Section -->
+      <div *ngIf="showWorkouts" class="workouts">
+        <div class="workout" *ngFor="let workout of workouts">
+          <div class="left">
+            <h3>{{ workout.name }}</h3>
+            <p>{{ workout.description }}</p>
+            <p>Duration: {{ workout.duration }} minutes</p>
+          </div>
+          
+          <div class="right">
+            <p>By: {{ workout.userName }}</p>
+            <p>Created: {{ workout.date | date:'medium' }}</p>
+          </div>
+          
+        </div>
+      </div>
+  
+      <!-- Meals Section -->
+      <div *ngIf="showMeals" class="meals">
+        <div class="meal" *ngFor="let meal of meals">
+          <div class="left">
+            <h3>{{ meal.name }}</h3>
+            <p>{{ meal.description }}</p>
+            <p>Eaten: {{ meal.date | date:'medium' }}</p>
+          </div>
+          <div class="right">
+            <p>By: {{ meal.userName }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

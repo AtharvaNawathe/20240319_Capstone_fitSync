@@ -1,0 +1,47 @@
+/* add-workout.component.css */
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%; /* Adjust the width as needed */
+  margin: 100px auto 0; /* Center the form horizontally with top margin */
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  }
+  
+  div {
+    margin-bottom: 20px; /* Increase spacing between form elements */
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 8px; /* Add spacing below labels */
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px; /* Increase input field padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+  
+  button {
+    padding: 12px 20px; /* Adjust button padding */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Increase button text size */
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

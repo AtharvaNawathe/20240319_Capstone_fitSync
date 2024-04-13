@@ -1,14 +1,10 @@
-<body>
-  <mat-toolbar [ngClass]="'navbar-bg'">
-    <span (click)="navigateToHome()">One-Rep-Max</span>
+
+  <mat-toolbar>
     <div class="buttons-container">
+      <a><img src="../../../assets/img/logo.png" class="site-logo" alt=""></a>
       <a *ngIf="showMealsButton">
         <img src="../../../assets/img/profile-logo.png" alt="Edit Profile" class="profile-icon" (click)="navigateToProfile()">
       </a>
-      <button *ngIf="showWorkoutsButton" class="button-arounder" (click)="navigateToWorkouts()">Your Workouts</button>
-      <button *ngIf="showMealsButton" class="button-arounder" (click)="navigateToMeals()">Your Meals</button>
-      <button *ngIf="showMealsButton" class="button-arounder" (click)="Logout()">Log Out</button>
     </div>
-    
   </mat-toolbar>
-</body>
+

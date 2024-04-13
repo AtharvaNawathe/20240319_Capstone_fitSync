@@ -1,18 +1,42 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const mealPlanSchema = new Schema({
-    meal_name: { type: String, required: true, unique: true },
-    username: { type: String },
-    goal: { type: String, required: true },
-    meal_plan: [{
-        meal_type: { type: String, required: true }, // Example: Pre-workout, Breakfast, Lunch, Dinner
-        meals: [{
-            name: { type: String, required: true },
-            description: { type: String, required: true },
-            meal_status: { type: String, default: 'pending' }
-        }]
-    }]
-});
+const mealPlanSchema = new mongoose.Schema({
+  username:{
+    type:String
+  },
+  mealName: {
+    type: String,
+    required: true,
+  },
+  mealType: {
+    type: String,
+    required: true,
+  },
+  mealTime: {
+    hour: {
+      type: Number,
+      required: true,
+    },
+    minute: {
+      type: Number,
+      required: true,
+    },
+    period: {
+      type: String,
+      enum: ['AM', 'PM'],
+      required: true,
+    },
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  foodDescription: {
+    type: String,
+    required: true,
+  },
+}, { timestamps: true });
 
-module.exports = mongoose.model('MealPlan', mealPlanSchema);
+const MealPlan = mongoose.model('MealPlan', mealPlanSchema);
+
+module.exports = MealPlan;

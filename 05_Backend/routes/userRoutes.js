@@ -30,9 +30,6 @@ router.post('/login', UserController.login);
 router.post('/forgotpassword',UserController.forget_password)
 router.post('/resetpassword',UserController.reset_password)
 router.get('/profiledetails',verifyToken, UserController.getProfileDetails)
-router.put('/goal', verifyToken, UserController.updateGoal);
 router.put('/editprofile', verifyToken, UserController.editProfile);
-router.put('/personaldetails', verifyToken, UserController.personalDetails);
-router.post('/save',  UserController.createUser);
 
 module.exports = router;

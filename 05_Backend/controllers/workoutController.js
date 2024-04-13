@@ -1,11 +1,11 @@
-const User = require('../models/user_schema');
-const bcrypt = require('bcrypt');
+const User = require("../models/user_schema");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
-const jwt = require('jsonwebtoken');
-const WorkoutPlan = require('../models/workout_schema')
-const WorkoutHistory = require('../models/WorkoutHistory_schema');
+const jwt = require("jsonwebtoken");
+const WorkoutPlan = require("../models/workout_schema");
+const WorkoutHistory = require("../models/WorkoutHistory_schema");
+const verifyToken = require("../middlewares/auth");
 dotenv.config();
-
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -15,18 +15,23 @@ const SECRET_KEY = process.env.SECRET_KEY;
  * @param {Object} res HTTP response object.
  */
 const addWorkoutPlan = async (req, res) => {
-    try {
-        const { goal, workout_loc, workout_name, schedule } = req.body;
 
-        // Check if workout_name, goal, workout_loc, and schedule are provided
-        if (!goal || !workout_loc || !workout_name || !schedule) {
-            return res.status(400).send('Workout name, goal, workout location, and schedule are required');
-        }
+
+  try {
+    const {
+      activity_name,
+      activity,
+      activity_description,
+      date,
+      duration,
+      notes,
+    } = req.body;
+   
+    let username; // Initialize username variable
 
         // Check if user is logged in (assuming token is included in request headers)
-        let username;
         if (req.headers.authorization) {
-            const token = req.headers.authorization // Assuming token is in format: Bearer <token>
+            const token = req.headers.authorization; // Assuming token is in format: Bearer <token>
             try {
                 const decodedToken = jwt.verify(token, SECRET_KEY);
                 username = decodedToken.username;
@@ -36,34 +41,27 @@ const addWorkoutPlan = async (req, res) => {
             }
         }
 
-        // Fetch user from the database based on username
-        if (username) {
-            const user = await User.findOne({ username });
-            if (!user) {
-                return res.status(404).send('User not found');
-            }
-        }
-
-        // Create a new workout plan
-        const newWorkoutPlanData = {
-            workout_name,
-            goal,
-            workout_loc,
-            schedule,
-            username // Include username in the new workout plan data
-        };
-        
-        // Create a new workout plan
-        const newWorkoutPlan = new WorkoutPlan(newWorkoutPlanData);
-
-        // Save the workout plan to the database
-        await newWorkoutPlan.save();
-
-        res.status(201).send('Workout plan added successfully');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
-    }
+    const workoutPlan = new WorkoutPlan({
+      username,
+      activity_name,
+      activity,
+      activity_description,
+      date: new Date(date),
+      duration: parseInt(duration), // Convert duration to a number
+      notes,
+    });
+    await workoutPlan.save();
+    res
+      .status(201)
+      .json({
+        message: "Workout plan created successfully",
+        data: workoutPlan,
+      });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to create workout plan", error: error.message });
+  }
 };
 
 /**
@@ -72,28 +70,30 @@ const addWorkoutPlan = async (req, res) => {
  * @param {Object} res HTTP response object.
  */
 const myWorkouts = async (req, res) => {
-    try {
-        // Extract the authorization token from the request headers
-        const token = req.headers.authorization;
+  try {
+    // Extract the authorization token from the request headers
+    const token = req.headers.authorization;
 
-        // Check if the token is provided
-        if (!token) {
-            return res.status(401).json({ message: "Authorization token is missing" });
-        }
-
-        // Decode the token to get the username
-        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-        const username = decodedToken.username;
-
-        // Fetch workouts associated with the username
-        const workouts = await WorkoutPlan.find({ username });
-
-        // Return the workouts as a response
-        res.status(200).json({ workouts });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+    // Check if the token is provided
+    if (!token) {
+      return res
+        .status(401)
+        .json({ message: "Authorization token is missing" });
     }
+
+    // Decode the token to get the username
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const username = decodedToken.username;
+
+    // Fetch workouts associated with the username
+    const workouts = await WorkoutPlan.find({ username });
+
+    // Return the workouts as a response
+    res.status(200).json({ workouts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 /**
@@ -102,38 +102,40 @@ const myWorkouts = async (req, res) => {
  * @param {Object} res HTTP response object.
  */
 const updateWorkoutStatus = async (req, res) => {
-    try {
-        const { exercise_name } = req.body;
+  try {
+    const { exercise_name } = req.body;
 
-        // Check if exercise_name is provided
-        if (!exercise_name) {
-            return res.status(400).send('Exercise name is required');
-        }
-
-        // Find the workout plan containing the exercise
-        const workoutPlan = await WorkoutPlan.findOne({ 'schedule.exercises.exercise_name': exercise_name });
-
-        if (!workoutPlan) {
-            return res.status(404).send('Workout plan not found');
-        }
-
-        // Update the status of the exercise to "completed"
-        workoutPlan.schedule.forEach(day => {
-            day.exercises.forEach(exercise => {
-                if (exercise.exercise_name === exercise_name) {
-                    exercise.workout_status = 'completed';
-                }
-            });
-        });
-
-        // Save the updated workout plan
-        await workoutPlan.save();
-
-        res.status(200).send('Workout status updated successfully');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+    // Check if exercise_name is provided
+    if (!exercise_name) {
+      return res.status(400).send("Exercise name is required");
     }
+
+    // Find the workout plan containing the exercise
+    const workoutPlan = await WorkoutPlan.findOne({
+      "schedule.exercises.exercise_name": exercise_name,
+    });
+
+    if (!workoutPlan) {
+      return res.status(404).send("Workout plan not found");
+    }
+
+    // Update the status of the exercise to "completed"
+    workoutPlan.schedule.forEach((day) => {
+      day.exercises.forEach((exercise) => {
+        if (exercise.exercise_name === exercise_name) {
+          exercise.workout_status = "completed";
+        }
+      });
+    });
+
+    // Save the updated workout plan
+    await workoutPlan.save();
+
+    res.status(200).send("Workout status updated successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 };
 
 /**
@@ -142,21 +144,21 @@ const updateWorkoutStatus = async (req, res) => {
  * @param {Object} res HTTP response object.
  */
 const getAllWorkouts = async (req, res) => {
-    try {
-        // Fetch all workout plans from the database
-        const workouts = await WorkoutPlan.find();
+  try {
+    // Fetch all workout plans from the database
+    const workouts = await WorkoutPlan.find();
 
-        // Check if any workout plans exist
-        if (!workouts || workouts.length === 0) {
-            return res.status(404).json({ message: "No workouts found" });
-        }
-
-        // Send the list of workouts in the response
-        res.json(workouts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+    // Check if any workout plans exist
+    if (!workouts || workouts.length === 0) {
+      return res.status(404).json({ message: "No workouts found" });
     }
+
+    // Send the list of workouts in the response
+    res.json(workouts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 /**
@@ -165,107 +167,112 @@ const getAllWorkouts = async (req, res) => {
  * @param {Object} res HTTP response object.
  */
 const removeWorkout = async (req, res) => {
-    try {
-        const { workout_name } = req.body;
+  try {
+    const { workout_name } = req.body;
 
-        // Check if workout_name is provided
-        if (!workout_name) {
-            return res.status(400).send('Workout name is required');
-        }
-
-        // Remove the workout plan from the database
-        const deletedWorkout = await WorkoutPlan.findOneAndDelete({ workout_name });
-
-        if (!deletedWorkout) {
-            return res.status(404).send('Workout not found');
-        }
-
-        res.status(200).send('Workout removed successfully');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+    // Check if workout_name is provided
+    if (!workout_name) {
+      return res.status(400).send("Workout name is required");
     }
+
+    // Remove the workout plan from the database
+    const deletedWorkout = await WorkoutPlan.findOneAndDelete({ workout_name });
+
+    if (!deletedWorkout) {
+      return res.status(404).send("Workout not found");
+    }
+
+    res.status(200).send("Workout removed successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
 };
 
-
 const moveWorkoutToHistory = async (req, res) => {
-    try {
-        const { workout_name, day } = req.body;
+  try {
+    const { workout_name, day } = req.body;
 
-        // Find the workout entry in WorkoutPlan based on workout_name
-        const workoutPlan = await WorkoutPlan.findOne({ workout_name });
+    // Find the workout entry in WorkoutPlan based on workout_name
+    const workoutPlan = await WorkoutPlan.findOne({ workout_name });
 
-        if (!workoutPlan) {
-            return res.status(404).json({ message: 'Workout plan not found' });
-        }
-
-        // Find the schedule entry index for the provided day
-        const scheduleEntryIndex = workoutPlan.schedule.findIndex(entry => entry.day === day);
-
-        if (scheduleEntryIndex === -1) {
-            return res.status(404).json({ message: 'No workout found for the provided day' });
-        }
-
-        // Get the exercises for the provided day
-        const exercisesToRemove = workoutPlan.schedule[scheduleEntryIndex].exercises;
-
-        // Create a new document to insert in WorkoutHistory collection
-        const newWorkoutHistoryEntry = {
-            workout_name: workoutPlan.workout_name,
-            day: day,
-            exercises: exercisesToRemove
-        };
-
-        // Find and replace the existing document if it exists, otherwise insert a new one
-        await WorkoutHistory.findOneAndReplace(
-            { workout_name: newWorkoutHistoryEntry.workout_name, day: newWorkoutHistoryEntry.day },
-            newWorkoutHistoryEntry,
-            { upsert: true }
-        );
-
-        // Remove the entire day's data structure from the workout plan
-        workoutPlan.schedule.pull({ day: day });
-
-        await workoutPlan.save();
-
-        res.status(200).json({ message: 'Workout data moved to history and entire day\'s data removed from workout plan successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+    if (!workoutPlan) {
+      return res.status(404).json({ message: "Workout plan not found" });
     }
+
+    // Find the schedule entry index for the provided day
+    const scheduleEntryIndex = workoutPlan.schedule.findIndex(
+      (entry) => entry.day === day
+    );
+
+    if (scheduleEntryIndex === -1) {
+      return res
+        .status(404)
+        .json({ message: "No workout found for the provided day" });
+    }
+
+    // Get the exercises for the provided day
+    const exercisesToRemove =
+      workoutPlan.schedule[scheduleEntryIndex].exercises;
+
+    // Create a new document to insert in WorkoutHistory collection
+    const newWorkoutHistoryEntry = {
+      workout_name: workoutPlan.workout_name,
+      day: day,
+      exercises: exercisesToRemove,
+    };
+
+    // Find and replace the existing document if it exists, otherwise insert a new one
+    await WorkoutHistory.findOneAndReplace(
+      {
+        workout_name: newWorkoutHistoryEntry.workout_name,
+        day: newWorkoutHistoryEntry.day,
+      },
+      newWorkoutHistoryEntry,
+      { upsert: true }
+    );
+
+    // Remove the entire day's data structure from the workout plan
+    workoutPlan.schedule.pull({ day: day });
+
+    await workoutPlan.save();
+
+    res
+      .status(200)
+      .json({
+        message:
+          "Workout data moved to history and entire day's data removed from workout plan successfully",
+      });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 const getWorkoutHistory = async (req, res) => {
-    try {
-        // Fetch all workout plans from the database
-        const workouts = await WorkoutHistory.find();
+  try {
+    // Fetch all workout plans from the database
+    const workouts = await WorkoutHistory.find();
 
-        // Check if any workout plans exist
-        if (!workouts || workouts.length === 0) {
-            return res.status(404).json({ message: "No workouts found" });
-        }
-
-        // Send the list of workouts in the response
-        res.json(workouts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+    // Check if any workout plans exist
+    if (!workouts || workouts.length === 0) {
+      return res.status(404).json({ message: "No workouts found" });
     }
+
+    // Send the list of workouts in the response
+    res.json(workouts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
-
-
-
-
-
-
-
-  module.exports = {
-    addWorkoutPlan,
-    myWorkouts,
-    updateWorkoutStatus,
-    getAllWorkouts,
-    removeWorkout,
-    moveWorkoutToHistory,
-    getWorkoutHistory
-  }
+module.exports = {
+  addWorkoutPlan,
+  myWorkouts,
+  updateWorkoutStatus,
+  getAllWorkouts,
+  removeWorkout,
+  moveWorkoutToHistory,
+  getWorkoutHistory,
+};

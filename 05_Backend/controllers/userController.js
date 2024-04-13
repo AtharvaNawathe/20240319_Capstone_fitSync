@@ -326,31 +326,6 @@ const getProfileDetails =
     }
   });
 
-/**
- * Updates the goal of the logged-in user.
- * @param {Object} req HTTP request object.
- * @param {Object} res HTTP response object.
- */
-const updateGoal = async (req, res) => {
-    try {
-        const userId = req.decoded.userId; // Get user ID from decoded token
-        
-        // Extract the goal from request body
-        const { goal } = req.body;
-
-        // Update user's goal in the database
-        const updatedUser = await User.findByIdAndUpdate(userId, { goal }, { new: true });
-
-        if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        res.json({ message: "Goal updated successfully", user: updatedUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
 
 /**
  * Edits profile details of the logged-in user.
@@ -378,74 +353,10 @@ const editProfile = async (req, res) => {
     }
 };
 
-/**
- * Updates personal details of the logged-in user.
- * @param {Object} req HTTP request object.
- * @param {Object} res HTTP response object.
- */
-
-const personalDetails = async (req, res) => {
-  try {
-    const token = req.headers.authorization; // Extract JWT token from headers
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify and decode the token
-    const userId = decodedToken.userId; // Assuming the userId is stored in the token
-
-    const { height, weight, gender, goal, veg, workout_loc } = req.body;
-
-    // Find the user by userId
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Update user details
-    user.height = height;
-    user.weight = weight;
-    user.gender = gender;
-    user.goal = goal;
-    user.veg = veg;
-    user.workout_loc = workout_loc;
-
-    // Save the updated user details
-    await user.save();
-
-    res.status(200).json({ message: 'User details updated successfully', user });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-};
 
 
-const createUser = async (req, res) => {
-  try {
-    const userData = req.body;
-    const { email } = userData;
 
-    // Check if a user with the provided email already exists
-    let existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-      // Update the existing user's information
-      existingUser.gender = userData.gender;
-      existingUser.birthdate = userData.birthdate;
-      existingUser.preferredUnits = userData.preferredUnits;
-      existingUser.height = userData.height;
-      existingUser.waist = userData.waist;
-      existingUser.hips = userData.hips;
-      existingUser.neck = userData.neck;
-
-      await existingUser.save();
-      res.status(200).json({ message: 'User information updated successfully' });
-    } else {
-      // User not found, return an error
-      res.status(404).json({ message: 'User not found' });
-    }
-  } catch (error) {
-    console.error('Error saving/updating user:', error);
-    res.status(500).json({ message: 'Failed to save/update user information' });
-  }
-};
 
 // Export the controller functions
 module.exports = {
@@ -454,9 +365,5 @@ module.exports = {
   forget_password,
   reset_password,
   getProfileDetails,
-  updateGoal,
   editProfile,
-  personalDetails,
-  createUser
-
 };

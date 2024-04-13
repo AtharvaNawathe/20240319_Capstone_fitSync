@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const workoutPlanSchema = new Schema({
-    workout_name: { type: String, required: true},
-    username: { type: String },
-    goal: { type: String, required:true },
-    workout_loc: { type: String, required: true},
-    schedule: [{
-        day: { type: String, required: true },
-        exercises: [{
-            exercise_name: { type: String, required: true },
-            description: { type: String, required: true },
-            workout_status: { type: String, default: 'pending' }
-        }]
-    }]
+const workoutPlanSchema = new mongoose.Schema({
+  username: { type: String },
+  activity_name: { type: String, required: true },
+  activity: { type: String, required: true },
+  activity_description: { type: String },
+  date: { type: Date, required: true },
+  duration: { type: Number, required: true }, // assuming duration is in minutes
+  notes: { type: String }
 });
 
-module.exports = mongoose.model('WorkoutPlan', workoutPlanSchema);
+const WorkoutPlan = mongoose.model('WorkoutPlan', workoutPlanSchema);
+
+module.exports = WorkoutPlan;

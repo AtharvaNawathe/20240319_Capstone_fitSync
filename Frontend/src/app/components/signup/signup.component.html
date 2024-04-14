@@ -8,7 +8,7 @@
         <input type="text" id="username" name="username" [(ngModel)]="user.username" placeholder="Username" required>
         <input type="text" id="Email" name="Email" [(ngModel)]="user.email" placeholder="Email" required>
         <input type="password" id="password" name="password" [(ngModel)]="user.password" placeholder="Password" required>
-        <a type="submit">Already a Member?</a>
+        <a type="submit" (click)="navigateToLogin()">Already a Member?</a>
         <button type="submit">Register</button>
       </form>
     </div>

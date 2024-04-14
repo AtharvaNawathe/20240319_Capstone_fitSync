@@ -51,9 +51,12 @@
     width: 25px;
   }
   
-  .wrapper .sidebar ul li:hover{
-    background-color: #d1a04d;
+  
+  .wrapper .sidebar ul li:hover:not(:last-child) a img {
+    /* Reset any hover effect on the img */
+    filter: none;
   }
+
       
   .wrapper .sidebar ul li:hover a{
     color: black;
@@ -101,7 +104,13 @@
     margin-bottom: 20px;
   }
 
-  
+
+  .site-logo {
+    margin-left: 20px;
+    margin-top: 270px;
+    width: 30px;
+    height: 30px
+  }
   
   @media (max-height: 500px){
     .social_media{

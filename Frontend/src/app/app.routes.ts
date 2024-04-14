@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AddWorkoutComponent } from './components/add-workout/add-workout.component';
 import { AddMealsComponent } from './components/add-meals/add-meals.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 export const routes: Routes = [
@@ -22,4 +23,5 @@ export const routes: Routes = [
     { path: 'editprofile', component:EditprofileComponent},
     { path: 'addworkout', component:AddWorkoutComponent},
     { path: 'addmeal', component:AddMealsComponent},
+    { path: '**', component:PageNotFoundComponent},
 ];

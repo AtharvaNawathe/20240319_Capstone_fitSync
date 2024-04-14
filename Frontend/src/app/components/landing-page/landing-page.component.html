@@ -1,162 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One-Rep-Max</title>
-
-  <!--import-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-<body>
-  <div class="landing">
-    <!-- ******  Video section ***************-->
-    <div id="videosection">
-      <video autoplay loop muted playsinline class="video">
-        <!-- Use a full or relative path to your video file -->
-        <source src="../../../assets/videoplayback.mp4" type="video/mp4" />
-        <!-- Fallback content for browsers that do not support HTML5 video -->
-        Your browser does not support the video tag.
-      </video>
-    </div>
-
-    <!--**************** NavBar Section      ******************** -->
-    <div>
-      <div id="navbar">
-        <nav>
-          <img src="../../../assets/img/logo.png" alt="" class="sitelogo">
-          <ul>
-            <li (click)="navigateToAuth()"><a>Register</a></li>
-            <li (click)="navigateToAuth()" ><a>Sign In</a></li>
-            <li><a href=""><img src="https://img.icons8.com/ios/344/search--v1.png" id='srch_lv'></a></li>
-            <li id="menubtn">&#8803; <div id="smallscr">
-              </div>
-            </li>
-
-          </ul>
-
-        </nav>
-        <div id="extra_nav" class="notdisplay">
-          <p id="register1"><a>Register</a></p>
-          <p id="login1"><a>Sign In</a></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ******* Heading-1 ******************** -->
-    <div class="content">
-      <h1>A better way to track your workouts</h1>
-      <div id="buttonhome" class="display">
-        <button id="startfree" (click)="navigateToAuth()"><a>Start Free</a></button>
-      </div>
-      <div class="play">
-        <p class="playp">Get the app</p>
-        <p>
-          <a href="https://play.google.com/store/apps/details?id=com.mooncascade.gymwolf" title="Android App">
-            <img src="https://www.gymwolf.com/img/footer/android-button.png" alt="Android App" width="134" />
-          </a>
-        </p>
-        <p>
-          <a href="https://www.gymwolf.com/img/footer/ios-button.png" title="iPhone App">
-            <img src="https://www.gymwolf.com/img/footer/ios-button.png" alt="iPhone App" width="134" />
-          </a>
-        </p>
-      </div>
-      <div id="divinput" class="notdisplay">
-        <div><input type="email" placeholder="Entre your Email">
-          <button id="regi_button">Register</button>
-        </div>
-        <button class="facebbok"><b style="font-size: 20px; font-family:verdana">f</b> | Sign In with
-          Facebook</button>
-      </div>
-
-      <div>
-
-      </div>
-
-    </div>
-    <div id="extender"></div>
-  </div>
-  <!-- **********************--MId-Section--**************************************** -->
-<!-- 
-  <div class="mid-section">
-    <h1>Online personal trainer</h1>
-
-    <p>
-      Gymwolf has certified personal trainers that provide you with customised
-      workout plans depending on your goals. Our trainers track your progress,
-      coach and motivate you daily through our web and smartphone app.
-    </p>
-    <button><a href="./trainer.html">Learn more</a></button>
-  </div> -->
-
-  <!-- *************** -Mid-Section--2************ -->
-  <div class="mid-section-2">
-    <div class="mid-section-part-1">
-      <div>
-        <h1>Features</h1>
-
-        <p>
-          One-Rep-Max is a workout tracking tool. Add workouts, create your own
-          customized workout plans or find suitable plan from other users.
-          Accomplish your goals with motivation from personal trainer and
-          committed training.
-        </p>
-        <button><a href="./tour.html">Take tour</a></button>
-      </div>
-      <div>
-        <img src="https://www.gymwolf.com/img/landing/features-img.png" alt="" />
-      </div>
-    </div>
-
-    <div class="mid-section-part-2">
-      <div>
-        <img src="https://www.gymwolf.com/img/landing/progress-img.png" alt="" />
-      </div>
-      <div>
-        <h1>See your progress</h1>
-
-        <p>
-          One-Rep-Max provides different graphs that help you track your progress.
-          There are graphs for gym workouts, cardio workouts and bodyweight.
-          The graphs are highly customizable: you can select the date range,
-          exercise and group the results by month, week or single workout.
-        </p>
-        <button><a href="./tour.html">Take tour</a></button>
-      </div>
-    </div>
-
-    <div class="mid-section-part-1">
-      <div>
-        <h1>Database with 300+ exercises</h1>
-
-        <p>
-          One-Rep-Max has a database with over 300 exercises. The exercises come
-          with detailed descriptions, tips and step-by-step images. If you
-          don't find a exercise from our database, then you can also add your
-          own exercises.
-        </p>
-        <button><a href="">Take tour</a></button>
-      </div>
-      <div>
-        <img src="https://www.gymwolf.com/img/landing/database-img.png" alt="" />
-      </div>
+<div class="main">
+    <div class="container">
+      <h1>Move</h1>
+      <p>Form healthy habits to take your fitness to the next level.</p>
+      <a  class="btn" (click)="navigateToSignup()">Start Now</a>
     </div>
   </div>
 
-  <div class="footer-container">
-    <div class="footer-lifted">
-      <p class="footer-counter">
-        <span class="label label-default">1</span><span class="label label-default">1</span><span
-          class="label label-default">4</span><span class="label label-default">3</span><span
-          class="label label-default">9</span><span class="label label-default">1</span><span
-          class="label label-default">7</span><span class="label label-default">8</span><span
-          class="label label-default">5</span><span class="label label-default">5</span> <span>kg</span>
-      </p>
-      <p class="lead">LIFTED USING One-Rep-Max</p>
+  <div class="supporting">
+    <div class="container">
+      <div class="col">
+        <h2>Move</h2>
+        <p>Become more active by tracking your fitness, rides, and walks.</p>
+      </div>
+      <div class="col">
+        <h2>Sync</h2>
+        <p>Access your activity on our website.</p>
+      </div>
+      <div class="col">
+        <h2>Compete</h2>
+        <p>Challenge yourself to achieve new goals and celebrate your progress.</p>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <!-- ******************* ->Footer Section ->************************************** -->
+  </div>
+
+
+  <div class="feature">
+    <div class="container">
+      <h2>Move. Rest. Recover. Move.</h2>
+    </div>
+  </div>
+  <div class="supporting">
+    <div class="container">
+      <h2>Go Premium</h2>
+      <p>Receive recommendations based on your activity to level up.</p>
+      <a href="#" class="btn">Learn more</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container">
+      <h2>Stop scrolling. Start moving</h2>
+      <a href="#" class="btn">Start Now</a>
+    </div>
+  </div>

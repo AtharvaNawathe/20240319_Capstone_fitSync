@@ -22,7 +22,9 @@ export class SignupComponent {
 
   constructor(private http: HttpClient, private router: Router) {} // Inject HttpClient
 
-
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
   signup() {
     this.http.post('http://localhost:3000/user/signup', this.user).subscribe({
       next: (response) => {

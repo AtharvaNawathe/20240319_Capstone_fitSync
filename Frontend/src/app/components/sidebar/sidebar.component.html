@@ -9,9 +9,12 @@
       <li><a (click)="loadYourPlans()"><i></i>Your Plans</a></li>
       <li><a (click)="loadTrackProgress()"><i></i>Track Progress</a></li>
       <li><a (click)="loadBlogs()"><i></i>Blogs</a></li>
-      
+      <li><a (click)="Logout()">
+        <img src="../../../assets/img/logout_1828427.png" class="site-logo" alt="Logout">
+      </a></li>
     </ul>
   </div>
+
   <div class="main_content">
     <ng-container *ngIf="showAddWorkout">
       <app-add-workout></app-add-workout>

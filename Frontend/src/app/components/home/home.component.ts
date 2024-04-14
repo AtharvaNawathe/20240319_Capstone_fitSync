@@ -20,22 +20,5 @@ export class HomeComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      });
-
-      this.http.get<any>('http://localhost:3000/user/profiledetails', { headers }).subscribe(
-        (response) => {
-          this.username = response.user.username;
-        },
-        (error) => {
-          console.error(error);
-          // Handle error
-        }
-      );
-    }
   }
 }

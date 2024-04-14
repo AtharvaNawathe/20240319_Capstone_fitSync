@@ -15,8 +15,6 @@ const SECRET_KEY = process.env.SECRET_KEY;
  * @param {Object} res HTTP response object.
  */
 const addWorkoutPlan = async (req, res) => {
-
-
   try {
     const {
       activity_name,
@@ -190,62 +188,33 @@ const removeWorkout = async (req, res) => {
 };
 
 const moveWorkoutToHistory = async (req, res) => {
-  try {
-    const { workout_name, day } = req.body;
+  const { activity_name } = req.body;
 
-    // Find the workout entry in WorkoutPlan based on workout_name
-    const workoutPlan = await WorkoutPlan.findOne({ workout_name });
+  try {
+    // Find the workout plan entry by activity_name
+    const workoutPlan = await WorkoutPlan.findOne({ activity_name });
 
     if (!workoutPlan) {
-      return res.status(404).json({ message: "Workout plan not found" });
+      return res.status(404).json({ message: 'Workout plan not found' });
     }
 
-    // Find the schedule entry index for the provided day
-    const scheduleEntryIndex = workoutPlan.schedule.findIndex(
-      (entry) => entry.day === day
-    );
+    // Create a new workout history entry with the found workout plan data
+    const workoutHistoryEntry = new WorkoutHistory({
+      ...workoutPlan.toObject(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
-    if (scheduleEntryIndex === -1) {
-      return res
-        .status(404)
-        .json({ message: "No workout found for the provided day" });
-    }
+    // Save the new workout history entry
+    await workoutHistoryEntry.save();
 
-    // Get the exercises for the provided day
-    const exercisesToRemove =
-      workoutPlan.schedule[scheduleEntryIndex].exercises;
+    // Remove the workout plan entry from workoutplans collection
+    await WorkoutPlan.findByIdAndDelete(workoutPlan._id);
 
-    // Create a new document to insert in WorkoutHistory collection
-    const newWorkoutHistoryEntry = {
-      workout_name: workoutPlan.workout_name,
-      day: day,
-      exercises: exercisesToRemove,
-    };
-
-    // Find and replace the existing document if it exists, otherwise insert a new one
-    await WorkoutHistory.findOneAndReplace(
-      {
-        workout_name: newWorkoutHistoryEntry.workout_name,
-        day: newWorkoutHistoryEntry.day,
-      },
-      newWorkoutHistoryEntry,
-      { upsert: true }
-    );
-
-    // Remove the entire day's data structure from the workout plan
-    workoutPlan.schedule.pull({ day: day });
-
-    await workoutPlan.save();
-
-    res
-      .status(200)
-      .json({
-        message:
-          "Workout data moved to history and entire day's data removed from workout plan successfully",
-      });
+    res.status(200).json({ message: 'Workout plan moved to history successfully' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error('Error moving workout plan to history:', error);
+    res.status(500).json({ message: 'Failed to move workout plan to history', error: error.message });
   }
 };
 

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class AddMealsComponent implements OnInit{
   mealForm!: FormGroup;
-  hours: number[] = []; 
-  minutes: number[] = [];
+  hours: number[] = Array.from({ length: 12 }, (_, i) => i + 1);
+  minutes: number[] = Array.from({ length: 60 }, (_, i) => i);
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner']; // Dropdown options for meal types
+  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner'];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.mealForm = this.fb.group({
@@ -30,21 +31,34 @@ export class AddMealsComponent implements OnInit{
       date: ['', Validators.required],
       foodDescription: ['', Validators.required]
     });
-
-    for (let i = 1; i <= 12; i++) {
-      this.hours.push(i);
-    }
-    for (let i = 0; i <= 59; i++) {
-      this.minutes.push(i);
-    }
   }
 
   onSubmit() {
     if (this.mealForm.valid) {
-      console.log(this.mealForm.value);
-      // Reset form after submission
-      this.mealForm.reset();
+      const formData = this.mealForm.value;
+
+      const token = localStorage.getItem('token'); // Assuming you have an auth token
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `${token}`
+      });
+
+      this.http
+        .post<any>('http://localhost:3000/meals/addmealplans', formData, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            // Reset form after successful submission
+            this.mealForm.reset();
+            alert('Meal added successfully!');
+          },
+          error: (error) => {
+            console.error('Error:', error);
+            alert('Failed to add meal. Please try again.');
+          }
+        });
+    } else {
+      alert('Please fill in all required fields.');
     }
   }
-
 }

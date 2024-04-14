@@ -30,7 +30,7 @@ export class EditprofileComponent implements OnInit {
       'Authorization': `${token}`
     });
     // Make HTTP GET request to fetch user profile details from backend API
-    this.http.get<any>('http://localhost:3000/user/profiledetails' ,{ headers })
+    this.http.get<any>('http://localhost:3000/user/getprofile' ,{ headers })
       .subscribe(
         (response) => {
           if (response.success) {

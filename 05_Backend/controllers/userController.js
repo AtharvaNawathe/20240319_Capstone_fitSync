@@ -107,7 +107,7 @@ const login = async (req, res) => {
 
     // If the password is valid, generate a JWT token
     const token = jwt.sign(
-      { userId: user._id, username: user.username, userType: user.user_type },
+      { userId: user._id, username: user.username, userType: user.user_type, email: user.email },
       process.env.SECRET_KEY,
       { expiresIn: process.env.TOKEN_EXPIRY }
     );
@@ -279,78 +279,67 @@ const isTokenExpired = (timestamp) => {
 };
 
 /**
- * Retrieves profile details of the logged-in user.
- * @param {Function} verifyToken Function to verify user token.
- * @param {Object} req HTTP request object.
- * @param {Object} res HTTP response object.
- */
-const getProfileDetails =
-  (verifyToken,
-  async (req, res) => {
-    try {
-      const userData = req.decoded;
-
-      // Find the user by ID
-      const user = await User.findById(userData.userId);
-
-      if (!user) {
-        return res.status(404).json({
-          success: false,
-          message: "User not found",
-        });
-      }
-
-      // Extract user details
-      const userDetails = {
-        username: user.username,
-        name: user.name,
-        email: user.email,
-        height:user.height,
-        waist:user.waist,
-        hips:user.hips,
-        neck:user.neck
-        // Add other user details as needed
-      };
-
-      res.status(200).json({
-        success: true,
-        message: "User profile retrieved successfully!",
-        user: userDetails,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        message: "Internal Server Error",
-      });
-    }
-  });
-
-
-/**
  * Edits profile details of the logged-in user.
  * @param {Object} req HTTP request object.
  * @param {Object} res HTTP response object.
  */
 const editProfile = async (req, res) => {
-    try {
-        const userId = req.decoded.userId; // Get user ID from decoded token
-        
-        // Extract updated profile information from request body
-        const { name, height, weight, gender, veg, workout_plan, meal_plan } = req.body;
+  try {
+    const { name, email, height, waist, hips, neck } = req.body;
 
-        // Update user's profile information in the database
-        const updatedUser = await User.findByIdAndUpdate(userId, { name, height, weight, gender, veg, workout_plan, meal_plan }, { new: true });
+    const user = req.user; // User extracted from token in the middleware
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
-        }
+    // Update user profile fields
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (height) user.height = height;
+    if (waist) user.waist = waist;
+    if (hips) user.hips = hips;
+    if (neck) user.neck = neck;
 
-        res.json({ message: "Profile updated successfully", user: updatedUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+    // Save updated user profile
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'User profile updated successfully',
+      user: user
+    });
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getUserDetails = async (req, res) => {
+  try {
+    // Extract the user email from the request object
+    const { email } = req.user;
+
+    if (!email) {
+      return res.status(401).json({ error: 'Invalid token' });
     }
+
+    // Retrieve user details from the database using the email from the token
+    const userDetails = await User.findOne({ email });
+
+    if (!userDetails) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Return user details as JSON response
+    res.status(200).json({
+      success: true,
+      message: 'User details retrieved successfully',
+      user: userDetails
+    });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 
@@ -364,6 +353,6 @@ module.exports = {
   login,
   forget_password,
   reset_password,
-  getProfileDetails,
   editProfile,
+  getUserDetails
 };

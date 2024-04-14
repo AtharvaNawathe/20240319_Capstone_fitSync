@@ -28,8 +28,8 @@ const { verifyToken} = require("../middlewares/auth");
 router.post('/signup', UserController.signup);
 router.post('/login', UserController.login);
 router.post('/forgotpassword',UserController.forget_password)
-router.post('/resetpassword',UserController.reset_password)
-router.get('/profiledetails',verifyToken, UserController.getProfileDetails)
+router.post('/resetpassword',UserController.reset_password);
 router.put('/editprofile', verifyToken, UserController.editProfile);
+router.get('/getprofile', verifyToken, UserController.getUserDetails);
 
 module.exports = router;

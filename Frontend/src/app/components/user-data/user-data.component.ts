@@ -1,46 +1,96 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule,HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-data',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,HttpClientModule],
   templateUrl: './user-data.component.html',
   styleUrl: './user-data.component.css'
 })
-export class UserDataComponent {
-  showWorkouts = true; // Default to showing workouts
+export class UserDataComponent implements OnInit {
+  showWorkouts = true;
   showMeals = false;
+  workouts: any[] = [];
+  meals: any[] = [];
 
-  workouts = [
-    {
-      name: 'Morning Run',
-      description: 'Ran 5 kilometers in the park.',
-      duration: 30,
-      userName: 'John Doe',
-      date: new Date()
-    },
-    {
-      name: 'Circuit Training',
-      description: 'Full-body workout session.',
-      duration: 45,
-      userName: 'Jane Smith',
-      date: new Date()
-    }
-  ];
+  constructor(private http: HttpClient) {}
 
-  meals = [
-    {
-      name: 'Breakfast',
-      description: 'Oatmeal with fruits.',
-      userName: 'John Doe',
-      date: new Date()
-    },
-    {
-      name: 'Lunch',
-      description: 'Grilled chicken salad.',
-      userName: 'Jane Smith',
-      date: new Date()
-    }
-  ];
+  ngOnInit(): void {
+    this.fetchWorkouts();
+    this.fetchMeals();
+  }
+
+  fetchWorkouts(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `${localStorage.getItem('token')}`
+    });
+
+    this.http.get<any>('http://localhost:3000/workouts/myworkouts', { headers })
+      .subscribe(
+        (response) => {
+          this.workouts = response.workouts; // Assign workouts array from response
+        },
+        (error) => {
+          console.error('Error fetching workouts:', error);
+        }
+      );
+  }
+
+  fetchMeals(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `${localStorage.getItem('token')}`
+    });
+
+    this.http.get<any>('http://localhost:3000/meals/mymeals', { headers })
+      .subscribe(
+        (response) => {
+          this.meals = response.meals; // Assign meals array from response
+        },
+        (error) => {
+          console.error('Error fetching meals:', error);
+        }
+      );
+  }
+
+  moveWorkoutToHistory(activity_name: string): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token') || ''
+    });
+
+    this.http.post<any>('http://localhost:3000/workouts/workouthistory', { activity_name }, { headers })
+      .subscribe(
+        (response) => {
+          console.log('Workout moved to history successfully:', response);
+          // After successful move, fetch updated workouts
+          this.fetchWorkouts();
+        },
+        (error) => {
+          console.error('Error moving workout to history:', error);
+        }
+      );
+  }
+
+  moveMealToHistory(mealName: string): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token') || ''
+    });
+
+    this.http.post<any>('http://localhost:3000/meals/mealhistory', { mealName }, { headers })
+      .subscribe(
+        (response) => {
+          console.log('Meal moved to history successfully:', response);
+          // After successful move, fetch updated meals
+          this.fetchMeals();
+        },
+        (error) => {
+          console.error('Error moving meal to history:', error);
+        }
+      );
+  }
 }

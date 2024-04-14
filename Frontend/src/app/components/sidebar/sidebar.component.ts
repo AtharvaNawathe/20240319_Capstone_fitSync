@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AddWorkoutComponent } from '../add-workout/add-workout.component';
 import { CommonModule } from '@angular/common';
 import { AddMealsComponent } from '../add-meals/add-meals.component';
@@ -14,12 +14,17 @@ import { BlogsComponent } from '../blogs/blogs.component';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  username: string ;
   showAddWorkout = false;
   showAddMeal = false;
   showYourPlans = false;
   showTrackProgress = false;
   showBlogs = false; // New property to control blogs view
 
+  constructor() {
+    // Retrieve the username from localStorage on component initialization
+    this.username = localStorage.getItem('username') ?? '';
+  }
   loadAddWorkout(): void {
     this.showAddWorkout = true;
     this.showAddMeal = false;

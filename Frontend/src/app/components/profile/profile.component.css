@@ -149,7 +149,7 @@ button:hover{
 }
 .save-button{
     padding: 10px;
-    background-color:rgb(238, 238, 238);
+    
     margin-top: 20px;
     border: none;
     border-top: 1px solid rgb(208, 200, 200);
@@ -278,6 +278,10 @@ select[name="birth-data"]{
     color: #428bca;
     text-decoration: underline;
     
+}
+
+.profile-image img {
+    width: 100px;
 }
 
 

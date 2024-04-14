@@ -1,10 +1,13 @@
+<mat-toolbar>
+  <div class="buttons-container">
+    <!-- Always display the logo at the leftmost position -->
+    <a (click)="navigateToHome()">
+      <img src="../../../assets/img/logo.png" class="site-logo" alt="Logo">
+    </a>
 
-  <mat-toolbar>
-    <div class="buttons-container">
-      <a><img src="../../../assets/img/logo.png" class="site-logo" alt=""></a>
-      <a *ngIf="showMealsButton">
-        <img src="../../../assets/img/profile-logo.png" alt="Edit Profile" class="profile-icon" (click)="navigateToProfile()">
-      </a>
-    </div>
-  </mat-toolbar>
-
+    <!-- Only display the profile icon if 'showMealsButton' is true -->
+    <a *ngIf="showMealsButton" class="profile-icon" (click)="navigateToProfile()">
+      <img src="../../../assets/img/profile.png" alt="Edit Profile">
+    </a>
+  </div>
+</mat-toolbar>

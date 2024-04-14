@@ -7,7 +7,11 @@ const workoutPlanSchema = new mongoose.Schema({
   activity_description: { type: String },
   date: { type: Date, required: true },
   duration: { type: Number, required: true }, // assuming duration is in minutes
-  notes: { type: String }
+  notes: { type: String },
+  status: {
+    type:String,
+    default: "Pending"
+  }
 });
 
 const WorkoutPlan = mongoose.model('WorkoutPlan', workoutPlanSchema);

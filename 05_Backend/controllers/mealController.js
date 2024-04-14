@@ -170,62 +170,33 @@ const removeMeal = async (req, res) => {
 };
 
 const moveMealToHistory = async (req, res) => {
-  try {
-    const { meal_name, meal_type } = req.body;
+  const { mealName } = req.body;
 
-    // Find the meal entry in MealPlan based on meal_name
-    const mealPlan = await MealPlan.findOne({ meal_name });
+  try {
+    // Find the meal plan entry by mealName and activity_name
+    const mealPlan = await MealPlan.findOne({ mealName});
 
     if (!mealPlan) {
-      return res.status(404).json({ message: "Meal plan not found" });
+      return res.status(404).json({ message: 'Meal plan not found' });
     }
 
-    // Find the meal plan entry for the provided meal type
-    const mealTypeEntryIndex = mealPlan.meal_plan.findIndex(
-      (entry) => entry.meal_type === meal_type
-    );
+    // Create a new meal history entry with the found meal plan data
+    const mealHistoryEntry = new MealHistory({
+      ...mealPlan.toObject(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
-    if (mealTypeEntryIndex === -1) {
-      return res
-        .status(404)
-        .json({ message: "No meal found for the provided type" });
-    }
+    // Save the new meal history entry
+    await mealHistoryEntry.save();
 
-    // Get the meals for the provided meal type
-    const mealsToRemove = mealPlan.meal_plan[mealTypeEntryIndex].meals;
+    // Remove the meal plan entry from mealplans collection
+    await MealPlan.findByIdAndDelete(mealPlan._id);
 
-    // Create a new document to insert in MealHistory collection
-    const newMealHistoryEntry = {
-      meal_name: mealPlan.meal_name,
-      meal_plan: [
-        {
-          meal_type: mealPlan.meal_plan[mealTypeEntryIndex].meal_type,
-          meals: mealsToRemove,
-        },
-      ],
-    };
-
-    // Find and replace the existing document if it exists, otherwise insert a new one
-    await MealHistory.findOneAndReplace(
-      { meal_name: newMealHistoryEntry.meal_name },
-      newMealHistoryEntry,
-      { upsert: true }
-    );
-
-    // Remove the entire meal type's data structure from the meal plan
-    mealPlan.meal_plan.splice(mealTypeEntryIndex, 1);
-
-    await mealPlan.save();
-
-    res
-      .status(200)
-      .json({
-        message:
-          "Meal data moved to history and entire meal type's data removed from meal plan successfully",
-      });
+    res.status(200).json({ message: 'Meal plan moved to history successfully' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error('Error moving meal plan to history:', error);
+    res.status(500).json({ message: 'Failed to move meal plan to history', error: error.message });
   }
 };
 

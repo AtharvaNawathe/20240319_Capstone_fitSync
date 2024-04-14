@@ -28,6 +28,7 @@ export class SignupComponent {
       next: (response) => {
         console.log('Signup successful', response);
         window.alert("You have successfully Signed up");
+        this.router.navigate(['/profile']);
       },
       error: (error) => {
         console.error('Signup failed', error);

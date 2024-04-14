@@ -10,6 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 interface LoginResponse {
   token: string;
+  user: {
+    username: string;
+    // Add other user properties as needed
+  };
+
   // Add other properties as needed
 }
 
@@ -36,7 +41,9 @@ export class LoginComponent implements OnInit{
         next: (response) => {
           console.log('Login successful', response);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('username', response.user.username);
           window.alert("You have successfully logged in");
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Login failed', error);
@@ -57,4 +64,5 @@ export class LoginComponent implements OnInit{
   {
     this.router.navigate(['/signup']);
   }
+
 }

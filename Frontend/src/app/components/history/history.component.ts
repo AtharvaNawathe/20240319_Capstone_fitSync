@@ -1,48 +1,59 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,CommonModule,HttpClientModule,FormsModule],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
-export class HistoryComponent {
-
-  showWorkouts = true; // Default to showing workouts
+export class HistoryComponent implements OnInit {
+  showWorkouts = true;
   showMeals = false;
+  workouts: any[] = [];
+  meals: any[] = [];
 
-  workouts = [
-    {
-      name: 'Morning Run',
-      description: 'Ran 5 kilometers in the park.',
-      duration: 30,
-      userName: 'John Doe',
-      date: new Date()
-    },
-    {
-      name: 'Circuit Training',
-      description: 'Full-body workout session.',
-      duration: 45,
-      userName: 'Jane Smith',
-      date: new Date()
-    }
-  ];
+  constructor(private http: HttpClient) {}
 
-  meals = [
-    {
-      name: 'Breakfast',
-      description: 'Oatmeal with fruits.',
-      userName: 'John Doe',
-      date: new Date()
-    },
-    {
-      name: 'Lunch',
-      description: 'Grilled chicken salad.',
-      userName: 'Jane Smith',
-      date: new Date()
-    }
-  ];
+  ngOnInit(): void {
+    this.fetchWorkoutHistory();
+    this.fetchMealHistory();
+  }
 
+  fetchWorkoutHistory(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token') || ''
+    });
+
+    this.http.get<any>('http://localhost:3000/workouts/getworkouthistory', { headers })
+      .subscribe(
+        (response) => {
+          this.workouts = response; // Assign the workouts array from response
+        },
+        (error) => {
+          console.error('Error fetching workout history:', error);
+        }
+      );
+  }
+
+  fetchMealHistory(): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token') || ''
+    });
+
+    this.http.get<any>('http://localhost:3000/meals/getmealshistory', { headers })
+      .subscribe(
+        (response) => {
+          this.meals = response; // Assign the meals array from response
+        },
+        (error) => {
+          console.error('Error fetching meal history:', error);
+        }
+      );
+  }
 }

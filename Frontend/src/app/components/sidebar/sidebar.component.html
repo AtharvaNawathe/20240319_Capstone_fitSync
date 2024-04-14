@@ -2,13 +2,14 @@
 
 <div class="wrapper">
   <div class="sidebar">
-    <h2>Hey, Atharva!</h2>
+    <h2>Hey, {{ username }}</h2>
     <ul>
       <li><a (click)="loadAddWorkout()"><i class="fas fa-dumbbell"></i> Add Workout</a></li>
       <li><a (click)="loadAddMeal()"><i class="fas fa-dumbbell"></i>Add Meal</a></li>
       <li><a (click)="loadYourPlans()"><i></i>Your Plans</a></li>
       <li><a (click)="loadTrackProgress()"><i></i>Track Progress</a></li>
       <li><a (click)="loadBlogs()"><i></i>Blogs</a></li>
+      
     </ul>
   </div>
   <div class="main_content">

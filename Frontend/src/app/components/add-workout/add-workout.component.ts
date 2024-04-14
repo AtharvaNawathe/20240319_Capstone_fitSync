@@ -20,17 +20,16 @@ export class AddWorkoutComponent {
   // List of activities for the dropdown
   activities: string[] = ['Running', 'Cycling', 'Swimming', 'Weightlifting', 'Yoga', 'Other'];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.workoutForm = this.fb.group({
-      workoutName: ['', Validators.required],
-      timeRequired: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      activity_name: ['', Validators.required],
       date: ['', Validators.required],
+      activity_description:['',Validators.required],
       activity: ['', Validators.required],
       preferredActivity: [''],
-      durationHours: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      durationMinutes: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      duration: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       notes: ['']
     });
   }
@@ -39,13 +38,34 @@ export class AddWorkoutComponent {
   get f() { return this.workoutForm.controls; }
 
   onSubmit() {
-    // Handle form submission, e.g., send data to backend
-    if (this.workoutForm.valid) {
-      console.log(this.workoutForm.value);
-      // Reset form after submission
-      this.workoutForm.reset();
+    const token = localStorage.getItem('token');
+    if (token) {
+      const formData = this.workoutForm.value;
+  
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': ` ${token}`
+      });
+
+      console.log(headers);
+      
+  
+      this.http.post<any>('http://localhost:3000/workouts/addworkoutplans', formData, { headers })
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            // Reset the form after successful submission
+            this.workoutForm.reset();
+            window.alert("Success");
+          },
+          error: (error) => {
+            console.error('Error:', error);
+            // Handle error
+          }
+        });
     }
   }
+  
 
   onActivityChange(selectedActivity: string) {
     const preferredActivityControl = this.workoutForm.get('preferredActivity') as AbstractControl | null;

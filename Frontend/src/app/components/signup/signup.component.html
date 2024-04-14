@@ -3,14 +3,34 @@
 <div class="container">
     <div class="card">
       <h2>Register</h2>
-      <form (submit)="signup()">
-        <input type="text" id="name" name="name" [(ngModel)]="user.name" placeholder="Name" required>
-        <input type="text" id="username" name="username" [(ngModel)]="user.username" placeholder="Username" required>
-        <input type="text" id="Email" name="Email" [(ngModel)]="user.email" placeholder="Email" required>
-        <input type="password" id="password" name="password" [(ngModel)]="user.password" placeholder="Password" required>
-        <a type="submit" (click)="navigateToLogin()">Already a Member?</a>
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <input type="text" formControlName="name" placeholder="Name">
+        <div *ngIf="formControls['name'].touched && formControls['name'].invalid" class="error-message">
+          <div *ngIf="formControls['name'].errors?.['required']">Name is required.</div>
+        </div>
+      
+        <input type="text" formControlName="username" placeholder="Username">
+        <div *ngIf="formControls['username'].touched && formControls['username'].invalid" class="error-message">
+          <div *ngIf="formControls['username'].errors?.['required']">Username is required.</div>
+        </div>
+      
+        <input type="text" formControlName="email" placeholder="Email">
+        <div *ngIf="formControls['email'].touched && formControls['email'].invalid" class="error-message">
+          <div *ngIf="formControls['email'].errors?.['required']">Email is required.</div>
+          <div *ngIf="formControls['email'].errors?.['email']">Invalid email format.</div>
+        </div>
+      
+        <input type="password" formControlName="password" placeholder="Password">
+        <div *ngIf="formControls['password'].touched && formControls['password'].invalid" class="error-message">
+          <div *ngIf="formControls['password'].errors?.['required']">Password is required.</div>
+          <div *ngIf="formControls['password'].errors?.['minlength']">Password must be at least 4 characters.</div>
+          <div *ngIf="formControls['password'].errors?.['needsUpperCase']">Password must contain at least one uppercase letter.</div>
+        </div>
+      
+        <a (click)="navigateToLogin()">Already a Member?</a>
         <button type="submit">Register</button>
       </form>
+      
     </div>
   </div>
 </body>

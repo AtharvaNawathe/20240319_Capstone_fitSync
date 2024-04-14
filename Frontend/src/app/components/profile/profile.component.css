@@ -115,8 +115,8 @@ section{
 
 button{
     color: #fff;
-    background: #2ecc71;
-    border-color: #29b062;
+    background: #704214;
+    border-color: #704214;
     display: inline-block;
     font-size: 14px;
     text-align: center;
@@ -133,8 +133,8 @@ button{
     margin-top: -15px;
 }
 button:hover{
-    background: #30b065;
-    border-color: #207744;
+    background: #704214;
+    border-color: #704214;;
 }
 #profile p{
     margin-top: -20px;

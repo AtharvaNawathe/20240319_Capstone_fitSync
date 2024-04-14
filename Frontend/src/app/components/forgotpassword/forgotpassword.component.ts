@@ -21,7 +21,7 @@ export class ForgotpasswordComponent {
 
   navigateToAuth ()
   {
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/login']);
   }
 
   //when button it clicked 
@@ -34,7 +34,7 @@ export class ForgotpasswordComponent {
         console.log(this.email);
         window.alert("Password reset link sent to Email Successfully!!");
         console.log('Response:', response);
-        this.router.navigate(['/auth']);
+        this.router.navigate(['/login']);
       },
       (error) => {
         // Handle any errors that occur during the request

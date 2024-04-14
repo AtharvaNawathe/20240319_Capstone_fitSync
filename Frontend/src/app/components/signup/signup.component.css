@@ -28,8 +28,9 @@ body {
   .card {
     background-color: #d1a04d;
     padding: 20px;
+    margin-top: -50px;
     border-radius: 8px;
-    height: 400px;
+    height: 520px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   }
   

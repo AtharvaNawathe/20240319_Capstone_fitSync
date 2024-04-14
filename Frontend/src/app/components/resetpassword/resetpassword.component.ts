@@ -42,7 +42,7 @@ export class ResetpasswordComponent {
           console.log('Response:', response);
 
           window.alert("Password Reset Sucessfully!");
-          this.router.navigate(['/auth']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           // Handle any errors that occur during the request

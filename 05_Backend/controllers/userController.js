@@ -285,29 +285,30 @@ const isTokenExpired = (timestamp) => {
  */
 const editProfile = async (req, res) => {
   try {
-    const { name, email, height, waist, hips, neck } = req.body;
+    const { email } = req.user; // Extract email from authenticated user
+    const updatedUserData = req.body; // Updated user data from request body
 
-    const user = req.user; // User extracted from token in the middleware
+    // Find the user by email and update the profile fields
+    const user = await User.findOne({ email });
 
-    // Update user profile fields
-    if (name) user.name = name;
-    if (email) user.email = email;
-    if (height) user.height = height;
-    if (waist) user.waist = waist;
-    if (hips) user.hips = hips;
-    if (neck) user.neck = neck;
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-    // Save updated user profile
+    // Update user profile fields based on the request body
+    if (updatedUserData.name) user.name = updatedUserData.name;
+    if (updatedUserData.email) user.email = updatedUserData.email;
+    if (updatedUserData.height) user.height = updatedUserData.height;
+    if (updatedUserData.waist) user.waist = updatedUserData.waist;
+    if (updatedUserData.hips) user.hips = updatedUserData.hips;
+    if (updatedUserData.neck) user.neck = updatedUserData.neck;
+
+    // Save the updated user profile
     await user.save();
 
-    res.status(200).json({
-      success: true,
-      message: 'User profile updated successfully',
-      user: user
-    });
+    res.status(204).json({ message: 'Profile Updated Successfully' });
   } catch (error) {
-    console.error('Error updating user profile:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    next(error); // Pass the error to the error handling middleware
   }
 };
 

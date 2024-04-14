@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
   username: string ;
   isSignedUp: boolean = false;
   showAddWorkout = false;
@@ -26,6 +26,11 @@ export class SidebarComponent {
   constructor( private router: Router) {
     // Retrieve the username from localStorage on component initialization
     this.username = localStorage.getItem('username') ?? '';
+  }
+
+  ngOnInit(): void {
+    // Load the Add Workout section by default when the component initializes
+    this.loadAddWorkout();
   }
   loadAddWorkout(): void {
     this.showAddWorkout = true;

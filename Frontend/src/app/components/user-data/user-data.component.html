@@ -20,7 +20,7 @@
         <div class="right">
           <p>By: {{ workout.username }}</p>
           <p>Created: {{ workout.date | date:'medium' }}</p>
-          <button class="check-button" (click)="moveWorkoutToHistory(workout.activity_name)">Check</button>
+          <button class="check-button" (click)="moveWorkoutToHistory(workout.activity_name)">&#x2713;</button>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="right">
           <p>By: {{ meal.username }}</p>
-          <button class="check-button" (click)="moveMealToHistory(meal.mealName)">Check</button>
+          <button class="check-button" (click)="moveMealToHistory(meal.mealName)">&#x2713;</button>
         </div>
       </div>
     </div>

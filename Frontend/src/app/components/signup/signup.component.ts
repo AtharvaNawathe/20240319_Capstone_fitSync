@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -51,12 +52,24 @@ export class SignupComponent implements OnInit {
     this.http.post('http://localhost:3000/user/signup', this.user).subscribe({
       next: (response) => {
         console.log('Signup successful', response);
-        window.alert("You have successfully Signed up");
+        this.showSuccessNotification();
         this.router.navigate(['/profile']);
       },
       error: (error) => {
         console.error('Signup failed', error);
       }
     });
+}
+
+
+
+showSuccessNotification(): void {
+  Swal.fire({
+    position: 'top',
+    icon: 'success',
+    title: 'You have successfully Signed up',
+    showConfirmButton: false,
+    timer: 1500
+  });
 }
 }

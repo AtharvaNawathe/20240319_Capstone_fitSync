@@ -1,0 +1,115 @@
+/* Resetting default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styles */
+  body {
+    background-color: black;
+    color: #704214; /* Set default text color to dark brown */
+  }
+  
+  /* Container styles */
+  #maincontainer {
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    overflow: hidden; /* Clear floats */
+    background-color: white; /* Set background color to white */
+    padding: 20px; /* Add padding for spacing */
+    border: 2px solid #ddd; /* Add border with a light gray color */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Results section styles */
+  #resultsSection {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    margin-top: 50px;
+    box-sizing: border-box; /* Include padding and border in width */
+    background-color: white; /* Set background color to white */
+    border: 2px solid #ddd; /* Add border with a light gray color */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Calculator container styles */
+  #calulatorContainer {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in width */
+    background-color: white; /* Set background color to white */
+    border: 2px solid #ddd; /* Add border with a light gray color */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Meal container styles */
+  #mealContainer {
+    width: 50%;
+    float: right;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in width */
+    background-color: white; /* Set background color to white */
+    border: 2px solid #ddd; /* Add border with a light gray color */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Style for meal sections */
+  .meal {
+    margin-top: 20px; /* Add top margin for spacing between meal sections */
+  }
+  
+  /* Headings within meal sections */
+  .meal h5 {
+    text-decoration: underline;
+  }
+  
+  /* Style for form inputs */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    margin-bottom: 10px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none; /* Remove outline on focus */
+  }
+  
+  /* Style for select dropdown */
+  select.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none; /* Remove outline on focus */
+  }
+  
+  /* Style for radio buttons */
+  #gender {
+    margin-top: 10px;
+  }
+  
+  .radio-inline {
+    margin-right: 20px;
+  }
+  
+  /* Style for activity and goal dropdowns */
+  #activity,
+  #goal {
+    margin-bottom: 20px; /* Add bottom margin to create a gap between activity and goal */
+  }
+  
+
+  label {
+    font-weight: bold;
+    color: #704214;
+    margin-bottom: 8px; /* Add spacing below labels */
+  }

@@ -11,6 +11,12 @@ p {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.site-logo {
+  width: 100px; /* Adjust logo width */
+  height: 70px; /* Adjust logo height */
+  margin-right: 20px; /* Add margin to separate logo from profile icon */
+}
+
 .container {
   max-width: 940px;
   margin: 0 auto;

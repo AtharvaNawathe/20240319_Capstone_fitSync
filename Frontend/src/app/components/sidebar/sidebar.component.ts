@@ -6,11 +6,14 @@ import { UserDataComponent } from '../user-data/user-data.component';
 import { HistoryComponent } from '../history/history.component';
 import { BlogsComponent } from '../blogs/blogs.component';
 import { Router } from '@angular/router';
+import { CalculatorComponent } from '../calculator/calculator.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [AddWorkoutComponent,CommonModule,AddMealsComponent,UserDataComponent,HistoryComponent,BlogsComponent],
+  imports: [AddWorkoutComponent,CommonModule,AddMealsComponent,UserDataComponent,HistoryComponent,BlogsComponent,CalculatorComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -21,7 +24,8 @@ export class SidebarComponent implements OnInit{
   showAddMeal = false;
   showYourPlans = false;
   showTrackProgress = false;
-  showBlogs = false; // New property to control blogs view
+  showBlogs = false; 
+  showCalculator = false;// New property to control blogs view
 
   constructor( private router: Router) {
     // Retrieve the username from localStorage on component initialization
@@ -37,7 +41,8 @@ export class SidebarComponent implements OnInit{
     this.showAddMeal = false;
     this.showYourPlans = false;
     this.showTrackProgress = false;
-    this.showBlogs = false; // Hide blogs view
+    this.showBlogs = false;
+    this.showCalculator = false; // Hide blogs view
   }
 
   loadAddMeal(): void {
@@ -45,7 +50,16 @@ export class SidebarComponent implements OnInit{
     this.showAddMeal = true;
     this.showYourPlans = false;
     this.showTrackProgress = false;
-    this.showBlogs = false; // Hide blogs view
+    this.showBlogs = false;
+    this.showCalculator = false; // Hide blogs view
+  }
+  loadCalculator(): void {
+    this.showCalculator = true;
+    this.showAddWorkout = false;
+    this.showAddMeal = false;
+    this.showYourPlans = false;
+    this.showTrackProgress = false;
+    this.showBlogs = false;
   }
 
   loadYourPlans(): void {
@@ -53,7 +67,8 @@ export class SidebarComponent implements OnInit{
     this.showAddMeal = false;
     this.showYourPlans = true;
     this.showTrackProgress = false;
-    this.showBlogs = false; // Hide blogs view
+    this.showBlogs = false;
+    this.showCalculator = false; // Hide blogs view
   }
 
   loadTrackProgress(): void {
@@ -61,7 +76,8 @@ export class SidebarComponent implements OnInit{
     this.showAddMeal = false;
     this.showYourPlans = false;
     this.showTrackProgress = true;
-    this.showBlogs = false; // Hide blogs view
+    this.showBlogs = false; 
+    this.showCalculator = false;// Hide blogs view
   }
 
   loadBlogs(): void {
@@ -69,22 +85,38 @@ export class SidebarComponent implements OnInit{
     this.showAddMeal = false;
     this.showYourPlans = false;
     this.showTrackProgress = false;
-    this.showBlogs = true; // Show blogs view
+    this.showBlogs = true;
+    this.showCalculator = false; // Show blogs view
   }
 
-  Logout(): void {
-    const confirmation = confirm('Are you sure you want to log out?');
-
-    // Check if the user confirmed the action
-    if (confirmation) {
-      this.isSignedUp = false;
-      // clearing the token from the local Storage
-      localStorage.removeItem('token');
-      // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
-
-      this.router.navigate(['']);
-      // this.clearSessionTimer();
-    }
+  
+  logout(): void {
+    // Show confirmation dialog
+    this.showSuccessNotification().then((confirmed) => {
+      if (confirmed) {
+        // User confirmed, perform logout actions
+        this.isSignedUp = false;
+        localStorage.removeItem('token');
+        // Redirect to login page after logout
+        this.router.navigate(['']);
+        // Optionally, clear session timer or other tasks
+        // this.clearSessionTimer();
+      }
+    });
   }
 
+  async showSuccessNotification(): Promise<boolean> {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to Logout?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Log out!'
+    });
+
+    return result.isConfirmed;
+  }
+ 
 }

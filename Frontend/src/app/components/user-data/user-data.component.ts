@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule,HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-user-data',
@@ -84,7 +86,7 @@ export class UserDataComponent implements OnInit {
     this.http.post<any>('http://localhost:3000/meals/mealhistory', { mealName }, { headers })
       .subscribe(
         (response) => {
-          console.log('Meal moved to history successfully:', response);
+          this.showSuccessNotification();
           // After successful move, fetch updated meals
           this.fetchMeals();
         },
@@ -92,5 +94,15 @@ export class UserDataComponent implements OnInit {
           console.error('Error moving meal to history:', error);
         }
       );
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Congratulations! You have completed the task!',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }

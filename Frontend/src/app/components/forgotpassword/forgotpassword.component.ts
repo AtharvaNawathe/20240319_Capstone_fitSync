@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -32,14 +33,33 @@ export class ForgotpasswordComponent {
       (response) => {
         // Handle the response from the backend
         console.log(this.email);
-        window.alert("Password reset link sent to Email Successfully!!");
+        this.showSuccessNotification();
         console.log('Response:', response);
         this.router.navigate(['/login']);
       },
       (error) => {
         // Handle any errors that occur during the request
-        console.error('Error:', error);
+        this.showUnsuccessNotification();
       }
     );
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Password reset link sent to Email Successfully!!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to sent link. Please try again.",
+      footer: ''
+    });
   }
 }

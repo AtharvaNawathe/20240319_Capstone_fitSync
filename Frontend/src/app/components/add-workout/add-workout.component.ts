@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient,HttpClientModule,HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-workout',
@@ -56,14 +57,35 @@ export class AddWorkoutComponent {
             console.log(response);
             // Reset the form after successful submission
             this.workoutForm.reset();
-            window.alert("Success");
+            this.showSuccessNotification();
           },
           error: (error) => {
             console.error('Error:', error);
             // Handle error
+          this.showUnsuccessNotification();
           }
         });
     }
+  }
+
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Activity Added!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to add Activity. Please try again.",
+      footer: ''
+    });
   }
   
 

@@ -8,11 +8,15 @@
       <li><a (click)="loadAddMeal()"><i class="fas fa-dumbbell"></i>Add Meal</a></li>
       <li><a (click)="loadYourPlans()"><i></i>Your Plans</a></li>
       <li><a (click)="loadTrackProgress()"><i></i>Track Progress</a></li>
+      <li><a (click)="loadCalculator()"><i></i>Calculator</a></li>
       <li><a (click)="loadBlogs()"><i></i>Blogs</a></li>
-      <li><a (click)="Logout()">
+      <li><a (click)="logout()">
         <img src="../../../assets/img/logout_1828427.png" class="site-logo" alt="Logout">
       </a></li>
+     
+
     </ul>
+    <!-- <img src="../../../assets/img/logout_1828427.png" class="site-logo" alt="Logout"> -->
   </div>
 
   <div class="main_content">
@@ -34,6 +38,10 @@
 
     <ng-container *ngIf="showBlogs">
       <app-blogs></app-blogs>
+    </ng-container>
+
+    <ng-container *ngIf="showCalculator">
+      <app-calculator></app-calculator>
     </ng-container>
 
   </div>

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { HttpClientModule, HttpClient} from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute for accessing URL parameters
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class ResetpasswordComponent {
           // Handle the response from the backend
           console.log('Response:', response);
 
-          window.alert("Password Reset Sucessfully!");
+          this.showSuccessNotification();
           this.router.navigate(['/login']);
         },
         (error) => {
@@ -49,5 +50,15 @@ export class ResetpasswordComponent {
           console.error('Error:', error);
         }
       );
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Password Reset Sucessfully!',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }

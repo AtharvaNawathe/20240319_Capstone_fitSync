@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -50,15 +51,34 @@ export class AddMealsComponent implements OnInit{
             console.log(response);
             // Reset form after successful submission
             this.mealForm.reset();
-            alert('Meal added successfully!');
+            this.showSuccessNotification();
           },
           error: (error) => {
             console.error('Error:', error);
-            alert('Failed to add meal. Please try again.');
+            this.showUnsuccessNotification();
           }
         });
     } else {
-      alert('Please fill in all required fields.');
+      this.showUnsuccessNotification();
     }
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Meal Added!',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to add meal. Please try again.",
+      footer: ''
+    });
   }
 }

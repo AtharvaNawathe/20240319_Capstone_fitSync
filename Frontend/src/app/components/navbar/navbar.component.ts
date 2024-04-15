@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; 
+import Swal from 'sweetalert2';
 // import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -54,4 +55,34 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  logout(): void {
+    // Show confirmation dialog
+    this.showSuccessNotification().then((confirmed) => {
+      if (confirmed) {
+        // User confirmed, perform logout actions
+        this.isSignedUp = false;
+        localStorage.removeItem('token');
+        // Redirect to login page after logout
+        this.router.navigate(['']);
+        // Optionally, clear session timer or other tasks
+        // this.clearSessionTimer();
+      }
+    });
+  }
+
+  async showSuccessNotification(): Promise<boolean> {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to Logout?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Log out!'
+    });
+
+    return result.isConfirmed;
+  }
+ 
 }

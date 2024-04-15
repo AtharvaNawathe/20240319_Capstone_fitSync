@@ -1,0 +1,93 @@
+<div class="container" id="maincontainer">
+    <div class="content-wrapper">
+    <div id="calulatorContainer">
+    
+      <!-- Closing div for results section -->
+  
+      <div class="form-group">
+        <div class="form">
+          <label for="weight">Weight</label>
+          <input type="text" class="form-control"  [(ngModel)]="weight" >
+        </div>
+        <div class="form">
+          <label for="Age">Age</label>
+          <input type="number" class="form-control" [(ngModel)]="age"  >
+        </div>
+        <div class="form">
+          <label for="height">Height</label>
+          <input type="number" class="form-control" [(ngModel)]="height" >
+        </div>
+        <div id="activity">
+          <label for="activityLevel">Select activity level</label>
+          <select class="form-control" [(ngModel)]="selectedActivity">
+            <option value="Select activity level..." placeholder="Select activity level"></option>
+            <option *ngFor="let activity of activities" [ngValue]="activity">{{ activity.name }}</option>
+          </select>
+        </div>
+        <!-- Closing div for activity dropdown -->
+  
+        <div id="goal">
+          <label for="goal">Select your goal</label>
+          <select class="form-control" [(ngModel)]="selectedGoal">
+            <option placeholder="Height in cm"></option>
+            <option *ngFor="let goal of goals" [ngValue]="goal">{{ goal.name }}</option>
+          </select>
+        </div>
+        <!-- Closing div for goal -->
+  
+        <div id="gender">
+          <label class="radio-inline"><input type="radio" name="optradio" [(ngModel)]="gender" value="male">Male</label>
+          <label class="radio-inline"><input type="radio" name="optradio" [(ngModel)]="gender" value="female">Female</label>
+        </div>
+        <!-- Closing div for radio gender -->
+      </div>
+      <!-- Closing div for form-group -->
+      <div id="resultsSection">
+        <h3>Results</h3>
+        <div id="results">
+          <p>Your <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank">BMR</a> = {{ bmr() | number: '1.0-0' }}</p>
+          <p>Required daily cals = {{ cals() | number: '1.0-0' }} </p>
+          <p>Daily Protein cals = {{ proteinCals() | number: '1.0-0' }} </p>
+          <p>Daily Carbs cals = {{ carbsCals() | number: '1.0-0' }}</p>
+          <p>Daily Fat cals = {{ fatCals() | number: '1.0-0' }}</p>
+        </div>
+        <!-- Closing div for results -->
+      </div>
+    </div>
+    <!-- Closing div for calculator container -->
+  
+    <div id="mealContainer">
+      <h3>Meal Plan (in grams)</h3>
+      <div class="meal">
+        <h5>Breakfast</h5>
+        <p>Protein: {{ breakfast[0].value() | number: '1.0-0' }}</p>
+        <p>Carbs: {{ breakfast[1].value() | number: '1.0-0' }}</p>
+        <p>Fat: {{ breakfast[2].value() | number: '1.0-0' }}</p>
+      </div>
+  
+      <div class="meal">
+        <h5>Snack</h5> 
+        <p>Protein: {{ snack[0].value() | number: '1.0-0' }}</p>
+        <p>Carbs: {{ snack[1].value() | number: '1.0-0' }}</p>
+        <p>Fat: {{ snack[2].value() | number: '1.0-0' }}</p>
+      </div>
+  
+      <div class="meal">
+        <h5>Lunch</h5>
+        <p>Protein: {{ mainMeal[0].value() | number: '1.0-0' }}</p>
+        <p>Carbs: {{ mainMeal[1].value() | number: '1.0-0' }}</p>
+        <p>Fat: {{ mainMeal[2].value() | number: '1.0-0' }}</p>
+      </div>
+  
+      <div class="meal">
+        <h5>Dinner</h5>
+        <p>Protein: {{ mainMeal[0].value() | number: '1.0-0' }}</p>
+        <p>Carbs: {{ mainMeal[1].value() | number: '1.0-0' }}</p>
+        <p>Fat: {{ mainMeal[2].value() | number: '1.0-0' }}</p>
+      </div>
+    </div>
+    </div>
+    <!-- Closing div for mealContainer -->
+  </div>
+  
+  

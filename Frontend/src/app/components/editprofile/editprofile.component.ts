@@ -4,6 +4,7 @@ import { HttpClient,HttpClientModule,HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-editprofile',
   standalone: true,
@@ -63,11 +64,32 @@ export class EditprofileComponent implements OnInit {
         (response) => {
           console.log('Profile updated successfully:', response);
           // Optionally, redirect to another page after successful update
+          this.showSuccessNotification();
           window.location.reload(); 
+
         },
         (error) => {
-          console.error('Error occurred while updating user profile:', error);
+          this.showUnsuccessNotification();
         }
       );
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Profile changes successfull!',
+      showConfirmButton: false,
+      timer: 3000
+    });
+  }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to save changes. Please try again.",
+      footer: ''
+    });
   }
 }

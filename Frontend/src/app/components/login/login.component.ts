@@ -6,6 +6,8 @@ import { SignupComponent } from '../signup/signup.component';
 import { NavbarComponent } from '../navbar/navbar.component'; 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
+import Swal from 'sweetalert2';
 
 
 interface LoginResponse {
@@ -21,7 +23,7 @@ interface LoginResponse {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule,SignupComponent,NavbarComponent,HttpClientModule],
+  imports: [CommonModule,FormsModule,SignupComponent,NavbarComponent,HttpClientModule,DialogModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -31,6 +33,8 @@ export class LoginComponent implements OnInit{
     username: '',
     password: ''
   };
+  loginError: string | null = null;
+  visible = false
 
   constructor(private http: HttpClient, private router: Router) {} // Inject HttpClient
 
@@ -42,13 +46,25 @@ export class LoginComponent implements OnInit{
           console.log('Login successful', response);
           localStorage.setItem('token', response.token);
           localStorage.setItem('username', response.user.username);
-          window.alert("You have successfully logged in");
+          this.showSuccessNotification(); // Show success notification upon successful login
+          this.loginError = null;
           this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Login failed', error);
+          this.loginError = 'Invalid username or password.';
+       
         }
       });
+  }
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Login Successful',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 
   ngOnInit(): void {
@@ -63,6 +79,11 @@ export class LoginComponent implements OnInit{
   navigateToSignup(): void
   {
     this.router.navigate(['/signup']);
+  }
+
+  navigateToForgotPassword(): void
+  {
+    this.router.navigate(['/forgotpassword']);
   }
 
 }

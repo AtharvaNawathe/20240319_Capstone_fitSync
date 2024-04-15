@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -26,12 +27,31 @@ export class ProfileComponent {
           console.log('Data saved successfully!', response);
           // Clear form after successful save if needed
           this.formData = {};
-          window.alert("You have successfullt filled the data");
+          this.showSuccessNotification();
           this.router.navigate(['/login']);
         },
         (error) => {
-          console.error('Error saving data:', error);
+         this.showUnsuccessNotification();
         }
       );
+  }
+
+  showSuccessNotification(): void {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'Data Saved',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Failed to add Data. Please try again.",
+      footer: ''
+    });
   }
 }

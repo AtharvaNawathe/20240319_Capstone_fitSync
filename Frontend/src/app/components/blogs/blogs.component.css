@@ -73,7 +73,7 @@ html {
   }
   
   .card p { 
-	flex: 1; /* make p grow to fill available space*/
+	flex: 1; 
 	line-height: 1.4;
   }
   

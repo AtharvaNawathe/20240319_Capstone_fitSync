@@ -12,9 +12,9 @@ p {
 }
 
 .site-logo {
-  width: 100px; /* Adjust logo width */
-  height: 70px; /* Adjust logo height */
-  margin-right: 20px; /* Add margin to separate logo from profile icon */
+  width: 100px; 
+  height: 70px; 
+  margin-right: 20px; 
 }
 
 .container {

@@ -3,22 +3,22 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 50%; /* Adjust the width as needed */
-  margin: 100px auto 0; /* Center the form horizontally with top margin */
+  width: 50%; 
+  margin: 100px auto 0; 
   padding: 20px;
   border: 2px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
   
   div {
-    margin-bottom: 20px; /* Increase spacing between form elements */
+    margin-bottom: 20px;
   }
   
   label {
     font-weight: bold;
     color: #704214;
-    margin-bottom: 8px; /* Add spacing below labels */
+    margin-bottom: 8px; 
   }
   
   input[type="text"],
@@ -27,21 +27,21 @@ form {
   select,
   textarea {
     width: 100%;
-    padding: 10px; /* Increase input field padding */
+    padding: 10px;
     border: 1px solid #ccc;
     color: #704214;
     border-radius: 4px;
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    box-sizing: border-box; 
   }
   
   button {
-    padding: 12px 20px; /* Adjust button padding */
+    padding: 12px 20px; 
     background-color: #704214;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px; /* Increase button text size */
+    font-size: 16px; 
   }
   
   button:disabled {

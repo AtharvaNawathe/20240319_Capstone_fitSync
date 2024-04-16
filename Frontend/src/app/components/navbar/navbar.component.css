@@ -15,14 +15,14 @@ mat-toolbar {
 .buttons-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to the left */
-  padding-left: 20px; /* Add padding to separate logo from the left edge */
+  justify-content: flex-start; 
+  padding-left: 20px; 
 }
 
 .site-logo {
-  width: 70px; /* Adjust logo width */
-  height: 40px; /* Adjust logo height */
-  margin-right: 20px; /* Add margin to separate logo from profile icon */
+  width: 70px; 
+  height: 40px; 
+  margin-right: 20px; 
 }
 
 .profile-icon {

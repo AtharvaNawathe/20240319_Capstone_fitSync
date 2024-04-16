@@ -14,10 +14,10 @@ interface LoginResponse {
   token: string;
   user: {
     username: string;
-    // Add other user properties as needed
+
   };
 
-  // Add other properties as needed
+  
 }
 
 @Component({
@@ -36,17 +36,16 @@ export class LoginComponent implements OnInit{
   loginError: string | null = null;
   visible = false
 
-  constructor(private http: HttpClient, private router: Router) {} // Inject HttpClient
+  constructor(private http: HttpClient, private router: Router) {} 
 
 
-    // Replace 'your-backend-endpoint' with the URL to your backend login API
     login() {
       this.http.post<LoginResponse>('http://localhost:3000/user/login', this.user).subscribe({
         next: (response) => {
           console.log('Login successful', response);
           localStorage.setItem('token', response.token);
           localStorage.setItem('username', response.user.username);
-          this.showSuccessNotification(); // Show success notification upon successful login
+          this.showSuccessNotification();
           this.loginError = null;
           this.router.navigate(['/home']);
         },
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // Logic to handle authentication status
+   
   }
 
 

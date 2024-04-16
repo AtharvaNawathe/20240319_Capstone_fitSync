@@ -38,7 +38,7 @@ export class AddMealsComponent implements OnInit{
     if (this.mealForm.valid) {
       const formData = this.mealForm.value;
 
-      const token = localStorage.getItem('token'); // Assuming you have an auth token
+      const token = localStorage.getItem('token'); 
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `${token}`

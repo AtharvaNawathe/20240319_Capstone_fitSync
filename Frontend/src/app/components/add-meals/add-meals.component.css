@@ -1,8 +1,8 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 50%; /* Adjust the width as needed */
-  margin: 100px auto 0; /* Center the form horizontally with top margin */
+  width: 50%; 
+  margin: 100px auto 0; 
   padding: 20px;
   border: 2px solid #ddd;
   border-radius: 8px;
@@ -11,7 +11,7 @@ form {
 
  input {
   width: 100%;
-  padding: 10px; /* Increase input field padding */
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   color: #704214;
@@ -43,8 +43,8 @@ textarea {
 }
 
 .time-input {
-  flex: 1; /* Each time input occupies equal space */
-  margin-right: 10px; /* Adjust spacing between time inputs */
+  flex: 1; 
+  margin-right: 10px; 
 }
 
 button {

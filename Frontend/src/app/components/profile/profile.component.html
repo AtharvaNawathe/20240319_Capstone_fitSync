@@ -19,28 +19,8 @@
                     <input [(ngModel)]="formData.email" name="email" class="input-box" type="text"><br>
                     <label for="name1">Your name:</label>
                     <input [(ngModel)]="formData.name" name="name" class="input-box" type="text"><br>
-                    <!-- <div class="form-group">
-                        <label id="gender" for="gender-option" class="control-label">Gender:</label>
-                        <label id="gender-option-male" class="radio">
-                            <input id="gender_male" type="radio" name="gender" value="male">
-                            Male
-                        </label><br>
-                        <label id="gender-option-male" class="radio">
-                            <input id="gender_male" type="radio" name="gender" value="female">
-                            Female
-                        </label>
-                    </div><br> -->
                     <label class="b-day" for="b-day b-month">Birth date:</label>
                     <input [(ngModel)]="formData.birthDate" name="birthDate" class="input-box" type="text"><br>
-                    <!-- <select class="input-box" name="birth-data" id="b-month">
-                        <option>-Month-</option>
-                    </select>
-                    <select class="input-box" name="birth-data" id="b-day">
-                        <option>-Day-</option>
-                    </select>
-                    <select class="input-box" name="birth-data" id="b-year">
-                        <option>-Year-</option>
-                    </select><br> -->
 
                     <div class="height-input">
                         <label for="height1 height2">Height:</label>
@@ -71,15 +51,5 @@
                 <button type="submit" class="save" (click)="saveData()">Save</button>
             </div>
         </div>
-        <!-- <div id="profile">
-            <div class="profile-image">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Profile Image">
-            </div>
-            <button class="profile-pic-button">Change profile picture</button>
-            <h4>0</h4>
-            <p>Workouts added</p>
-            <h4>0 kg</h4>
-            <p>Lifted</p>
-        </div> -->
     </section>
     </body>

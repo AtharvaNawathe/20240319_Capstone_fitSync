@@ -60,7 +60,7 @@ export class CalculatorComponent {
     } else if (this.gender === 'female') {
       return standard - 161;
     } else {
-      return NaN; // return NaN for invalid gender (handled by Angular's number validation)
+      return NaN; 
     }
   }
 

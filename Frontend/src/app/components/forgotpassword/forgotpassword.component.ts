@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class ForgotpasswordComponent {
   emailInputFocused: boolean = false;
   
-  // String variable to store the user's email
+
   email: string = '';
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -25,7 +25,7 @@ export class ForgotpasswordComponent {
     this.router.navigate(['/login']);
   }
 
-  //when button it clicked 
+
   forgetPassword(): void {
 
     this.http.post('http://localhost:3000/user/forgotpassword', { email: this.email })
@@ -38,7 +38,7 @@ export class ForgotpasswordComponent {
         this.router.navigate(['/login']);
       },
       (error) => {
-        // Handle any errors that occur during the request
+     
         this.showUnsuccessNotification();
       }
     );

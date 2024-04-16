@@ -15,17 +15,17 @@ import Swal from 'sweetalert2';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  formData: any = {}; // This will hold the form data
+  formData: any = {}; 
 
   constructor(private http: HttpClient,private router: Router) {}
 
   saveData() {
-    // Assuming you want to send formData to backend on save
+    
     this.http.post<any>('http://localhost:3000/user/save', this.formData)
       .subscribe(
         (response) => {
           console.log('Data saved successfully!', response);
-          // Clear form after successful save if needed
+          
           this.formData = {};
           this.showSuccessNotification();
           this.router.navigate(['/login']);

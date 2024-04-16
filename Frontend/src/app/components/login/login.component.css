@@ -79,7 +79,7 @@ body {
     position: absolute;
     margin-top: 50px;
     margin-left: -110px;
-    left: 50%; /* Adjust this value to horizontally center the image */ /* Horizontally center the image */
-    width: 200px; /* Optional: Make the image round */
+    left: 50%; 
+    width: 200px; 
   }
   

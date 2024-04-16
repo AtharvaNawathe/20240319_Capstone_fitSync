@@ -65,7 +65,7 @@ button:hover {
   background-color: #a5783d;
 }
 
-/* Style for the image */
+
 .image-container {
   position: relative;
 }
@@ -74,8 +74,8 @@ button:hover {
   position: absolute;
   margin-top: 50px;
   margin-left: -110px;
-  left: 50%; /* Adjust this value to horizontally center the image */ /* Horizontally center the image */
-  width: 200px; /* Optional: Make the image round */
+  left: 50%; 
+  width: 200px; 
 }
 
 a {

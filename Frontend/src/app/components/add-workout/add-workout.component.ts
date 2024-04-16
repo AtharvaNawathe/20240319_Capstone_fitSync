@@ -18,7 +18,6 @@ import Swal from 'sweetalert2';
 export class AddWorkoutComponent {
   workoutForm!: FormGroup;
 
-  // List of activities for the dropdown
   activities: string[] = ['Running', 'Cycling', 'Swimming', 'Weightlifting', 'Yoga', 'Other'];
 
   constructor(private fb: FormBuilder,private http: HttpClient) { }
@@ -35,7 +34,7 @@ export class AddWorkoutComponent {
     });
   }
 
-  // Convenience getter for easy access to form fields
+
   get f() { return this.workoutForm.controls; }
 
   onSubmit() {
@@ -55,7 +54,7 @@ export class AddWorkoutComponent {
         .subscribe({
           next: (response) => {
             console.log(response);
-            // Reset the form after successful submission
+         
             this.workoutForm.reset();
             this.showSuccessNotification();
           },

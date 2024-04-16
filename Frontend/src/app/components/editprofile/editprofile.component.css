@@ -41,17 +41,17 @@
 }
 
 .save-changes-btn {
-    background-color: #704214;; /* Blue background color */
-    color: #fff; /* White text color */
-    padding: 10px 20px; /* Padding around the text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Show pointer cursor on hover */
+    background-color: #704214;
+    color: #fff; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
   }
   
   /* Style for the Save Changes button on hover */
   .save-changes-btn:hover {
-    background-color: #d1a04d;/* Darker blue on hover */
+    background-color: #d1a04d;
   }
 
   

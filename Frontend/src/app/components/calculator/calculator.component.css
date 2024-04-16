@@ -1,13 +1,13 @@
-/* Resetting default margin and padding for all elements */
+
 * {
     margin: 0;
     padding: 0;
   }
   
-  /* Body styles */
+ 
   body {
     background-color: black;
-    color: #704214; /* Set default text color to dark brown */
+    color: #704214;
   }
   
   /* Container styles */
@@ -15,11 +15,11 @@
     width: 80%;
     margin: auto;
     margin-top: 100px;
-    overflow: hidden; /* Clear floats */
-    background-color: white; /* Set background color to white */
-    padding: 20px; /* Add padding for spacing */
-    border: 2px solid #ddd; /* Add border with a light gray color */
-    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; 
+    background-color: white; 
+    padding: 20px; 
+    border: 2px solid #ddd; 
+    border-radius: 5px; 
   }
   
   /* Results section styles */
@@ -28,10 +28,10 @@
     float: left;
     padding: 20px;
     margin-top: 50px;
-    box-sizing: border-box; /* Include padding and border in width */
-    background-color: white; /* Set background color to white */
-    border: 2px solid #ddd; /* Add border with a light gray color */
-    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; 
+    background-color: white; 
+    border: 2px solid #ddd; 
+    border-radius: 5px; 
   }
   
   /* Calculator container styles */
@@ -39,10 +39,10 @@
     width: 50%;
     float: left;
     padding: 20px;
-    box-sizing: border-box; /* Include padding and border in width */
-    background-color: white; /* Set background color to white */
-    border: 2px solid #ddd; /* Add border with a light gray color */
-    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; 
+    background-color: white; 
+    border: 2px solid #ddd; 
+    border-radius: 5px; 
   }
   
   /* Meal container styles */
@@ -50,23 +50,23 @@
     width: 50%;
     float: right;
     padding: 20px;
-    box-sizing: border-box; /* Include padding and border in width */
-    background-color: white; /* Set background color to white */
-    border: 2px solid #ddd; /* Add border with a light gray color */
-    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; 
+    background-color: white; 
+    border: 2px solid #ddd; 
+    border-radius: 5px;
   }
   
   /* Style for meal sections */
   .meal {
-    margin-top: 20px; /* Add top margin for spacing between meal sections */
+    margin-top: 20px; 
   }
   
-  /* Headings within meal sections */
+
   .meal h5 {
     text-decoration: underline;
   }
   
-  /* Style for form inputs */
+
   .form-group {
     margin-bottom: 20px;
   }
@@ -80,7 +80,7 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    outline: none; /* Remove outline on focus */
+    outline: none; 
   }
   
   /* Style for select dropdown */
@@ -89,7 +89,7 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    outline: none; /* Remove outline on focus */
+    outline: none; 
   }
   
   /* Style for radio buttons */
@@ -104,12 +104,12 @@
   /* Style for activity and goal dropdowns */
   #activity,
   #goal {
-    margin-bottom: 20px; /* Add bottom margin to create a gap between activity and goal */
+    margin-bottom: 20px; 
   }
   
 
   label {
     font-weight: bold;
     color: #704214;
-    margin-bottom: 8px; /* Add spacing below labels */
+    margin-bottom: 8px; 
   }

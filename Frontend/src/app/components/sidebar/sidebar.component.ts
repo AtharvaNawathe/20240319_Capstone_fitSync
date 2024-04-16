@@ -25,15 +25,15 @@ export class SidebarComponent implements OnInit{
   showYourPlans = false;
   showTrackProgress = false;
   showBlogs = false; 
-  showCalculator = false;// New property to control blogs view
+  showCalculator = false;
 
   constructor( private router: Router) {
-    // Retrieve the username from localStorage on component initialization
+   
     this.username = localStorage.getItem('username') ?? '';
   }
 
   ngOnInit(): void {
-    // Load the Add Workout section by default when the component initializes
+    
     this.loadAddWorkout();
   }
   loadAddWorkout(): void {
@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit{
     this.showYourPlans = false;
     this.showTrackProgress = false;
     this.showBlogs = false;
-    this.showCalculator = false; // Hide blogs view
+    this.showCalculator = false; 
   }
 
   loadAddMeal(): void {
@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit{
     this.showYourPlans = false;
     this.showTrackProgress = false;
     this.showBlogs = false;
-    this.showCalculator = false; // Hide blogs view
+    this.showCalculator = false; 
   }
   loadCalculator(): void {
     this.showCalculator = true;
@@ -68,7 +68,7 @@ export class SidebarComponent implements OnInit{
     this.showYourPlans = true;
     this.showTrackProgress = false;
     this.showBlogs = false;
-    this.showCalculator = false; // Hide blogs view
+    this.showCalculator = false; 
   }
 
   loadTrackProgress(): void {
@@ -77,7 +77,7 @@ export class SidebarComponent implements OnInit{
     this.showYourPlans = false;
     this.showTrackProgress = true;
     this.showBlogs = false; 
-    this.showCalculator = false;// Hide blogs view
+    this.showCalculator = false;
   }
 
   loadBlogs(): void {
@@ -86,21 +86,20 @@ export class SidebarComponent implements OnInit{
     this.showYourPlans = false;
     this.showTrackProgress = false;
     this.showBlogs = true;
-    this.showCalculator = false; // Show blogs view
+    this.showCalculator = false; 
   }
 
   
   logout(): void {
-    // Show confirmation dialog
+    
     this.showSuccessNotification().then((confirmed) => {
       if (confirmed) {
-        // User confirmed, perform logout actions
+
         this.isSignedUp = false;
         localStorage.removeItem('token');
-        // Redirect to login page after logout
+ 
         this.router.navigate(['']);
-        // Optionally, clear session timer or other tasks
-        // this.clearSessionTimer();
+     
       }
     });
   }

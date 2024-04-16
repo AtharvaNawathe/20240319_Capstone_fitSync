@@ -32,7 +32,7 @@ export class HistoryComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/workouts/getworkouthistory', { headers })
       .subscribe(
         (response) => {
-          this.workouts = response; // Assign the workouts array from response
+          this.workouts = response; 
         },
         (error) => {
           console.error('Error fetching workout history:', error);
@@ -49,7 +49,7 @@ export class HistoryComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/meals/getmealshistory', { headers })
       .subscribe(
         (response) => {
-          this.meals = response; // Assign the meals array from response
+          this.meals = response;
         },
         (error) => {
           console.error('Error fetching meal history:', error);

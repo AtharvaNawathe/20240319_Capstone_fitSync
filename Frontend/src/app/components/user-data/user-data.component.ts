@@ -33,7 +33,7 @@ export class UserDataComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/workouts/myworkouts', { headers })
       .subscribe(
         (response) => {
-          this.workouts = response.workouts; // Assign workouts array from response
+          this.workouts = response.workouts; 
         },
         (error) => {
           console.error('Error fetching workouts:', error);
@@ -50,7 +50,7 @@ export class UserDataComponent implements OnInit {
     this.http.get<any>('http://localhost:3000/meals/mymeals', { headers })
       .subscribe(
         (response) => {
-          this.meals = response.meals; // Assign meals array from response
+          this.meals = response.meals; 
         },
         (error) => {
           console.error('Error fetching meals:', error);
@@ -68,7 +68,7 @@ export class UserDataComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('Workout moved to history successfully:', response);
-          // After successful move, fetch updated workouts
+          
           this.fetchWorkouts();
           this.showSuccessNotification();
         },
@@ -87,8 +87,7 @@ export class UserDataComponent implements OnInit {
     this.http.post<any>('http://localhost:3000/meals/mealhistory', { mealName }, { headers })
       .subscribe(
         (response) => {
-          
-          // After successful move, fetch updated meals
+         
           this.fetchMeals();
           this.showSuccessNotification();
         },

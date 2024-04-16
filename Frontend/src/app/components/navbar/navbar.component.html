@@ -1,11 +1,11 @@
 <mat-toolbar>
   <div class="buttons-container">
-    <!-- Always display the logo at the leftmost position -->
+
     <a (click)="navigateToHome()">
       <img src="../../../assets/img/logo.png" class="site-logo" alt="Logo">
     </a>
 
-    <!-- Only display the profile icon if 'showMealsButton' is true -->
+
     <a *ngIf="showMealsButton" class="profile-icon" (click)="navigateToProfile()">
       <img src="../../../assets/img/profile.png" alt="Edit Profile">
     </a>

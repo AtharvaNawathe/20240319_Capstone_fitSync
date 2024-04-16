@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; 
 import Swal from 'sweetalert2';
-// import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -41,15 +41,15 @@ export class NavbarComponent implements OnInit {
   Logout(): void {
     const confirmation = confirm('Are you sure you want to log out?');
 
-    // Check if the user confirmed the action
+   
     if (confirmation) {
       this.isSignedUp = false;
-      // clearing the token from the local Storage
+      
       localStorage.removeItem('token');
-      // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
+   
 
       this.router.navigate(['/auth']);
-      // this.clearSessionTimer();
+
     }
   }
 
@@ -57,16 +57,15 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    // Show confirmation dialog
+    
     this.showSuccessNotification().then((confirmed) => {
       if (confirmed) {
-        // User confirmed, perform logout actions
+        
         this.isSignedUp = false;
         localStorage.removeItem('token');
-        // Redirect to login page after logout
+       
         this.router.navigate(['']);
-        // Optionally, clear session timer or other tasks
-        // this.clearSessionTimer();
+    
       }
     });
   }

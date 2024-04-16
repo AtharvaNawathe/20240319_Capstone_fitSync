@@ -6,7 +6,7 @@ const workoutPlanSchema = new mongoose.Schema({
   activity: { type: String, required: true },
   activity_description: { type: String },
   date: { type: Date, required: true },
-  duration: { type: Number, required: true }, // assuming duration is in minutes
+  duration: { type: Number, required: true }, 
   notes: { type: String },
   status: {
     type:String,

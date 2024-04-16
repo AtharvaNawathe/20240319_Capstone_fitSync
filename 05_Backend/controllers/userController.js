@@ -9,6 +9,8 @@ const { verifyToken} = require("../middlewares/auth");
 const config = require("../config/config");
 const { validateInputs } = require('../validators/user_validators');
 dotenv.config();
+
+
 /**
  * Sign up a new user.
  * @param {object} req - The request object.
@@ -342,11 +344,6 @@ const getUserDetails = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
-
-
-
-
 
 // Export the controller functions
 module.exports = {

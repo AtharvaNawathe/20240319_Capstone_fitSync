@@ -15,9 +15,7 @@ const { verifyToken } = require("../middlewares/auth");
  * This router handles various meal-related operations, including:
  *  - **POST /addmealplans:** Creates a new meal plan. (Handled by `mealController.addMealPlan`)
  *  - **GET /mymeals** (Protected): Retrieves the user's meal plans. Requires a valid JWT token. (Handled by `mealController.getMyMeals`)
- *  - **PUT /updatemeals** (Protected): Updates the status of a meal (e.g., marked as completed). Requires a valid JWT token. (Handled by `mealController.updateMealStatus`)
  *  - **GET /getmeals** (Protected): Retrieves all available meals. Requires a valid JWT token. (Handled by `mealController.getAllMeals`)
- *  - **DELETE /removemeal** (Protected): Deletes a meal plan or meal. Requires a valid JWT token. (Handled by `mealController.removeMeal`)
  *
  * @module mealRoutes
  *
@@ -25,18 +23,9 @@ const { verifyToken } = require("../middlewares/auth");
  */
 router.post("/addmealplans", mealController.addMealPlan);
 router.get("/mymeals", verifyToken, mealController.getMyMeals);
-router.put("/updatemeals", verifyToken, mealController.updateMealStatus);
 router.get("/getmeals", verifyToken, mealController.getAllMeals);
-router.delete("/removemeal", verifyToken, mealController.removeMeal);
 router.post('/mealhistory', verifyToken, mealController.moveMealToHistory);
 router.get('/getmealshistory', verifyToken, mealController.getMealsHistory);
 
-/*
-router.post("/", mealController.addMealPlan);
-router.get("/", verifyToken, mealController.getMyMeals);
-router.put("/:id", verifyToken, mealController.updateMealStatus);
-router.get("/", verifyToken, mealController.getAllMeals);
-router.delete("/:id", verifyToken, mealController.removeMeal);
-*/
 
 module.exports = router;

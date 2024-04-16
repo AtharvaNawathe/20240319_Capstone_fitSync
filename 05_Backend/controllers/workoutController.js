@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const WorkoutPlan = require("../models/workout_schema");
 const WorkoutHistory = require("../models/WorkoutHistory_schema");
-const verifyToken = require("../middlewares/auth");
 dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -159,34 +158,12 @@ const getAllWorkouts = async (req, res) => {
   }
 };
 
+
 /**
- * Removes a workout from the database.
+ * Moves a workout plan to workout history.
  * @param {Object} req HTTP request object.
  * @param {Object} res HTTP response object.
  */
-const removeWorkout = async (req, res) => {
-  try {
-    const { workout_name } = req.body;
-
-    // Check if workout_name is provided
-    if (!workout_name) {
-      return res.status(400).send("Workout name is required");
-    }
-
-    // Remove the workout plan from the database
-    const deletedWorkout = await WorkoutPlan.findOneAndDelete({ workout_name });
-
-    if (!deletedWorkout) {
-      return res.status(404).send("Workout not found");
-    }
-
-    res.status(200).send("Workout removed successfully");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
-  }
-};
-
 const moveWorkoutToHistory = async (req, res) => {
   const { activity_name } = req.body;
 
@@ -221,6 +198,12 @@ const moveWorkoutToHistory = async (req, res) => {
   }
 };
 
+
+/**
+ * Retrieves all workout history entries.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getWorkoutHistory = async (req, res) => {
   try {
     // Fetch all workout plans from the database
@@ -244,7 +227,6 @@ module.exports = {
   myWorkouts,
   updateWorkoutStatus,
   getAllWorkouts,
-  removeWorkout,
   moveWorkoutToHistory,
   getWorkoutHistory,
 };

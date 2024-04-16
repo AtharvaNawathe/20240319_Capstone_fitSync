@@ -19,9 +19,8 @@ const { verifyToken} = require("../middlewares/auth");
  *  - forgotpassword
  *  - reset_password
  *  - getProfileDetails (requires valid JWT token)
- *  - updateGoal (requires valid JWT token)
  *  - editProfile (requires valid JWT token)
- *  - personalDetails
+ *  - getprofile (requires valid JWT token)
  *
  * @module userRoutes
  */

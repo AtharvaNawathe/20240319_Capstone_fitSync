@@ -79,44 +79,6 @@ const getMyMeals = async (req, res) => {
   }
 };
 
-/**
- * Updates the status of a meal to "completed".
- * while tracking the progress if user has consumed a meal status will be updated
- * to completed
- * @param {Object} req HTTP request object.
- * @param {Object} res HTTP response object.
- */
-const updateMealStatus = async (req, res) => {
-  try {
-    const { name } = req.body;
-
-    // Check if name is provided
-    if (!name) {
-      return res.status(400).send("Meal name is required");
-    }
-
-    // Find the meal plan by meal name and update the status
-    const mealPlan = await MealPlan.findOneAndUpdate(
-      { "meal_plan.meals.name": name },
-      {
-        $set: { "meal_plan.$[outer].meals.$[inner].meal_status": "completed" },
-      },
-      {
-        arrayFilters: [{ "outer.meals.name": name }, { "inner.name": name }],
-        new: true,
-      }
-    );
-
-    if (!mealPlan) {
-      return res.status(404).send("Meal plan not found");
-    }
-
-    res.status(200).send("Meal status updated successfully");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
-  }
-};
 
 /**
  * Retrieves all meals not assigned to any user.
@@ -142,33 +104,10 @@ const getAllMeals = async (req, res) => {
 };
 
 /**
- * Removes a meal from a user's meal plan.
+ * Moves a meal plan to meal history.
  * @param {Object} req HTTP request object.
  * @param {Object} res HTTP response object.
  */
-const removeMeal = async (req, res) => {
-  try {
-    const { meal_name } = req.body;
-
-    // Check if meal_name is provided
-    if (!meal_name) {
-      return res.status(400).send("Meal name is required");
-    }
-
-    // Remove the meal plan from the database
-    const deletedMeal = await MealPlan.findOneAndDelete({ meal_name });
-
-    if (!deletedMeal) {
-      return res.status(404).send("Meal not found");
-    }
-
-    res.status(200).send("Meal removed successfully");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error");
-  }
-};
-
 const moveMealToHistory = async (req, res) => {
   const { mealName } = req.body;
 
@@ -200,6 +139,11 @@ const moveMealToHistory = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves all meal history entries.
+ * @param {Object} req HTTP request object.
+ * @param {Object} res HTTP response object.
+ */
 const getMealsHistory = async (req, res) => {
   try {
     // Fetch all meal plans from the database
@@ -221,9 +165,7 @@ const getMealsHistory = async (req, res) => {
 module.exports = {
   addMealPlan,
   getMyMeals,
-  updateMealStatus,
   getAllMeals,
-  removeMeal,
   moveMealToHistory,
   getMealsHistory,
 };

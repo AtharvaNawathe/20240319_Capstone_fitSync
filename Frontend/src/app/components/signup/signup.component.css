@@ -81,3 +81,7 @@ button:hover {
 a {
   cursor: pointer;
 }
+
+.error-message {
+  color: red;
+}

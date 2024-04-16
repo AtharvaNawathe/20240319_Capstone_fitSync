@@ -285,4 +285,17 @@ select[name="birth-data"]{
     width: 100px;
 }
 
+.image-container {
+    position: relative;
+  }
+  
+  .image-container img {
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 360px;
+    left: 50%; /* Adjust this value to horizontally center the image */ /* Horizontally center the image */
+    width: 400px;
+     /* Optional: Make the image round */
+  }
+
 

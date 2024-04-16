@@ -193,6 +193,7 @@ const moveWorkoutToHistory = async (req, res) => {
   try {
     // Find the workout plan entry by activity_name
     const workoutPlan = await WorkoutPlan.findOne({ activity_name });
+    console.log("Workout - ",workoutPlan._id);
 
     if (!workoutPlan) {
       return res.status(404).json({ message: 'Workout plan not found' });
@@ -209,7 +210,9 @@ const moveWorkoutToHistory = async (req, res) => {
     await workoutHistoryEntry.save();
 
     // Remove the workout plan entry from workoutplans collection
-    await WorkoutPlan.findByIdAndDelete(workoutPlan._id);
+   await WorkoutPlan.findOneAndDelete(workoutPlan._id);
+    console.log(workoutPlan._id);
+    
 
     res.status(200).json({ message: 'Workout plan moved to history successfully' });
   } catch (error) {

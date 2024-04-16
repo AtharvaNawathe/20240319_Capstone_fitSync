@@ -70,6 +70,7 @@ export class UserDataComponent implements OnInit {
           console.log('Workout moved to history successfully:', response);
           // After successful move, fetch updated workouts
           this.fetchWorkouts();
+          this.showSuccessNotification();
         },
         (error) => {
           console.error('Error moving workout to history:', error);
@@ -86,9 +87,10 @@ export class UserDataComponent implements OnInit {
     this.http.post<any>('http://localhost:3000/meals/mealhistory', { mealName }, { headers })
       .subscribe(
         (response) => {
-          this.showSuccessNotification();
+          
           // After successful move, fetch updated meals
           this.fetchMeals();
+          this.showSuccessNotification();
         },
         (error) => {
           console.error('Error moving meal to history:', error);

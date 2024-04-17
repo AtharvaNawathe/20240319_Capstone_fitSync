@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit{
     login() {
       this.http.post<LoginResponse>('http://localhost:3000/user/login', this.user).subscribe({
         next: (response) => {
-          console.log('Login successful', response);
           localStorage.setItem('token', response.token);
           localStorage.setItem('username', response.user.username);
           this.showSuccessNotification();
@@ -50,9 +49,7 @@ export class LoginComponent implements OnInit{
           this.router.navigate(['/home']);
         },
         error: (error) => {
-          console.error('Login failed', error);
-          this.loginError = 'Invalid username or password.';
-       
+         this.showUnsuccessNotification();
         }
       });
   }
@@ -65,6 +62,17 @@ export class LoginComponent implements OnInit{
       timer: 1500
     });
   }
+
+  showUnsuccessNotification(): void {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Invalid Credentials",
+      footer: ''
+    });
+  }
+
+  
 
   ngOnInit(): void {
    

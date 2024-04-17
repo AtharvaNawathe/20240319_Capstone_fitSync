@@ -18,7 +18,7 @@ export class AddMealsComponent implements OnInit{
   hours: number[] = Array.from({ length: 12 }, (_, i) => i + 1);
   minutes: number[] = Array.from({ length: 60 }, (_, i) => i);
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner'];
+  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
 
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 

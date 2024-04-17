@@ -49,17 +49,30 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   signup() {
+    // Check if the form is valid
+    if (this.signupForm.invalid) {
+      return; // Do not proceed if the form is invalid
+    }
+  
+    // Update user object with form values
+    this.user.name = this.signupForm.value.name;
+    this.user.username = this.signupForm.value.username;
+    this.user.email = this.signupForm.value.email;
+    this.user.password = this.signupForm.value.password;
+  
+    // Make HTTP POST request to backend API with updated user object
     this.http.post('http://localhost:3000/user/signup', this.user).subscribe({
       next: (response) => {
         console.log('Signup successful', response);
         this.showSuccessNotification();
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/login']);
       },
       error: (error) => {
-        console.error('Signup failed', error);
+        this.showUnsuccessNotification();
       }
     });
-}
+  }
+  
 
 
 
@@ -70,6 +83,15 @@ showSuccessNotification(): void {
     title: 'You have successfully Signed up',
     showConfirmButton: false,
     timer: 1500
+  });
+}
+
+showUnsuccessNotification(): void {
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Failed to save changes. Please try again.",
+    footer: ''
   });
 }
 }

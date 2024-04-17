@@ -35,10 +35,6 @@ const mealPlanSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status: {
-    type:String,
-    default: "Pending"
-  }
 }, { timestamps: true });
 
 const MealPlan = mongoose.model('MealPlan', mealPlanSchema);

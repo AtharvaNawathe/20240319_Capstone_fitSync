@@ -207,6 +207,7 @@ const moveWorkoutToHistory = async (req, res) => {
 const getWorkoutHistory = async (req, res) => {
   try {
     // Fetch all workout plans from the database
+    
     const workouts = await WorkoutHistory.find();
 
     // Check if any workout plans exist

@@ -19,52 +19,44 @@ dotenv.config();
  */
 const signup = async (req, res) => {
   try {
-    const userData = req.body;
-    console.log(userData);
-
-    // Validate user data
-    const validationError = validateInputs(userData);
-    if (validationError) {
-      return res.status(400).json({
-        success: false,
-        message: validationError,
-      });
-    }
-
-    // Check if the user already exists with the provided email or phone number
+    const { username, password, email, name } = req.body;
+    // Validate user input
+    // const validation = signupValidation({ username, email, password });
+    // if (!validation.success) {
+    //   return res.status(400).json({ error: validation.error });
+    // }
+    // Check if username or email already exists
     const existingUser = await User.findOne({
-    $or: [{ email: userData.email }, /*{ phone_number: userData.phone_number }*/],
+      $or: [{ username }, { email }],
     });
-
     if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "An account already exists with the provided email.",
-      });
+      return res
+        .status(400)
+        .json({ error: "Username or email already exists" });
     }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-    userData.password = hashedPassword;
-
-    // Create a new user
-    const newUser = new User(userData);
-    const savedUser = await newUser.save();
-
-    res.status(201).json({
-      success: true,
-      message: "User signed up successfully!",
-      user: savedUser,
+    // Encrypt password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // Create new user
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      email,
+      name
     });
+    // Save user to database
+    await newUser.save();
+    // Remove sensitive information before sending response
+    newUser.password = undefined;
+    // Send success response
+    res
+      .status(201)
+      .json({ message: "User registered successfully", user: newUser });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
+    console.error("Error during user registration:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 /**
  * Login a user.
@@ -299,11 +291,9 @@ const editProfile = async (req, res) => {
 
     // Update user profile fields based on the request body
     if (updatedUserData.name) user.name = updatedUserData.name;
+    if (updatedUserData.username) user.username = updatedUserData.username;
+    if (updatedUserData.password) user.password = updatedUserData.password;
     if (updatedUserData.email) user.email = updatedUserData.email;
-    if (updatedUserData.height) user.height = updatedUserData.height;
-    if (updatedUserData.waist) user.waist = updatedUserData.waist;
-    if (updatedUserData.hips) user.hips = updatedUserData.hips;
-    if (updatedUserData.neck) user.neck = updatedUserData.neck;
 
     // Save the updated user profile
     await user.save();
@@ -344,6 +334,8 @@ const getUserDetails = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+
 
 // Export the controller functions
 module.exports = {

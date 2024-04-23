@@ -20,10 +20,12 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Frontend');
   });
 
-  it('should render title', () => {
+
+  // mY test cases
+
+  it('Should have title as Atharva', ()=> {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Frontend');
-  });
+    const app = fixture.componentInstance;
+    expect(app.username).toEqual('Atharva')
+  })
 });
